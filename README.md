@@ -10,7 +10,7 @@ It is mainly aimed at advanced technical users, like developers.
 
 **Encore** is a scalable tool for video transcoding,
 
-[Read the documentation online here](https://svt.github.io/encore-doc/)
+[Online documentation](https://svt.github.io/encore-doc/)
 
 Contributions are encouraged and welcomed.
 
