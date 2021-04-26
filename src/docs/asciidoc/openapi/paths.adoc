@@ -1,0 +1,363 @@
+
+[[_paths]]
+== Paths
+
+[[_postcollectionresource-encorejob-post]]
+=== POST /encoreJobs
+
+==== Description
+create-encorejob
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^4a"]
+|===
+|Type|Name|Schema
+|**Body**|**body** +
+__optional__|<<_encorejob,EncoreJob>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**201**|Created|<<_entitymodelencorejob,EntityModelEncoreJob>>
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/hal+json`
+
+
+==== Tags
+
+* encorejob
+
+
+[[_getcollectionresource-encorejob-get_1]]
+=== GET /encoreJobs
+
+==== Description
+get-encorejob
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a,.^2a"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**page** +
+__optional__|Zero-based page index (0..N)|integer|`0`
+|**Query**|**size** +
+__optional__|The size of the page to be returned|integer|`20`
+|**Query**|**sort** +
+__optional__|Sorting criteria in the format: property(,asc\|desc). Default sort order is ascending. Multiple sort criteria are supported.|< string > array(multi)|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_collectionmodelentitymodelencorejob,CollectionModelEntityModelEncoreJob>>
+|===
+
+
+==== Produces
+
+* `application/hal+json`
+* `text/uri-list`
+* `application/x-spring-data-compact+json`
+
+
+==== Tags
+
+* encorejob
+
+
+[[_executesearch-encorejob-get]]
+=== Finds EncoreJobs By Status
+....
+GET /encoreJobs/search/findByStatus
+....
+
+
+==== Description
+Returns EncoreJobs according to the given Status
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^9a,.^4a,.^2a"]
+|===
+|Type|Name|Description|Schema|Default
+|**Query**|**page** +
+__optional__|Zero-based page index (0..N)|integer|`0`
+|**Query**|**size** +
+__optional__|The size of the page to be returned|integer|`20`
+|**Query**|**sort** +
+__optional__|Sorting criteria in the format: property(,asc\|desc). Default sort order is ascending. Multiple sort criteria are supported.|< string > array(multi)|
+|**Query**|**status** +
+__optional__||enum (NEW, QUEUED, IN_PROGRESS, SUCCESSFUL, FAILED, CANCELLED)|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_pagedmodelencorejob,PagedModelEncoreJob>>
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `application/hal+json`
+
+
+==== Tags
+
+* encorejob
+
+
+[[_getitemresource-encorejob-get]]
+=== GET /encoreJobs/{id}
+
+==== Description
+get-encorejob
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^4a"]
+|===
+|Type|Name|Schema
+|**Path**|**id** +
+__required__|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_entitymodelencorejob,EntityModelEncoreJob>>
+|**404**|Not Found|No Content
+|===
+
+
+==== Produces
+
+* `application/hal+json`
+
+
+==== Tags
+
+* encorejob
+
+
+[[_putitemresource-encorejob-put]]
+=== PUT /encoreJobs/{id}
+
+==== Description
+update-encorejob
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^4a"]
+|===
+|Type|Name|Schema
+|**Path**|**id** +
+__required__|string
+|**Body**|**body** +
+__optional__|<<_encorejob,EncoreJob>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_entitymodelencorejob,EntityModelEncoreJob>>
+|**201**|Created|<<_entitymodelencorejob,EntityModelEncoreJob>>
+|**204**|No Content|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/hal+json`
+
+
+==== Tags
+
+* encorejob
+
+
+[[_deleteitemresource-encorejob-delete]]
+=== DELETE /encoreJobs/{id}
+
+==== Description
+delete-encorejob
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^4a"]
+|===
+|Type|Name|Schema
+|**Path**|**id** +
+__required__|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**204**|No Content|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Tags
+
+* encorejob
+
+
+[[_patchitemresource-encorejob-patch]]
+=== PATCH /encoreJobs/{id}
+
+==== Description
+patch-encorejob
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^4a"]
+|===
+|Type|Name|Schema
+|**Path**|**id** +
+__required__|string
+|**Body**|**body** +
+__optional__|<<_encorejob,EncoreJob>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_entitymodelencorejob,EntityModelEncoreJob>>
+|**204**|No Content|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `application/hal+json`
+
+
+==== Tags
+
+* encorejob
+
+
+[[_cancel]]
+=== Cancel an EncoreJob
+....
+POST /encoreJobs/{jobId}/cancel
+....
+
+
+==== Description
+Cancels an EncoreJob with thw given JobId
+
+
+==== Parameters
+
+[options="header", cols=".^2a,.^3a,.^4a"]
+|===
+|Type|Name|Schema
+|**Path**|**jobId** +
+__required__|string (uuid)
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|string
+|===
+
+
+==== Produces
+
+* `application/hal+json`
+
+
+==== Tags
+
+* encorejob
+
+
+[[_getqueue]]
+=== Get Queues
+....
+GET /queue
+....
+
+
+==== Description
+Returns a list of queues (QueueItems)
+
+
+==== Responses
+
+[options="header", cols=".^2a,.^14a,.^4a"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|< <<_queueitem,QueueItem>> > array
+|===
+
+
+==== Produces
+
+* `application/hal+json`
+
+
+==== Tags
+
+* queue
+
+
+

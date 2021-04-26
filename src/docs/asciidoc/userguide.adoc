@@ -1,0 +1,62 @@
+=== Installation
+
+At the moment there are no *pre-ready-to-go* installation packages, pods, docker compose, docker Images etc, for *Encore*, but fear not - there are a few possibilities in how to get going. Continue reading!
+
+==== Quickstart
+
+* Encore requires:
+** JDK 11 or later
+** An available Redis instance (default configuration: locally installed port 6379)
+** FFmpeg (we recommend the version present in https://github.com/svt/homebrew-avtools[svt/AVTools] repository, which is what we use in our production environment)
+
+===== Build the project
+
+Run all tests and static analysis using:
+
+[source,bash]
+....
+$ ./gradlew clean check
+....
+
+===== Option: Run a local version with Spring Boot BootRun for a developer live testing/try-out
+
+You can run *Encore* on your local Developer machine for a quick test trial by using a local Developer Application Profile and start up *Encore*:
+
+.In the *Encore* root folder:
+[source,bash]
+----
+foobar@foo:~$ SPRING_PROFILES_ACTIVE=local ./gradlew clean bootRun
+----
+
+NOTE: This will use the "src/main/resources/application-local.yml" configuration profile in *Encore*.
+
+===== Option: Create an Encore Docker Image
+
+This quickstart option will show you how to use https://docs.brew.sh/Homebrew-on-Linux[Brew] and FFMpeg Docker to run Encore from a Docker Image.
+
+First, you need to create base FFmpeg Docker image - the following skeleton example installs a recent version of FFmpeg, with a few SVT-proxy filters, and mediainfo. Modify it after your needs.
+
+.An FFmpeg Dockerfile example, modify as per se, (click to expand)
+[%collapsible]
+====
+[source,dockerfile]
+----
+include::examples/docker/FFmpegDockerfile[]
+----
+
+====
+
+.Build and run
+.With env variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image
+[source,bash]
+----
+foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=<yourdockerbaseimage>. && docker run -e SPRING_PROFILES_ACTIVE='local' encore-docker
+----
+
+Success?? Great - next, go and check out the <<concepts>> or the <<apiendpoints>>.
+
+
+=== Configuration
+
+NOTE: TO-DO
+

@@ -1,0 +1,124 @@
+= Encore Documentation
+SVT Videocore <videocore@svt.se>
+0.1, 2021-04-25: Alpha
+:orgname: svt
+:doctype: book
+// Settings:
+:icons: font
+:idprefix:
+:idseparator: -
+:toc: left
+:toclevels: 2
+:pagenums:
+:imagesdir: ../img
+//Source code
+:source-indent: 2
+:source-language: kotlin
+:source-linenums-option:
+
+:table-stripes: even
+
+//skin selector for HTML backend,, buggy
+//++++
+//<script src="https://darshandsoni.com/asciidoctor-skins/switcher.js" type="text/javascript"></script>
+//++++
+
+[preface]
+== License
+
+_This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License. To view a copy of this license, visit https://creativecommons.org/licenses/by-sa/4.0/ or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA._
+
+Copyright 2021 Sveriges Television AB
+
+== Introduction
+
+WARNING: THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJECT.
+
+*This is a living, breathing guide*. If you’d like to contribute,  https://github.com/svt/encore-doc[fork us on GitHub!]
+
+*_What is Encore?_*
+
+*Encore* is a scalable video transcodingfootnote:[Encoding = source file is uncompressed, Transcoding = source file is compressed. The distinction might not matter much, but as the project creators use Encore for transcoding, that is preferred nomenclature] tool, built on Open Source giants like https://www.ffmpeg.org/[FFmpeg] and https://github.com/redisson[Redisson].
+
+*_Why does it exist?_*
+
+*Encore* was created as to provide a way to scale and somewhat abstract_ the transcoding power of FFmpeg, and make it easy to Encode-as-a-Service.
+
+*_Who is it for?_*
+
+*Encore* is aimed at the advanced technical user that needs a scalable video transcoding tool - for example, as a part of their VOD (Video On Demand) Encoding pipeline.
+
+*_How can you use it?_*
+
+For example, you could deploy a number of *Encore* instances within your existing Kubernetes/Docker/other container solution and let the instances communicate with a Redis cluster as a message broker for handling the Queues, so that you can scale your transcoding to many instances.
+
+*_Features_*
+
+* Scalable, with queuing possibilities
+* Profile Configuration
+* Possibility to extend FFmpeg functionality
+* Tested and tried in production
+
+*_Encore is not_*
+
+* A live/stream transcoder
+* Having packager functions (like Shaka, Bento and friends).
+* Having a GUI
+
+*_Built with_*
+
+* Kotlin
+* Spring Boot
+* Gradle
+* FFmpeg
+* mediainfo
+* Redisson
+* and many other great projects
+
+WARNING: API, Profile and other formats might change now and then before we reach version 1.0.0 - *Encore* is currently considered beta (but it *is* tried, battle tested and in use in production at SVT)
+
+== The User Guide
+
+This part of the documentation describes suggestions get going with a quick start and installation hints.
+
+include::userguide.adoc[]
+
+== The Concept/Technical Guide
+
+If you are looking for concepts, structures, API, methods, this part of the documentation is for you.
+
+include::technicalguide.adoc[]
+
+== The Community Guide
+
+In short, general information like the F.A.Q and links to Encore mentions.
+
+include::communityguide.adoc[]
+
+[[contributorguide]]
+== The Contributor Guide
+
+If you want to contribute to the project, read on.
+
+include::contributorguide.adoc[]
+
+_There are no more guides.
+You are now on your own.
+Thank you._
+
+== Appendix
+
+include::appendix.adoc[]
+
+=== Asciidoc Debug
+//TO-DO remove before final, just debugging
+.Built-in
+asciidoctor-version:: {asciidoctor-version}
+safe-mode-name:: {safe-mode-name}
+docdir:: {docdir}
+docfile:: {docfile}
+imagesdir:: {imagesdir}
+
+.Custom
+sourcedir:: {sourcedir}
+endpoint-url:: {endpoint-url}

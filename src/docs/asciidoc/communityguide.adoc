@@ -1,0 +1,69 @@
+=== Frequently Asked Questions
+
+==== I have great idea/bugfix/improvement Y to Encore, how to go further?
+
+See <<contributorguide, The Contribute section>>
+
+==== Can I write a plugin/extension for doing X in *Encore*?
+
+Currently, there are no extensions interface endpoints, but you could, for example, add transcoding functionality by writing an FFMpeg filter - some examples of how that can done can be found at https://github.com/SVT/ffmpeg-filter-proxy-filters[FFmpeg proxy filters] - have a peek at the https://github.com/svt/homebrew-avtools[SVT Brew AVTools] for how to build an FFmpeg with them.
+
+And of course, open a discussion issue if you have any ideas regarding contributions about extensions to *Encore*.
+
+=== Articles and talks
+
+https://conf.tube/videos/watch/751d41f4-72fd-4bfe-aa26-8d8b0e8054c2[Video: FOSS made us do it]
+- How *Encore* and FOSS tools enables the Video Encoding at SVT
+
+https://medium.com/the-svt-tech-blog/encore-video-transcoding-at-its-core-b80c3e5658b3[Article: Encore - video transcoding at it's core]
+- interesting for the project origin, albeit containing some non-valid information as the project has been rewritten - however most are true.
+
+=== Support
+
+There is *no formal* support - none, nada, nothing - for Encore directly from the main contributors / maintainers - but hey, we *want* people to use and improve the project so here are some suggestions for how you can get help.
+
+*File an Issue on GitHub*
+
+You can always file an issue, ask a question, open a discussion issue, and we will most likely respond when time allows.
+
+*Stack Overflow*
+
+If your question does not contain sensitive information, please ask a question on Stack Overflow and use the tag encore. Maybe some other users will help you.
+
+=== Project History
+
+*_The initiative_*
+
+It was around 2018, and it was time to yet again update the license and the hardware for proprietary non-flexible transcoding solution.
+Although that unnamed solution had served us well, we also had a history of less than optimal transcoding, flexibility and support when things went wrong.
+Around that period, it happened that, there was the next "Tekniksprint 2017" coming up at the organisation.
+A "Tekniksprint" is a "innovate what you want for an entire sprint", which SVT has two times a year.
+This time, a small team gathered, with the purpose of seeing how much of a video transcoding solution that could be build in two weeks.
+So, with warts, hacks and other shortcuts, we had a fun Sprint and ended up with something <<articles-and-talks, almost usable, see links>>.
+And, yes, it even had GUI so that we make it pretty demo friendly.
+Although, it  was not very robust, and something to aim to build further upon.
+
+The outcome from this was of course, that by having a Proof-of-Concept project, we now could now walk the long and winding internal organisation road of convincing everyone that we could, and that we should re-write the project seriously - weighting flexibility, features and support in comparison with others.
+But, cross-checking all already planned (and let's not even mention the unplanned) projects took us almost *one* year after the initial Encore-Tekniksprint.
+
+*_How we started developing Encore_*
+
+It almost became a meme for us, but in 2019 we wrote ut, tested it, and ran it in production, with so good results that we finally could ditch out proprietary solution.
+In fact, it helped us achieve better quality, better flexibility, and saved us much money - the costs for developing the Encore solution was multitudes less than buying just another new stack.
+Our video expert now has the ability experiment with new codeds, and encoding features that would be straight impossible had we chosen another solution.
+
+*_How we Open Source:d Encore_*
+
+We always had the intention to Open Source the solution, as we guessed others, mainly Public Broadcast organisations, would have an interest in the product.
+So during 2019/20 , with almost every Sprint-period, we tried to have at least a task that was directly prepared with Open Sourcing Encore.
+Slow, but determined.
+That is all.
+From license research, to documentation, to basic code cleanups, to remove the most SVT-specific,s releasing libraries that would make it possible to release the project itself.
+
+And here we are, warts and all, but finally here.
+
+So far, Encore has been a success story for us.
+We hope that it can benefit you, and grow to be a really great transcoding solution.
+
+/_The Videocore Team at SVT_
+
