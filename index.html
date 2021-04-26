@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<meta name="author" content="SVT Videocore">
+<title>Encore Documentation</title>
+<style>
+/* Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+
+@import url("//fonts.googleapis.com/css?family=Noto+Sans:300,600italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700");
+@import url(https://cdn.jsdelivr.net/gh/asciidoctor/asciidoctor@2.0/data/stylesheets/asciidoctor-default.css); /* Default asciidoc style framework - important */
+
+/* CUSTOMISATIONS */
+/* Change the values in root for quick customisation. If you want even more fine grain... venture further. */
+
+:root {
+    --maincolor: #FFFFFF;
+    --primarycolor: #2c3e50;
+    --secondarycolor: #ba3925;
+    --tertiarycolor: #186d7a;
+    --sidebarbackground: #CCC;
+    --linkcolor: #b71c1c;
+    --linkcoloralternate: #f44336;
+    --white: #FFFFFF;
+    --black: #000000;
+}
+
+/* Text styles */
+h1 {
+    color: var(--primarycolor) !important;
+}
+
+h2, h3, h4, h5, h6 {
+    color: var(--secondarycolor) !important;
+}
+
+.title {
+    color: var(--tertiarycolor) !important;
+    font-family: "Noto Sans", sans-serif !important;
+    font-style: normal !important;
+    font-weight: normal !important;
+}
+
+p {
+    font-family: "Noto Sans", sans-serif !important
+}
+
+/* Table styles */
+th {
+    font-family: "Noto Sans", sans-serif !important
+}
+
+/* Responsiveness fixes */
+video {
+    max-width: 100%;
+}
+
+@media all and (max-width: 600px) {
+    table {
+        width: 55vw !important;
+        font-size: 3vw;
+    }
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="book toc2 toc-left">
+<div id="header">
+<h1>Encore Documentation</h1>
+<div class="details">
+<span id="author" class="author">SVT Videocore</span><br>
+<span id="email" class="email"><a href="mailto:videocore@svt.se">videocore@svt.se</a></span><br>
+<span id="revnumber">version 0.1,</span>
+<span id="revdate">2021-04-25</span>
+<br><span id="revremark">Alpha</span>
+</div>
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#license">License</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#the-user-guide">The User Guide</a>
+<ul class="sectlevel2">
+<li><a href="#installation">Installation</a></li>
+<li><a href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li><a href="#the-concepttechnical-guide">The Concept/Technical Guide</a>
+<ul class="sectlevel2">
+<li><a href="#concepts">Concepts</a></li>
+<li><a href="#apiendpoints">API/Endpoints</a></li>
+</ul>
+</li>
+<li><a href="#the-community-guide">The Community Guide</a>
+<ul class="sectlevel2">
+<li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li><a href="#articles-and-talks">Articles and talks</a></li>
+<li><a href="#support">Support</a></li>
+<li><a href="#project-history">Project History</a></li>
+</ul>
+</li>
+<li><a href="#contributorguide">The Contributor Guide</a>
+<ul class="sectlevel2">
+<li><a href="#changing-the-code-base">Changing the code-base</a></li>
+<li><a href="#sign-off-and-optionally-sign-each-commit">Sign-off and optionally Sign each Commit</a></li>
+</ul>
+</li>
+<li><a href="#git-history">Git History</a></li>
+<li><a href="#appendix">Appendix</a>
+<ul class="sectlevel2">
+<li><a href="#homebrew-avtools">Homebrew AVTools</a></li>
+<li><a href="#profiles">Profiles</a></li>
+<li><a href="#the-future">The Future</a></li>
+<li><a href="#asciidoc-debug">Asciidoc Debug</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="license">License</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><em>This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) License. To view a copy of this license, visit <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="bare">https://creativecommons.org/licenses/by-sa/4.0/</a> or send a letter to Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.</em></p>
+</div>
+<div class="paragraph">
+<p>Copyright 2021 Sveriges Television AB</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJECT.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p><strong>This is a living, breathing guide</strong>. If you’d like to contribute,  <a href="https://github.com/svt/encore-doc">fork us on GitHub!</a></p>
+</div>
+<div class="paragraph">
+<p><strong><em>What is Encore?</em></strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Encore</strong> is a scalable video transcoding<sup class="footnote">[<a id="_footnoteref_1" class="footnote" href="#_footnotedef_1" title="View footnote.">1</a>]</sup> tool, built on Open Source giants like <a href="https://www.ffmpeg.org/">FFmpeg</a> and <a href="https://github.com/redisson">Redisson</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>Why does it exist?</em></strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Encore</strong> was created as to provide a way to scale and somewhat abstract_ the transcoding power of FFmpeg, and make it easy to Encode-as-a-Service.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>Who is it for?</em></strong></p>
+</div>
+<div class="paragraph">
+<p><strong>Encore</strong> is aimed at the advanced technical user that needs a scalable video transcoding tool - for example, as a part of their VOD (Video On Demand) Encoding pipeline.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>How can you use it?</em></strong></p>
+</div>
+<div class="paragraph">
+<p>For example, you could deploy a number of <strong>Encore</strong> instances within your existing Kubernetes/Docker/other container solution and let the instances communicate with a Redis cluster as a message broker for handling the Queues, so that you can scale your transcoding to many instances.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>Features</em></strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Scalable, with queuing possibilities</p>
+</li>
+<li>
+<p>Profile Configuration</p>
+</li>
+<li>
+<p>Possibility to extend FFmpeg functionality</p>
+</li>
+<li>
+<p>Tested and tried in production</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong><em>Encore is not</em></strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A live/stream transcoder</p>
+</li>
+<li>
+<p>Having packager functions (like Shaka, Bento and friends).</p>
+</li>
+<li>
+<p>Having a GUI</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><strong><em>Built with</em></strong></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Kotlin</p>
+</li>
+<li>
+<p>Spring Boot</p>
+</li>
+<li>
+<p>Gradle</p>
+</li>
+<li>
+<p>FFmpeg</p>
+</li>
+<li>
+<p>mediainfo</p>
+</li>
+<li>
+<p>Redisson</p>
+</li>
+<li>
+<p>and many other great projects</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+API, Profile and other formats might change now and then before we reach version 1.0.0 - <strong>Encore</strong> is currently considered beta (but it <strong>is</strong> tried, battle tested and in use in production at SVT)
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-user-guide">The User Guide</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This part of the documentation describes suggestions get going with a quick start and installation hints.</p>
+</div>
+<div class="sect2">
+<h3 id="installation">Installation</h3>
+<div class="paragraph">
+<p>At the moment there are no <strong>pre-ready-to-go</strong> installation packages, pods, docker compose, docker Images etc, for <strong>Encore</strong>, but fear not - there are a few possibilities in how to get going. Continue reading!</p>
+</div>
+<div class="sect3">
+<h4 id="quickstart">Quickstart</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Encore requires:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>JDK 11 or later</p>
+</li>
+<li>
+<p>An available Redis instance (default configuration: locally installed port 6379)</p>
+</li>
+<li>
+<p>FFmpeg (we recommend the version present in <a href="https://github.com/svt/homebrew-avtools">svt/AVTools</a> repository, which is what we use in our production environment)</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="sect4">
+<h5 id="build-the-project">Build the project</h5>
+<div class="paragraph">
+<p>Run all tests and static analysis using:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  $ ./gradlew clean check</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="option-run-a-local-version-with-spring-boot-bootrun-for-a-developer-live-testingtry-out">Option: Run a local version with Spring Boot BootRun for a developer live testing/try-out</h5>
+<div class="paragraph">
+<p>You can run <strong>Encore</strong> on your local Developer machine for a quick test trial by using a local Developer Application Profile and start up <strong>Encore</strong>:</p>
+</div>
+<div class="listingblock">
+<div class="title">In the <strong>Encore</strong> root folder:</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ SPRING_PROFILES_ACTIVE=local ./gradlew clean bootRun</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This will use the "src/main/resources/application-local.yml" configuration profile in <strong>Encore</strong>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect4">
+<h5 id="option-create-an-encore-docker-image">Option: Create an Encore Docker Image</h5>
+<div class="paragraph">
+<p>This quickstart option will show you how to use <a href="https://docs.brew.sh/Homebrew-on-Linux">Brew</a> and FFMpeg Docker to run Encore from a Docker Image.</p>
+</div>
+<div class="paragraph">
+<p>First, you need to create base FFmpeg Docker image - the following skeleton example installs a recent version of FFmpeg, with a few SVT-proxy filters, and mediainfo. Modify it after your needs.</p>
+</div>
+<details>
+<summary class="title">An FFmpeg Dockerfile example, modify as per se, (click to expand)</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="dockerfile" class="language-dockerfile hljs">  FROM ubuntu:rolling
+
+  ENV LC_ALL C.UTF-8
+  ENV LANG C.UTF-8
+  ENV TZ Europe/Stockholm
+  RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
+
+  RUN apt-get update &amp;&amp; apt-get -y --no-install-recommends install \
+  build-essential \
+  curl \
+  sudo \
+  file \
+  locales \
+  ruby \
+  git \
+  expect \
+  openssh-client  \
+  ca-certificates \
+  zip \
+  unzip
+
+  RUN localedef -i en_US -f UTF-8 en_US.UTF-8 &amp;&amp; \
+  useradd -ms /bin/bash YOURUSER &amp;&amp; \
+  echo 'YOURUSER ALL=(ALL) NOPASSWD:ALL' &gt;&gt;/etc/sudoers &amp;&amp; \
+  echo 'Set disable_coredump false' &gt;&gt; /etc/sudo.conf
+
+  RUN mkdir -m777 /ffmpeg-filters
+  COPY --chown=YOURUSER:YOURUSER script /script
+
+  RUN su YOURUSER -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+  USER YOURUSER
+
+  ENV PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
+
+  RUN brew tap svt/avtools &amp;&amp; \
+      brew install ffmpeg-encore libsvg-proxy-filter libsrf-proxy-filter mediainfo &amp;&amp; \
+      sudo rm -rf "$(brew --cache)"
+
+  RUN cp $(brew --prefix)/lib/libsvg_filter.so $(brew --prefix)/lib/libsrf_filter.so /ffmpeg-filters/
+
+  CMD ["ffmpeg", "-version"]</code></pre>
+</div>
+</div>
+</div>
+</details>
+<div class="listingblock">
+<div class="title">With env variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=&lt;yourdockerbaseimage&gt;. &amp;&amp; docker run -e SPRING_PROFILES_ACTIVE='local' encore-docker</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Success?? Great - next, go and check out the <a href="#concepts">Concepts</a> or the <a href="#apiendpoints">API/Endpoints</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="configuration">Configuration</h3>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+TO-DO
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-concepttechnical-guide">The Concept/Technical Guide</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you are looking for concepts, structures, API, methods, this part of the documentation is for you.</p>
+</div>
+<div class="sect2">
+<h3 id="concepts">Concepts</h3>
+<div class="sect3">
+<h4 id="encore-job">Encore Job</h4>
+<div class="paragraph">
+<p><em>An <strong>Encore</strong> Job is the aggregate for the information needed to transcode a video - like streams, <strong>profiles</strong> and priorities.</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An <strong>Encore</strong> Job describes how a video file should be processed.</p>
+</li>
+<li>
+<p>An <strong>Encore</strong> Job can have several output streams, and one input stream.</p>
+</li>
+<li>
+<p>An <strong>Encore</strong> Job has a <strong><em>profile</em></strong>, which essentially describes how the job should configure it&#8217;s transcoding.</p>
+</li>
+<li>
+<p>An <strong>Encore</strong> Job has a priority, which essentially describes how the job should be prioritized compared to other concurrent transcoding jobs.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3">
+<h4 id="profile">Profile</h4>
+<div class="paragraph">
+<p><em>A <strong>Profile</strong> can be seen as a general abstraction of an FFmpeg configuration - example, bitrate to use, thumbnail generation, the codec to use.</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>A <strong>Profile</strong> specifies the configuration for an <strong>Encore</strong> Job - general metadata, FFmpeg configuration and specific codec configuration.</p>
+</li>
+<li>
+<p>A <strong>Profile</strong> is specified in the yaml-format.</p>
+</li>
+<li>
+<p>A <strong>Profile</strong> should a clear, describing name - for example, YouTube-X264.yml.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>See the <a href="#profiles">Profiles</a> in the Appendix for examples.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="scaling-distribution-and-queues">Scaling, distribution and queues</h4>
+<div class="paragraph">
+<p><em>By using Redis as a (message broker) Queue system through the framework Redisson and an internal concurrency scheduler, a great of number of <strong>Encore</strong> instances can be set up.</em></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>An <strong>Encore</strong> instance uses Redis through Redisson&#8217;s <em>Priority Blocking Queue</em>. Jobs are scheduled on an <strong>Encore</strong> instance according to a given priority.</p>
+</li>
+<li>
+<p>Furthermore, on an instance, The <strong>Encore</strong> concurrency setting affects how many transcoding jobs be run on the same instance at once.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><em>So, From an <strong>Encore</strong> instance&#8217;s point of view, the next EncoreJob is chosen for transcoding according to its priority (from Redis/Redisson Priority Queue) and according to how many concurrent tasks is allowed on the instance.</em></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="apiendpoints">API/Endpoints</h3>
+<div class="paragraph">
+<p><strong>Encore</strong> is built using the framework Spring Rest Data, so most of the current REST API is based on the <a href="https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources.fundamentals">default endpoints</a> generated from the usage of this framework. However, there also exists other Endpoints.</p>
+</div>
+<div class="paragraph">
+<p><strong>Encore&#8217;s</strong> endpoints are described and self-documented in the <a href="https://www.openapis.org/">OpenAPIv3 format</a>.</p>
+</div>
+<div class="sect3">
+<h4 id="live">Live</h4>
+<div class="paragraph">
+<p>To see and interact with the endpoints live, consult your</p>
+</div>
+<div class="paragraph">
+<p><a href="https://YOUR_RUNNING_ENCORE_INSTANCE/swagger-ui.html" class="bare">https://YOUR_RUNNING_ENCORE_INSTANCE/swagger-ui.html</a></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+This is the recommended way - dynamic, powerful and up-to-date.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="static">Static</h4>
+<div class="paragraph">
+<p>To see a static version of the API/Endpoint documentation, head to <a href="openapi.html">Static Endpoints</a></p>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+The statically generated documentation needs to be improved, and cleaned up, as it is autogenerated, with quite a few quirks. This would be ideally happen when the project is more mature.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="configure-and-generate-openapi-documentation">Configure and Generate OpenAPI documentation</h5>
+<div class="paragraph">
+<p>To create your own OpenAPI-export from <strong>Encore</strong> so that you transform it as you wish:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  $ SPRING_PROFILES_ACTIVE=local ./gradlew clean generateOpenApiDocs</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which will give you a <em>build/openapi.json</em> file for further processing.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For further information on how you can configure the API-generation, check out the <a href="https://springdoc.org/">Springdoc Project</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="developer">Developer</h4>
+<div class="sect4">
+<h5 id="encore-job-2">Encore Job</h5>
+<div class="paragraph">
+<p>The Encore Job is the most central object in Encore. This is the object you POST and GET in the API.</p>
+</div>
+<div class="paragraph">
+<p>The EncoreJob fields are documented in the <a href="#live">Live</a> API, but also in the</p>
+</div>
+<div class="paragraph">
+<p><a href="openapi.html#_encorejob">EncoreJob static documentation</a></p>
+</div>
+<details>
+<summary class="title">The Encore Job class in Kotlin, for further clearification (click to expand)</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">  package io.mockk
+
+  import kotlin.coroutines.Continuation
+  import kotlin.math.min
+
+  /**
+   * Returns one constant reply
+   */
+  data class ConstantAnswer&lt;T&gt;(val constantValue: T) : Answer&lt;T&gt; {
+      override fun answer(call: Call) = constantValue
+
+      override fun toString(): String = "const($constantValue)"
+  }
+
+  /**
+   * Delegates reply to the lambda function
+   */
+  data class FunctionAnswer&lt;T&gt;(val answerFunc: (Call) -&gt; T) : Answer&lt;T&gt; {
+      override fun answer(call: Call): T = answerFunc(call)
+
+      override fun toString(): String = "answer()"
+  }
+
+  /**
+   * Delegates reply to the lambda suspendable function
+   */
+  data class CoFunctionAnswer&lt;T&gt;(val answerFunc: suspend (Call) -&gt; T) : Answer&lt;T&gt; {
+
+      override fun answer(call: Call): T {
+          val lastParam = call.invocation.args.lastOrNull()
+          return if (lastParam is Continuation&lt;*&gt;)
+              InternalPlatformDsl.coroutineCall {
+                  answerFunc(call)
+              }.callWithContinuation(lastParam)
+          else
+              InternalPlatformDsl.runCoroutine {
+                  answerFunc(call)
+              }
+      }
+
+      override suspend fun coAnswer(call: Call) = answerFunc(call)
+
+      override fun toString(): String = "coAnswer()"
+
+      companion object {
+      }
+  }
+
+  /**
+   * Required to signalize many answers available
+   */
+  interface ManyAnswerable&lt;out T&gt; : Answer&lt;T&gt; {
+      val hasMore: Boolean
+
+      val flatAnswers: List&lt;Answer&lt;T&gt;&gt;
+  }
+
+  /**
+   * Returns many different replies, each time moving the next list element.
+   * Stops at the end.
+   */
+  data class ManyAnswersAnswer&lt;T&gt;(val answers: List&lt;Answer&lt;T&gt;&gt;) : ManyAnswerable&lt;T&gt; {
+
+      override val flatAnswers = answers.flatMap {
+          when (it) {
+              is ManyAnswerable&lt;T&gt; -&gt; it.flatAnswers
+              else -&gt; listOf(it)
+          }
+      }
+
+      private var pos = InternalPlatformDsl.counter()
+
+      override val hasMore: Boolean
+          get() = pos.value &lt; flatAnswers.size
+
+      override fun answer(call: Call): T {
+          if (flatAnswers.isEmpty()) {
+              throw MockKException("In many answers answer no answer available")
+          }
+          val pos = min(pos.increment(), (flatAnswers.size - 1).toLong()).toInt()
+          return flatAnswers[pos].answer(call)
+      }
+  }
+
+  /**
+   * Throws exception instead of function reply
+   */
+  data class ThrowingAnswer(val ex: Throwable) : Answer&lt;Nothing&gt; {
+      override fun answer(call: Call): Nothing {
+          throw ex
+      }
+  }</code></pre>
+</div>
+</div>
+</div>
+</details>
+</div>
+<div class="sect4">
+<h5 id="profile-2">Profile</h5>
+<div class="paragraph">
+<p>A profile consists of toplevel metadata and a list of transcoding jobs.
+The encodes list holds various types of Encoding types.
+The Encoding types can be audio, video, thumbnail maps and so on.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="#profiles">Profiles</a> section in the Appendix for concrete, real life <a href="#profile">Profile</a> examples.</p>
+</div>
+<div class="sect5">
+<h6 id="profile-description">Profile Description</h6>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<caption class="title">Table 1. toplevel: metadata for the profile</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the profile</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A helpful description for the profile</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">scaling</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Directly matching the FFmpeg scaling algorithm options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If given, has to match one of the <a href="https://ffmpeg.org/ffmpeg-scaler.html">FFmpeg scaling algorithms</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">lanczos</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">encodes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a list of different encoding types for a profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">AudioEncode
+   X264Encode
+   X265Encode
+   ThumbnailEncode
+   ThumbnailMapEncode</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<caption class="title">Table 2. type: VideoEncode (the base object for various videoencodes - X264Encode, X265Encode:</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">width</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adds the <a href="https://ffmpeg.org/ffmpeg-filters.html#scale">scale filter</a>, if scaling enabled</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null, or -2 if only height is given</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">height</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">adds the <a href="https://ffmpeg.org/ffmpeg-filters.html#scale">scale filter</a>, if scaling enabled</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">null, or -2 if only height is given</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">twoPass</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true, false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If FFmpeg transcoding should be <a href="https://en.wikipedia.org/wiki/Variable_bitrate#Multi-pass_encoding_and_single-pass_encoding">twoPass</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">params</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">general FFmpeg Encoding parameters (see <a href="#profiles">examples</a>, can be vsync etc)</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">filters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For adding extra <a href="https://ffmpeg.org/ffmpeg-filters.html">FFmpeg Filters</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">audioEncode</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">format</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The file output format</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">mp4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">suffix</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the suffix added to the output filename</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">codec</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The codec library to use, set in the corresponding type</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Examples: libx264,libx265, libfdk_aac</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">x264-params, x265-params</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specific coding parameters for a specific codec library and type, see <a href="#profiles">Profiles</a> for examples</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Examples: deblock, keyint</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<caption class="title">Table 3. type: ThumbnailMapEncode - generate a thumbnailmap</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aspectWidth</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">16</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">aspectHeight</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">9</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">tileHeight</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">90</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">cols</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">12</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">rows</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">20</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<caption class="title">Table 4. type: ThumbnailEncode - generate a thumbnail</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">percentages</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">[25, 50, 75]</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">thumbnailWidth</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">-2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">thumbnailHeight</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1080</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stripes-even stretch">
+<caption class="title">Table 5. type: AudioEncode</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">codec:</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The Audio library to use</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">libfdk_aac</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">samplerate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The audio samplerate</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">48000</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">channels</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Number of channels for the audio</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">suffix</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">codec_nrofchannels.ch</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="the-community-guide">The Community Guide</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In short, general information like the F.A.Q and links to Encore mentions.</p>
+</div>
+<div class="sect2">
+<h3 id="frequently-asked-questions">Frequently Asked Questions</h3>
+<div class="sect3">
+<h4 id="i-have-great-ideabugfiximprovement-y-to-encore-how-to-go-further">I have great idea/bugfix/improvement Y to Encore, how to go further?</h4>
+<div class="paragraph">
+<p>See <a href="#contributorguide">The Contribute section</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="can-i-write-a-pluginextension-for-doing-x-in-encore">Can I write a plugin/extension for doing X in <strong>Encore</strong>?</h4>
+<div class="paragraph">
+<p>Currently, there are no extensions interface endpoints, but you could, for example, add transcoding functionality by writing an FFMpeg filter - some examples of how that can done can be found at <a href="https://github.com/SVT/ffmpeg-filter-proxy-filters">FFmpeg proxy filters</a> - have a peek at the <a href="https://github.com/svt/homebrew-avtools">SVT Brew AVTools</a> for how to build an FFmpeg with them.</p>
+</div>
+<div class="paragraph">
+<p>And of course, open a discussion issue if you have any ideas regarding contributions about extensions to <strong>Encore</strong>.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="articles-and-talks">Articles and talks</h3>
+<div class="paragraph">
+<p><a href="https://conf.tube/videos/watch/751d41f4-72fd-4bfe-aa26-8d8b0e8054c2">Video: FOSS made us do it</a>
+- How <strong>Encore</strong> and FOSS tools enables the Video Encoding at SVT</p>
+</div>
+<div class="paragraph">
+<p><a href="https://medium.com/the-svt-tech-blog/encore-video-transcoding-at-its-core-b80c3e5658b3">Article: Encore - video transcoding at it&#8217;s core</a>
+- interesting for the project origin, albeit containing some non-valid information as the project has been rewritten - however most are true.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="support">Support</h3>
+<div class="paragraph">
+<p>There is <strong>no formal</strong> support - none, nada, nothing - for Encore directly from the main contributors / maintainers - but hey, we <strong>want</strong> people to use and improve the project so here are some suggestions for how you can get help.</p>
+</div>
+<div class="paragraph">
+<p><strong>File an Issue on GitHub</strong></p>
+</div>
+<div class="paragraph">
+<p>You can always file an issue, ask a question, open a discussion issue, and we will most likely respond when time allows.</p>
+</div>
+<div class="paragraph">
+<p><strong>Stack Overflow</strong></p>
+</div>
+<div class="paragraph">
+<p>If your question does not contain sensitive information, please ask a question on Stack Overflow and use the tag encore. Maybe some other users will help you.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="project-history">Project History</h3>
+<div class="paragraph">
+<p><strong><em>The initiative</em></strong></p>
+</div>
+<div class="paragraph">
+<p>It was around 2018, and it was time to yet again update the license and the hardware for proprietary non-flexible transcoding solution.
+Although that unnamed solution had served us well, we also had a history of less than optimal transcoding, flexibility and support when things went wrong.
+Around that period, it happened that, there was the next "Tekniksprint 2017" coming up at the organisation.
+A "Tekniksprint" is a "innovate what you want for an entire sprint", which SVT has two times a year.
+This time, a small team gathered, with the purpose of seeing how much of a video transcoding solution that could be build in two weeks.
+So, with warts, hacks and other shortcuts, we had a fun Sprint and ended up with something <a href="#articles-and-talks">almost usable, see links</a>.
+And, yes, it even had GUI so that we make it pretty demo friendly.
+Although, it  was not very robust, and something to aim to build further upon.</p>
+</div>
+<div class="paragraph">
+<p>The outcome from this was of course, that by having a Proof-of-Concept project, we now could now walk the long and winding internal organisation road of convincing everyone that we could, and that we should re-write the project seriously - weighting flexibility, features and support in comparison with others.
+But, cross-checking all already planned (and let&#8217;s not even mention the unplanned) projects took us almost <strong>one</strong> year after the initial Encore-Tekniksprint.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>How we started developing Encore</em></strong></p>
+</div>
+<div class="paragraph">
+<p>It almost became a meme for us, but in 2019 we wrote ut, tested it, and ran it in production, with so good results that we finally could ditch out proprietary solution.
+In fact, it helped us achieve better quality, better flexibility, and saved us much money - the costs for developing the Encore solution was multitudes less than buying just another new stack.
+Our video expert now has the ability experiment with new codeds, and encoding features that would be straight impossible had we chosen another solution.</p>
+</div>
+<div class="paragraph">
+<p><strong><em>How we Open Source:d Encore</em></strong></p>
+</div>
+<div class="paragraph">
+<p>We always had the intention to Open Source the solution, as we guessed others, mainly Public Broadcast organisations, would have an interest in the product.
+So during 2019/20 , with almost every Sprint-period, we tried to have at least a task that was directly prepared with Open Sourcing Encore.
+Slow, but determined.
+That is all.
+From license research, to documentation, to basic code cleanups, to remove the most SVT-specific,s releasing libraries that would make it possible to release the project itself.</p>
+</div>
+<div class="paragraph">
+<p>And here we are, warts and all, but finally here.</p>
+</div>
+<div class="paragraph">
+<p>So far, Encore has been a success story for us.
+We hope that it can benefit you, and grow to be a really great transcoding solution.</p>
+</div>
+<div class="paragraph">
+<p>/<em>The Videocore Team at SVT</em></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="contributorguide">The Contributor Guide</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>If you want to contribute to the project, read on.</p>
+</div>
+<div class="paragraph">
+<p>We gratefully accept contributions via
+<a href="https://help.github.com/articles/about-pull-requests/">pull requests</a>.</p>
+</div>
+<div class="paragraph">
+<p>Use the issue tracker to suggest feature requests, report bugs, and ask questions.
+This is also a great way to connect with the developers of the project as well
+as others who are interested in this solution.</p>
+</div>
+<div class="sect2">
+<h3 id="changing-the-code-base">Changing the code-base</h3>
+<div class="paragraph">
+<p>Generally speaking, you should fork this repository, make changes in your
+own fork, and then submit a pull-request. This is often called the <a href="https://gist.github.com/Chaser324/ce0505fbed06b947d962">Fork-and-Pull model</a></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>All contributions to this project will be released under the inbound=outbound norm, that is,
+they are submitted under the projects main license.</p>
+</li>
+<li>
+<p>By submitting a pull request or filing a bug, issue, or
+feature request, you agree to comply with this waiver of copyright interest.
+Details can be found in the <a href="https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12">EUPL 1.2 or later</a>.</p>
+</li>
+<li>
+<p>All new code should have associated unit
+tests that validate implemented features and the presence or lack of defects.</p>
+</li>
+<li>
+<p>Additionally, the code should follow any stylistic and architectural guidelines
+prescribed by the project. In the absence of such guidelines, mimic the styles
+and patterns in the existing code-base.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="sign-off-and-optionally-sign-each-commit">Sign-off and optionally Sign each Commit</h3>
+<div class="paragraph">
+<p>As part of filing a pull request you agree to the DCO.
+<a href="https://developercertificate.org/">Developer Certificate of Origin</a></p>
+</div>
+<div class="paragraph">
+<p>A DCO is a lightweight way for a contributor to confirm that they wrote or otherwise have the right
+to submit code or documentation to a project.</p>
+</div>
+<div class="paragraph">
+<p>To confirm that you agree to the DCO, you need to <strong>sign off</strong> your commits when sending us a pull request. Technically, this is done by supplying the <code>-s</code>/<code>--signoff</code> flag to git when committing:</p>
+</div>
+<div class="paragraph">
+<p><code>$ git commit -s -m "add fix for the bug"</code></p>
+</div>
+<div class="paragraph">
+<p>Optionally, you can also sign the commit with <code>-S</code> which also gives your commit a nice verified button on GitHub,
+but, it requires that you have a GPG keypair set up.
+For mor information, see <a href="https://docs.github.com/en/github/authenticating-to-github/signing-commits">Sign commit on GitHub with GPG key</a></p>
+</div>
+<div class="paragraph">
+<p><code>$ git commit -s -S -m "add fix for the bug"</code></p>
+</div>
+<div class="paragraph">
+<p>For the difference in signoff and signing, see
+<a href="https://medium.com/@MarkEmeis/git-commit-signoff-vs-signing-9f37ee272b14/">Git signoff vs signing</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="git-history">Git History</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In order to maintain a high software quality standard, contributions should aim follow these rules:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>We pay more attention to the quality of commit messages. In general, we share the view on how commit messages should be written with
+<a href="https://github.com/git/git/blob/master/Documentation/SubmittingPatches">the Git project itself</a>:</p>
+</li>
+<li>
+<p><a href="https://github.com/git/git/blob/e6932248fcb41fb94a0be484050881e03c7eb298/Documentation/SubmittingPatches#L43">Make separate commits for logically separate changes.</a>
+For example, pure formatting changes that do not affect software behaviour usually do not belong in the same commit as changes to program logic.</p>
+</li>
+<li>
+<p><a href="https://github.com/git/git/blob/e6932248fcb41fb94a0be484050881e03c7eb298/Documentation/SubmittingPatches#L101">Describe your changes well.</a>
+Do not just repeat in prose what is "obvious" from the code, but provide a rationale explaining <em>why</em> you believe
+your change is necessary.</p>
+</li>
+<li>
+<p><a href="https://github.com/git/git/blob/e6932248fcb41fb94a0be484050881e03c7eb298/Documentation/SubmittingPatches#L133">Describe your changes in the imperative.</a>
+Instead of writing "Fixes an issue with transcoding" prefer "Fix an transcoding issue". Think about it like the commit
+only does something <em>if</em> it is applied. This usually results in more concise commit messages.</p>
+</li>
+<li>
+<p><a href="https://github.com/git/git/blob/e6932248fcb41fb94a0be484050881e03c7eb298/Documentation/SubmittingPatches#L95">We are picky about whitespaces.</a>
+Trailing whitespace and duplicate blank lines are simply a superfluous annoyance, and most Git tools flag them red
+in the diff anyway.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Have a look at basically any of
+<a href="https://github.com/git/git/commits?author=peff">Jeff King&#8217;s commits</a> in the Git project.</p>
+</div>
+<div class="paragraph">
+<p>Thank you for reading and happy contributing!</p>
+</div>
+<div class="paragraph">
+<p><em>There are no more guides.
+You are now on your own.
+Thank you.</em></p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="appendix">Appendix</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="homebrew-avtools">Homebrew AVTools</h3>
+<div class="paragraph">
+<p>So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew? The creators of <strong>Encore</strong>, SVT, have released their Brew Formulas on <a href="https://github.com/svt/homebrew-avtools">GitHub: homewbrew-avtools</a>.</p>
+</div>
+<div class="paragraph">
+<p>That means it will be easier for you to try out <strong>Encore</strong>.</p>
+</div>
+<div class="paragraph">
+<p>For example, here is the <strong>Encore</strong> FFmpeg Brew Formula that with minor modifications, uses formulas for X264, X265, and SVT&#8217;s subtitle filter.
+These Brew formulas be configured as you wish.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+To use and install this version of FFmpeg locally, follow the examples given at the <a href="https://github.com/svt/homebrew-avtools/blob/main/README.md">AVTools README</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="listingblock">
+<div class="title">The SVT <strong>Encore</strong> FFmpeg Brew Formula</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="ruby" class="language-ruby hljs">  # SPDX-FileCopyrightText: 2009-present, Homebrew contributors
+  # SPDX-FileCopyrightText: 2021 Sveriges Television AB
+  #
+  # SPDX-License-Identifier: BSD-2-Clause
+
+  class FfmpegEncore &lt; Formula
+    desc "Play, record, convert, and stream audio and video"
+    homepage "https://ffmpeg.org/"
+    url "https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.xz"
+    sha256 "ad009240d46e307b4e03a213a0f49c11b650e445b1f8be0dda2a9212b34d2ffb"
+    license "GPL-2.0-only"
+    revision 1
+    head "https://github.com/FFmpeg/FFmpeg.git"
+    option "with-ffplay", "Enable ffplay"
+
+    depends_on "nasm" =&gt; :build
+    depends_on "pkg-config" =&gt; :build
+    depends_on "aom"
+    depends_on "fdk-aac"
+    depends_on "fontconfig"
+    depends_on "freetype"
+    depends_on "lame"
+    depends_on "libass"
+    depends_on "libsoxr"
+    depends_on "libssh"
+    depends_on "libvmaf"
+    depends_on "libvorbis"
+    depends_on "libvpx"
+    depends_on "openssl"
+    depends_on "x264-encore"
+    depends_on "x265-encore"
+
+    uses_from_macos "bzip2"
+    uses_from_macos "zlib"
+
+    conflicts_with "ffmpeg", because: "it also ships with ffmpeg binary"
+
+    resource "proxy_filter" do
+      url "https://github.com/SVT/ffmpeg-filter-proxy/archive/v1.0.tar.gz"
+      sha256 "9a9ddfe248ea299ffa5bf9643bed95913f00b3a9d4e03f402aebc3224e4f82f3"
+    end
+
+    if build.with? "ffplay"
+      depends_on "libxv" unless OS.mac?
+      depends_on "sdl2"
+    end
+
+    def install
+      resource("proxy_filter").stage do |stage|
+        @proxyfilterpath = Dir.pwd
+        stage.staging.retain!
+      end
+      cp_r Dir.glob("#{@proxyfilterpath}/*.c"), "libavfilter", verbose: true
+      inreplace "libavfilter/allfilters.c",
+                "extern AVFilter ff_vf_yadif;",
+                "extern AVFilter ff_vf_yadif;\nextern AVFilter ff_vf_proxy;\n"
+      inreplace "libavfilter/Makefile",
+                "# video filters",
+                "# video filters\nOBJS-\$(CONFIG_PROXY_FILTER) += vf_proxy.o\n"
+
+      args = %W[
+        --prefix=#{prefix}
+        --enable-shared
+        --enable-pthreads
+        --enable-version3
+        --enable-hardcoded-tables
+        --enable-avresample
+        --cc=#{ENV.cc}
+        --host-cflags=#{ENV.cflags}
+        --host-ldflags=#{ENV.ldflags}
+        --enable-gpl
+        --enable-libaom
+        --enable-libmp3lame
+        --enable-libvorbis
+        --enable-libvpx
+        --enable-libx264
+        --enable-libx265
+        --enable-lzma
+        --enable-libass
+        --enable-libfontconfig
+        --enable-libfreetype
+        --disable-libjack
+        --disable-indev=jack
+        --enable-libaom
+        --enable-openssl
+        --enable-libssh
+        --enable-libfdk-aac
+        --enable-libvmaf
+        --enable-nonfree
+      ]
+      args &lt;&lt; "--enable-ffplay" if build.with? "ffplay"
+      args &lt;&lt; "--enable-videotoolbox" if OS.mac?
+      system "./configure", *args
+      system "make", "install"
+
+      # Build and install additional FFmpeg tools
+      system "make", "alltools"
+      bin.install Dir["tools/*"].select { |f| File.executable? f }
+
+      # Fix for Non-executables that were installed to bin/
+      mv bin/"python", pkgshare/"python", force: true
+    end
+
+    test do
+      # Create an example mp4 file
+      mp4out = testpath/"video.mp4"
+      system bin/"ffmpeg", "-filter_complex", "testsrc=rate=1:duration=1", mp4out
+      assert_predicate mp4out, :exist?
+    end
+  end</code></pre>
+</div>
+</div>
+<div class="admonitionblock caution">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-caution" title="Caution"></i>
+</td>
+<td class="content">
+If you use the homebrew-avtools, the version of FFmpeg in use might be updated without notice.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="profiles">Profiles</h3>
+<div class="listingblock">
+<div class="title">Profile example, main</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">  program: withforcekeyframe.yml
+  youtube: video.yml</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Profile example, x264 codec with forced keyframes</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">  name: program
+  description: Program profile
+  scaling: bicubic
+  encodes:
+    - type: X264Encode
+      suffix: 3100
+      twoPass: true
+      height: 1080
+      params:
+        b:v: 3100k
+        maxrate: 4700k
+        bufsize: 6200k
+        r: 25
+        vsync: 1
+        pix_fmt: yuv420p
+        force_key_frames: expr:not(mod(n,96))
+        profile:v: high
+        level: 4.1
+      x264-params:
+        deblock: 0,0
+        aq-mode: 1
+        bframes: 6
+        keyint: 192
+        keyint_min: 96
+        ref: 4
+      audioEncode:
+        type: AudioEncode
+        bitrate: 192k
+        suffix: STEREO
+    - type: X264Encode
+      suffix: 2069
+      twoPass: true
+      height: 720
+      params:
+        b:v: 2069k
+        maxrate: 3104k
+        bufsize: 4138k
+        r: 25
+        vsync: 1
+        pix_fmt: yuv420p
+        force_key_frames: expr:not(mod(n,96))
+        profile:v: main
+        level: 3.1
+      x264-params:
+        deblock: 0,0
+        aq-mode: 1
+        bframes: 6
+        keyint: 192
+        keyint_min: 96
+        ref: 4
+      audioEncode:
+        type: AudioEncode
+        bitrate: 128k
+        suffix: STEREO
+    - type: X264Encode
+      suffix: 1312
+      twoPass: true
+      height: 540
+      params:
+        b:v: 1312k
+        maxrate: 1968k
+        bufsize: 2524k
+        r: 25
+        vsync: 1
+        pix_fmt: yuv420p
+        force_key_frames: expr:not(mod(n,96))
+        level: 3.1
+        profile:v: main
+      x264-params:
+        deblock: 0,0
+        aq-mode: 1
+        bframes: 6
+        keyint: 192
+        keyint_min: 96
+        ref: 4
+      audioEncode:
+        type: AudioEncode
+        bitrate: 96k
+        suffix: STEREO
+    - type: X264Encode
+      suffix: 806
+      twoPass: true
+      height: 360
+      params:
+        b:v: 806121
+        maxrate: 1209182
+        bufsize: 1612242
+        r: 25
+        vsync: 1
+        pix_fmt: yuv420p
+        force_key_frames: expr:not(mod(n,96))
+        profile:v: main
+        level: 3.1
+      x264-params:
+        deblock: 0,0
+        aq-mode: 1
+        bframes: 6
+        keyint: 192
+        keyint_min: 96
+        ref: 4
+      audioEncode:
+        type: AudioEncode
+        bitrate: 96k
+        suffix: STEREO
+    - type: X264Encode
+      suffix: 320
+      twoPass: true
+      height: 234
+      params:
+        b:v: 324051
+        maxrate: 486077
+        bufsize: 648102
+        r: 25
+        vsync: 1
+        pix_fmt: yuv420p
+        force_key_frames: expr:not(mod(n,96))
+        profile:v: baseline
+        level: 3.1
+      x264-params:
+        deblock: 0,0
+        aq-mode: 1
+        keyint: 192
+        keyint_min: 96
+        ref: 3
+      audioEncode:
+        type: AudioEncode
+        bitrate: 96k
+        suffix: STEREO
+    - type: AudioEncode
+      bitrate: 192k
+      suffix: STEREO
+      params:
+        cutoff: 20000
+    - type: AudioEncode
+      bitrate: 64k
+      suffix: STEREO_LB
+      params:
+        cutoff: 14000
+    - type: AudioEncode
+      bitrate: 192k
+      suffix: STEREO_DE
+      audioMixPreset: de
+      skipIfNoAudioMixPreset: true
+      params:
+        cutoff: 20000
+    - type: AudioEncode
+      bitrate: 64k
+      suffix: STEREO_DELB
+      audioMixPreset: de
+      skipIfNoAudioMixPreset: true
+      params:
+        cutoff: 14000
+    - type: AudioEncode
+      codec: ac3
+      bitrate: 448k
+      suffix: SURROUND
+      channels: 6
+    - type: ThumbnailMapEncode
+    - type: ThumbnailEncode (edited)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Profile example, x264 codec</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">  name: youtube
+  description: Youtube upload
+  encodes:
+    - type: X264Encode
+      suffix: 10000
+      twoPass: false
+      height: 1080
+      params:
+        crf: 15
+        r: 25
+        vsync: 1
+        pix_fmt: yuv420p
+        profile:v: high
+        level: 5.1
+      x264-params:
+        vbv-maxrate: 10000
+        vbv-bufsize: 20000
+        deblock: 0,0
+        aq-mode: 1
+        bframes: 4
+        keyint: 202
+        keyint_min: 100
+        ref: 8
+      audioEncode:
+        type: AudioEncode
+        bitrate: 256k
+        suffix: STEREO</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="the-future">The Future</h3>
+<div class="paragraph">
+<p>We have a few ideas where we would like to go with Encore. We are focusing on the features we need, but we are always open to suggestion and discussion, if you would like to contribute to the project.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="asciidoc-debug">Asciidoc Debug</h3>
+<div class="dlist">
+<div class="title">Built-in</div>
+<dl>
+<dt class="hdlist1">asciidoctor-version</dt>
+<dd>
+<p>2.0.10</p>
+</dd>
+<dt class="hdlist1">safe-mode-name</dt>
+<dd>
+<p>unsafe</p>
+</dd>
+<dt class="hdlist1">docdir</dt>
+<dd>
+<p>/home/runner/work/encore-doc/encore-doc/src/docs/asciidoc</p>
+</dd>
+<dt class="hdlist1">docfile</dt>
+<dd>
+<p>/home/runner/work/encore-doc/encore-doc/src/docs/asciidoc/encore-documentation.adoc</p>
+</dd>
+<dt class="hdlist1">imagesdir</dt>
+<dd>
+<p>../img</p>
+</dd>
+</dl>
+</div>
+<div class="dlist">
+<div class="title">Custom</div>
+<dl>
+<dt class="hdlist1">sourcedir</dt>
+<dd>
+<p>{sourcedir}</p>
+</dd>
+<dt class="hdlist1">endpoint-url</dt>
+<dd>
+<p>{endpoint-url}</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnotedef_1">
+<a href="#_footnoteref_1">1</a>. Encoding = source file is uncompressed, Transcoding = source file is compressed. The distinction might not matter much, but as the project creators use Encore for transcoding, that is preferred nomenclature
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Version 0.1<br>
+Last updated 2021-04-26 21:42:30 UTC
+</div>
+</div>
+<link rel="stylesheet" href="js/highlight/styles/darcula.min.css">
+<script src="js/highlight/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
+</body>
+</html>
