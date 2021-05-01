@@ -42,7 +42,7 @@ WARNING: THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCO
 
 *_Why does it exist?_*
 
-*Encore* was created as to provide a way to scale and somewhat abstract_ the transcoding power of FFmpeg, and make it easy to Encode-as-a-Service.
+*Encore* was created to scale, and somewhat abstract the transcoding _power of FFmpeg_, and to offer a simple solution for Transcoding-as-a-Service.
 
 *_Who is it for?_*
 

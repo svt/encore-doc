@@ -1,14 +1,14 @@
 
 === Homebrew AVTools
 
-So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew? The creators of *Encore*, SVT, have released their Brew Formulas on https://github.com/svt/homebrew-avtools[GitHub: homewbrew-avtools].
+So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew? The creators of *Encore*, SVT, have released their Brew Formulas on https://github.com/svt/homebrew-avtools[GitHub: Homebrew-AVTools].
 
 That means it will be easier for you to try out *Encore*.
 
 For example, here is the *Encore* FFmpeg Brew Formula that with minor modifications, uses formulas for X264, X265, and SVT's subtitle filter.
 These Brew formulas be configured as you wish.
 
-NOTE: To use and install this version of FFmpeg locally, follow the examples given at the https://github.com/svt/homebrew-avtools/blob/main/README.md[AVTools README].
+NOTE: To use and install this version of FFmpeg locally, follow the examples given at the https://github.com/svt/homebrew-avtools/blob/main/README.md[Homebrew AVTools README].
 
 .The SVT *Encore* FFmpeg Brew Formula
 [source, ruby]
@@ -16,7 +16,7 @@ NOTE: To use and install this version of FFmpeg locally, follow the examples giv
 include::https://raw.githubusercontent.com/svt/homebrew-avtools/main/Formula/ffmpeg-encore.rb[]
 ----
 
-CAUTION: If you use the homebrew-avtools, the version of FFmpeg in use might be updated without notice.
+CAUTION: If you use Homebrew-AVTools, the version of FFmpeg in use might be updated without notice.
 
 
 === Profiles
