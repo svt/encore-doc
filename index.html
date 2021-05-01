@@ -92,6 +92,7 @@ video {
 <li><a href="#the-concepttechnical-guide">The Concept/Technical Guide</a>
 <ul class="sectlevel2">
 <li><a href="#concepts">Concepts</a></li>
+<li><a href="#workflow">Workflow</a></li>
 <li><a href="#apiendpoints">API/Endpoints</a></li>
 </ul>
 </li>
@@ -161,7 +162,7 @@ THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJ
 <p><strong><em>Why does it exist?</em></strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Encore</strong> was created as to provide a way to scale and somewhat abstract_ the transcoding power of FFmpeg, and make it easy to Encode-as-a-Service.</p>
+<p><strong>Encore</strong> was created to scale, and somewhat abstract the transcoding <em>power of FFmpeg</em>, and to offer a simple solution for Transcoding-as-a-Service.</p>
 </div>
 <div class="paragraph">
 <p><strong><em>Who is it for?</em></strong></p>
@@ -416,6 +417,47 @@ TO-DO
 </div>
 <div class="sect2">
 <h3 id="concepts">Concepts</h3>
+<div class="paragraph">
+<p>TODO:  PICTURE OF ENCORE OVERVIEW (FROM O&#8217;s presentation)</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="workflow">Workflow</h3>
+<div class="paragraph">
+<p>The workflow for an Encore Job can be described as:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>An Encore Job is created</p>
+</li>
+<li>
+<p>It is offered to a Queue<sup class="footnote">[<a id="_footnoteref_2" class="footnote" href="#_footnotedef_2" title="View footnote.">2</a>]</sup></p>
+</li>
+<li>
+<p>At some point, the Encore Job is picked up from the Queue</p>
+</li>
+<li>
+<p>Metadata needed for the coming transcoding task is gathered - for example, the input stream is analyzed, the Profile is read.</p>
+</li>
+<li>
+<p>The transcoding is started - (FFmpeg transcoding starts)</p>
+</li>
+<li>
+<p>Output files are written to the configured destination</p>
+</li>
+</ol>
+</div>
+<details>
+<summary class="title">The Encore Job status field, roughly telling the observer the current position in the workflow (click to expand)</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">  Unresolved directive in technicalguide.adoc - include::https://raw.githubusercontent.com/svt/encore/master/src/main/kotlin/se/svt/oss/encore/model/Status.kt[]</code></pre>
+</div>
+</div>
+</div>
+</details>
 <div class="sect3">
 <h4 id="encore-job">Encore Job</h4>
 <div class="paragraph">
@@ -571,98 +613,7 @@ For further information on how you can configure the API-generation, check out t
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">  package io.mockk
-
-  import kotlin.coroutines.Continuation
-  import kotlin.math.min
-
-  /**
-   * Returns one constant reply
-   */
-  data class ConstantAnswer&lt;T&gt;(val constantValue: T) : Answer&lt;T&gt; {
-      override fun answer(call: Call) = constantValue
-
-      override fun toString(): String = "const($constantValue)"
-  }
-
-  /**
-   * Delegates reply to the lambda function
-   */
-  data class FunctionAnswer&lt;T&gt;(val answerFunc: (Call) -&gt; T) : Answer&lt;T&gt; {
-      override fun answer(call: Call): T = answerFunc(call)
-
-      override fun toString(): String = "answer()"
-  }
-
-  /**
-   * Delegates reply to the lambda suspendable function
-   */
-  data class CoFunctionAnswer&lt;T&gt;(val answerFunc: suspend (Call) -&gt; T) : Answer&lt;T&gt; {
-
-      override fun answer(call: Call): T {
-          val lastParam = call.invocation.args.lastOrNull()
-          return if (lastParam is Continuation&lt;*&gt;)
-              InternalPlatformDsl.coroutineCall {
-                  answerFunc(call)
-              }.callWithContinuation(lastParam)
-          else
-              InternalPlatformDsl.runCoroutine {
-                  answerFunc(call)
-              }
-      }
-
-      override suspend fun coAnswer(call: Call) = answerFunc(call)
-
-      override fun toString(): String = "coAnswer()"
-
-      companion object {
-      }
-  }
-
-  /**
-   * Required to signalize many answers available
-   */
-  interface ManyAnswerable&lt;out T&gt; : Answer&lt;T&gt; {
-      val hasMore: Boolean
-
-      val flatAnswers: List&lt;Answer&lt;T&gt;&gt;
-  }
-
-  /**
-   * Returns many different replies, each time moving the next list element.
-   * Stops at the end.
-   */
-  data class ManyAnswersAnswer&lt;T&gt;(val answers: List&lt;Answer&lt;T&gt;&gt;) : ManyAnswerable&lt;T&gt; {
-
-      override val flatAnswers = answers.flatMap {
-          when (it) {
-              is ManyAnswerable&lt;T&gt; -&gt; it.flatAnswers
-              else -&gt; listOf(it)
-          }
-      }
-
-      private var pos = InternalPlatformDsl.counter()
-
-      override val hasMore: Boolean
-          get() = pos.value &lt; flatAnswers.size
-
-      override fun answer(call: Call): T {
-          if (flatAnswers.isEmpty()) {
-              throw MockKException("In many answers answer no answer available")
-          }
-          val pos = min(pos.increment(), (flatAnswers.size - 1).toLong()).toInt()
-          return flatAnswers[pos].answer(call)
-      }
-  }
-
-  /**
-   * Throws exception instead of function reply
-   */
-  data class ThrowingAnswer(val ex: Throwable) : Answer&lt;Nothing&gt; {
-      override fun answer(call: Call): Nothing {
-          throw ex
-      }
-  }</code></pre>
+<pre class="highlightjs highlight"><code data-lang="kotlin" class="language-kotlin hljs">  Unresolved directive in technicalguide.adoc - include::https://raw.githubusercontent.com/svt/encore/master/src/main/kotlin/se/svt/oss/encore/model/EncoreJob.kt[]</code></pre>
 </div>
 </div>
 </div>
@@ -671,7 +622,7 @@ For further information on how you can configure the API-generation, check out t
 <div class="sect4">
 <h5 id="profile-2">Profile</h5>
 <div class="paragraph">
-<p>A profile consists of toplevel metadata and a list of transcoding jobs.
+<p>A profile consists of toplevel metadata, and a list of transcoding jobs.
 The encodes list holds various types of Encoding types.
 The Encoding types can be audio, video, thumbnail maps and so on.</p>
 </div>
@@ -1019,7 +970,7 @@ But, cross-checking all already planned (and let&#8217;s not even mention the un
 <div class="paragraph">
 <p>It almost became a meme for us, but in 2019 we wrote ut, tested it, and ran it in production, with so good results that we finally could ditch out proprietary solution.
 In fact, it helped us achieve better quality, better flexibility, and saved us much money - the costs for developing the Encore solution was multitudes less than buying just another new stack.
-Our video expert now has the ability experiment with new codeds, and encoding features that would be straight impossible had we chosen another solution.</p>
+We now have an easier way to work with new codecs and transcoding features that would be impossible, had we chosen another proprietary solution.</p>
 </div>
 <div class="paragraph">
 <p><strong><em>How we Open Source:d Encore</em></strong></p>
@@ -1028,15 +979,14 @@ Our video expert now has the ability experiment with new codeds, and encoding fe
 <p>We always had the intention to Open Source the solution, as we guessed others, mainly Public Broadcast organisations, would have an interest in the product.
 So during 2019/20 , with almost every Sprint-period, we tried to have at least a task that was directly prepared with Open Sourcing Encore.
 Slow, but determined.
-That is all.
-From license research, to documentation, to basic code cleanups, to remove the most SVT-specific,s releasing libraries that would make it possible to release the project itself.</p>
+From license research, documentation, basic code cleanups, removing the most SVT-specific code, and  releasing libraries that would make it possible to release the project itself at one point.</p>
 </div>
 <div class="paragraph">
 <p>And here we are, warts and all, but finally here.</p>
 </div>
 <div class="paragraph">
-<p>So far, Encore has been a success story for us.
-We hope that it can benefit you, and grow to be a really great transcoding solution.</p>
+<p>So far, Encore has been a success story for us at SVT.
+We sincerely hope that it can benefit you, and with time grow to be an even greater transcoding solution.</p>
 </div>
 <div class="paragraph">
 <p>/<em>The Videocore Team at SVT</em></p>
@@ -1123,7 +1073,7 @@ For mor information, see <a href="https://docs.github.com/en/github/authenticati
 <h2 id="git-history">Git History</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In order to maintain a high software quality standard, contributions should aim follow these rules:</p>
+<p>In order to maintain a high software quality standard, contributions should aim to follow these rules:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -1172,7 +1122,7 @@ Thank you.</em></p>
 <div class="sect2">
 <h3 id="homebrew-avtools">Homebrew AVTools</h3>
 <div class="paragraph">
-<p>So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew? The creators of <strong>Encore</strong>, SVT, have released their Brew Formulas on <a href="https://github.com/svt/homebrew-avtools">GitHub: homewbrew-avtools</a>.</p>
+<p>So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew? The creators of <strong>Encore</strong>, SVT, have released their Brew Formulas on <a href="https://github.com/svt/homebrew-avtools">GitHub: Homebrew-AVTools</a>.</p>
 </div>
 <div class="paragraph">
 <p>That means it will be easier for you to try out <strong>Encore</strong>.</p>
@@ -1188,7 +1138,7 @@ These Brew formulas be configured as you wish.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-To use and install this version of FFmpeg locally, follow the examples given at the <a href="https://github.com/svt/homebrew-avtools/blob/main/README.md">AVTools README</a>.
+To use and install this version of FFmpeg locally, follow the examples given at the <a href="https://github.com/svt/homebrew-avtools/blob/main/README.md">Homebrew AVTools README</a>.
 </td>
 </tr>
 </table>
@@ -1315,7 +1265,7 @@ To use and install this version of FFmpeg locally, follow the examples given at 
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-If you use the homebrew-avtools, the version of FFmpeg in use might be updated without notice.
+If you use Homebrew-AVTools, the version of FFmpeg in use might be updated without notice.
 </td>
 </tr>
 </table>
@@ -1582,11 +1532,14 @@ If you use the homebrew-avtools, the version of FFmpeg in use might be updated w
 <div class="footnote" id="_footnotedef_1">
 <a href="#_footnoteref_1">1</a>. Encoding = source file is uncompressed, Transcoding = source file is compressed. The distinction might not matter much, but as the project creators use Encore for transcoding, that is preferred nomenclature
 </div>
+<div class="footnote" id="_footnotedef_2">
+<a href="#_footnoteref_2">2</a>. In reality the Encore Job itself is not offered to, or polled from the queue - it is an Object QueueItem, which holds the needed metadata for the Encore Job
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2021-04-26 21:48:53 UTC
+Last updated 2021-05-01 04:37:03 UTC
 </div>
 </div>
 <link rel="stylesheet" href="js/highlight/styles/darcula.min.css">
