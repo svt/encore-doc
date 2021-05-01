@@ -50,20 +50,19 @@ But, cross-checking all already planned (and let's not even mention the unplanne
 
 It almost became a meme for us, but in 2019 we wrote ut, tested it, and ran it in production, with so good results that we finally could ditch out proprietary solution.
 In fact, it helped us achieve better quality, better flexibility, and saved us much money - the costs for developing the Encore solution was multitudes less than buying just another new stack.
-Our video expert now has the ability experiment with new codeds, and encoding features that would be straight impossible had we chosen another solution.
+We now have an easier way to work with new codecs and transcoding features that would be impossible, had we chosen another proprietary solution.
 
 *_How we Open Source:d Encore_*
 
 We always had the intention to Open Source the solution, as we guessed others, mainly Public Broadcast organisations, would have an interest in the product.
 So during 2019/20 , with almost every Sprint-period, we tried to have at least a task that was directly prepared with Open Sourcing Encore.
 Slow, but determined.
-That is all.
-From license research, to documentation, to basic code cleanups, to remove the most SVT-specific,s releasing libraries that would make it possible to release the project itself.
+From license research, documentation, basic code cleanups, removing the most SVT-specific code, and  releasing libraries that would make it possible to release the project itself at one point.
 
 And here we are, warts and all, but finally here.
 
-So far, Encore has been a success story for us.
-We hope that it can benefit you, and grow to be a really great transcoding solution.
+So far, Encore has been a success story for us at SVT.
+We sincerely hope that it can benefit you, and with time grow to be an even greater transcoding solution.
 
 /_The Videocore Team at SVT_
 

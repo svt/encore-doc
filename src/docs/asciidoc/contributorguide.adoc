@@ -45,7 +45,7 @@ https://medium.com/@MarkEmeis/git-commit-signoff-vs-signing-9f37ee272b14/[Git si
 
 == Git History
 
-In order to maintain a high software quality standard, contributions should aim follow these rules:
+In order to maintain a high software quality standard, contributions should aim to follow these rules:
 
 * We pay more attention to the quality of commit messages. In general, we share the view on how commit messages should be written with
 https://github.com/git/git/blob/master/Documentation/SubmittingPatches[the Git project itself]:
