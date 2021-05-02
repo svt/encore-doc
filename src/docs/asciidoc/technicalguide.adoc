@@ -1,3 +1,7 @@
+== The Concept/Technical Guide
+
+If you are looking for concepts, structures, API, methods, this part of the documentation is for you.
+
 === Concepts
 
 TODO:  PICTURE OF ENCORE OVERVIEW (FROM O's presentation)
@@ -48,7 +52,7 @@ _By using Redis as a (message broker) Queue system through the framework Redisso
 * An *Encore* instance uses Redis through Redisson's _Priority Blocking Queue_. Jobs are scheduled on an *Encore* instance according to a given priority.
 * Furthermore, on an instance, The *Encore* concurrency setting affects how many transcoding jobs be run on the same instance at once.
 
-_So, From an *Encore* instance's point of view, the next EncoreJob is chosen for transcoding according to its priority (from Redis/Redisson Priority Queue) and according to how many concurrent tasks is allowed on the instance._
+_So, From an *Encore* instance's point of view, the next EncoreJob is chosen for transcoding according to its priority (from Redis/Redisson Priority Queue) and according to how many concurrent tasks that are allowed._
 
 
 [#apiendpoints]
@@ -87,9 +91,9 @@ which will give you a _build/openapi.json_ file for further processing.
 
 TIP: For further information on how you can configure the API-generation, check out the https://springdoc.org/[Springdoc Project]
 
-==== Developer
+=== Models
 
-===== Encore Job
+==== Encore Job
 
 The Encore Job is the most central object in Encore. This is the object you POST and GET in the API.
 
@@ -106,19 +110,17 @@ include::https://raw.githubusercontent.com/svt/encore/master/src/main/kotlin/se/
 ----
 ====
 
-===== Profile
+==== Profile
 
-A profile consists of toplevel metadata, and a list of transcoding jobs.
-The encodes list holds various types of Encoding types.
-The Encoding types can be audio, video, thumbnail maps and so on.
+NOTE: See the <<profiles>> section in the Appendix for concrete <<profile>> examples.
 
-See the <<profiles>> section in the Appendix for concrete, real life <<profile>> examples.
 
-====== Profile Description
+A *Profile* consists of toplevel metadata, and a list of encoding configuration types - _encodes_.
 
-.toplevel: metadata for the profile
+.Profile metadata
+[grid=none,frame=sides]
 |===
-|Field |Description |Constraint |Default
+| Field | Description | Constraint | Default
 
 | name
 | The name of the profile
@@ -126,157 +128,28 @@ See the <<profiles>> section in the Appendix for concrete, real life <<profile>>
 |
 
 | description
-| A helpful description for the profile
+| A preferably helpful description for the profile
 |
 |
 
 | scaling
 | Directly matching the FFmpeg scaling algorithm options
-| If given, has to match one of the https://ffmpeg.org/ffmpeg-scaler.html[FFmpeg scaling algorithms]
+| If given, one of the https://ffmpeg.org/ffmpeg-scaler.html[FFmpeg Scaling algorithm options]
 | lanczos
 
-
 | encodes
-| a list of different encoding types for a profile
-|  AudioEncode
-   X264Encode
-   X265Encode
-   ThumbnailEncode
-   ThumbnailMapEncode
+| a list of encode types (configurations) for the profile
+|
+<<audioencode,AudioEncode>>
+<<videoencode,X264Encode>>
+<<videoencode,X265Encode>>
+<<thumbnailencode,ThumbnailEncode>>
+<<thumbnailmapencode,ThumbnailMapEncode>>
 |
 |===
 
-.type: VideoEncode (the base object for various videoencodes - X264Encode, X265Encode:
-|===
-|Field |Description |Constraint |Default
+===== (n)Encode Description
 
-| width
-| adds the https://ffmpeg.org/ffmpeg-filters.html#scale[scale filter], if scaling enabled
-|
-|  null, or -2 if only height is given
-
-| height
-| adds the https://ffmpeg.org/ffmpeg-filters.html#scale[scale filter], if scaling enabled
-|
-|  null, or -2 if only height is given
-
-| twoPass
-| true, false
-| If FFmpeg transcoding should be https://en.wikipedia.org/wiki/Variable_bitrate#Multi-pass_encoding_and_single-pass_encoding[twoPass]
-| true
-
-
-| params
-| general FFmpeg Encoding parameters (see <<profiles,examples>>, can be vsync etc)
-|
-|
-
-| filters
-| For adding extra https://ffmpeg.org/ffmpeg-filters.html[FFmpeg Filters]
-|
-|
-
-| audioEncode
-|
-|
-|
-
-| format
-| The file output format
-|
-| mp4
-
-| suffix
-| the suffix added to the output filename
-|
-|
-
-| codec
-| The codec library to use, set in the corresponding type
-|
-| Examples: libx264,libx265, libfdk_aac
-
-| x264-params, x265-params
-| Specific coding parameters for a specific codec library and type, see <<profiles>> for examples
-|
-| Examples: deblock, keyint
-|===
-
-.type: ThumbnailMapEncode - generate a thumbnailmap
-|===
-|Field |Description |Constraint |Default
-
-| aspectWidth
-|
-|
-| 16
-
-| aspectHeight
-|
-|
-| 9
-
-| tileHeight
-|
-|
-| 90
-
-| cols
-|
-|
-| 12
-
-| rows
-|
-|
-| 20
-|===
-
-.type: ThumbnailEncode - generate a thumbnail
-|===
-|Field |Description |Constraint |Default
-
-| percentages
-|
-|
-| [25, 50, 75]
-
-| thumbnailWidth
-|
-|
-| -2
-
-| thumbnailHeight
-|
-|
-| 1080
-|===
-
-
-.type: AudioEncode
-|===
-| Field | Description | Constraint | Default
-
-| codec:
-| The Audio library to use
-|
-|  libfdk_aac
-
-| samplerate
-| The audio samplerate
-|
-| 48000
-
-| channels
-| Number of channels for the audio
-|
-| 2
-
-| suffix
-|
-|
-| codec_nrofchannels.ch
-|===
-
+include::encodes.adoc[]
 
 

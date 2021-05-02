@@ -32,7 +32,7 @@ Copyright 2021 Sveriges Television AB
 
 == Introduction
 
-WARNING: THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJECT.
+WARNING: THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJECT RELEASE.
 
 *This is a living, breathing guide*. If you’d like to contribute,  https://github.com/svt/encore-doc[fork us on GitHub!]
 
@@ -77,36 +77,17 @@ For example, you could deploy a number of *Encore* instances within your existin
 
 WARNING: API, Profile and other formats might change now and then before we reach version 1.0.0 - *Encore* is currently considered beta (but it *is* tried, battle tested and in use in production at SVT)
 
-== The User Guide
-
-This part of the documentation describes suggestions get going with a quick start and installation hints.
-
 include::userguide.adoc[]
-
-== The Concept/Technical Guide
-
-If you are looking for concepts, structures, API, methods, this part of the documentation is for you.
 
 include::technicalguide.adoc[]
 
-== The Community Guide
-
-In short, general information like the F.A.Q and links to Encore mentions.
-
 include::communityguide.adoc[]
-
-[[contributorguide]]
-== The Contributor Guide
-
-If you want to contribute to the project, read on.
 
 include::contributorguide.adoc[]
 
 _There are no more guides.
 You are now on your own.
 Thank you._
-
-== Appendix
 
 include::appendix.adoc[]
 
