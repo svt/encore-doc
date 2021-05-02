@@ -55,7 +55,7 @@ _By using Redis as a (message broker) Queue system through the framework Redisso
 _So, From an *Encore* instance's point of view, the next EncoreJob is chosen for transcoding according to its priority (from Redis/Redisson Priority Queue) and according to how many concurrent tasks that are allowed._
 
 
-[#apiendpoints]
+[[apiendpoints]]
 === API/Endpoints
 
 *Encore* is built using the framework Spring Rest Data, so most of the current REST API is based on the https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources.fundamentals[default endpoints] generated from the usage of this framework. However, there also exists other Endpoints.
