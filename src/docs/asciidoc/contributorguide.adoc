@@ -1,3 +1,7 @@
+[[contributorguide]]
+== The Contributor Guide
+
+If you want to contribute to the project, read on.
 
 We gratefully accept contributions via
 https://help.github.com/articles/about-pull-requests/[pull requests].
@@ -43,7 +47,7 @@ For mor information, see https://docs.github.com/en/github/authenticating-to-git
 For the difference in signoff and signing, see
 https://medium.com/@MarkEmeis/git-commit-signoff-vs-signing-9f37ee272b14/[Git signoff vs signing]
 
-== Git History
+=== Git History
 
 In order to maintain a high software quality standard, contributions should aim to follow these rules:
 

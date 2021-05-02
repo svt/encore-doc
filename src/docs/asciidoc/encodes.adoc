@@ -1,0 +1,228 @@
+
+***
+
+[[audioencode]]
+.AudioEncode - audio
+[grid=none,frame=sides]
+|===
+| Field | Description | Constraint | Default
+
+| codec
+| audio library to use
+|
+| https://wiki.hydrogenaud.io/index.php?title=Fraunhofer_FDK_AAC[libfdk_aac]
+
+| bitrate
+|
+| optional
+|
+
+| samplerate
+| The audio sample rate in hz
+|
+| 48000
+
+| channels
+| The number of channels
+|
+| 2
+
+| suffix
+| the suffix for the audio output file
+|
+| {codec]_{nrofchannels}.ch
+
+| params
+| a map of FFmpeg parameters to the given codec - cutoff etc
+|
+|
+
+| filters
+| any optional filters to FFmpeg.
+|
+|
+
+| audioMixPreset
+| define presents for audio mixes
+|
+| default
+
+| skipIfNoAudioMixPreset
+| don't encode audio if no mix was found
+| Boolean
+| false
+
+| format
+| output file extension
+|
+| mp4
+|===
+
+***
+
+[[videoencode]]
+.VideoEncode - (base for <<x264encode, X264Encode>>, <<x265encode, X265Encode>>):
+[grid=none,frame=sides]
+|===
+| Field | Description | Constraint | Default
+
+| width
+| adds the https://ffmpeg.org/ffmpeg-filters.html#scale[scale filter] (if scaling enabled)
+|
+|  null, or -2 if only height is given
+
+| height
+| adds the https://ffmpeg.org/ffmpeg-filters.html#scale[scale filter] (if scaling enabled)
+|
+|  null, or -2 if only height is given
+
+| twoPass
+| true, false
+| If FFmpeg transcoding should be https://en.wikipedia.org/wiki/Variable_bitrate#Multi-pass_encoding_and_single-pass_encoding[twoPass]
+| true
+
+| params
+| general FFmpeg Encoding parameters (see <<profiles,examples>>, vsync etc)
+|
+|
+
+| filters
+| For adding extra https://ffmpeg.org/ffmpeg-filters.html[FFmpeg Filters]
+|
+|
+
+| audioEncode
+|
+|
+|
+
+| suffix
+| the suffix added to the output filename
+|
+|
+
+| format
+| The file output format
+|
+|
+
+
+| codec
+| codec library to use
+|
+| Example: libx264
+
+| x264-params, x265-params
+| Specific coding parameters for a specific codec library and type,
+|
+| Examples: deblock, keyint
+|===
+
+[[x264encode]]
+.X264Encode - video
+[grid=none,frame=sides]
+|===
+| Field | Description | Constraint | Default
+
+4+| fields from  <<videoencode, VideoEncode>>
+
+| x264-params
+| map of specific x264 codec library parameters
+|
+| deblock, keyint, etc, see https://trac.ffmpeg.org/wiki/Encode/H.264[Overwriting default preset settings - FFmpeg x264]
+and  <<profiles>> for examples
+| format
+|
+|
+| mp4
+
+| codec
+|
+|
+| https://trac.ffmpeg.org/wiki/Encode/H.264["libx264"]
+
+|===
+
+[[x265encode]]
+.X265Encode - video
+[grid=none,frame=sides]
+|===
+| Field | Description | Constraint | Default
+
+4+| fields from  <<videoencode, VideoEncode>>
+
+| x265-params
+| map of specific x265 codec library parameters
+|
+| deblock, scenecut, etc, see https://trac.ffmpeg.org/wiki/Encode/H.265[Passing Options for FFmpeg x265]
+  and  <<profiles>> for examples
+| format
+|
+|
+| mp4
+
+| codec
+|
+|
+| https://trac.ffmpeg.org/wiki/Encode/H.265["libx265"]
+
+|===
+
+***
+
+[[thumbnailmapencode]]
+.ThumbnailMapEncode - image
+[grid=none,frame=sides]
+|===
+|Field |Description |Constraint |Default
+
+| aspectWidth
+|
+|
+| 16
+
+| aspectHeight
+|
+|
+| 9
+
+| tileHeight
+|
+|
+| 90
+
+| cols
+|
+|
+| 12
+
+| rows
+|
+|
+| 20
+|===
+
+[[thumbnailencode]]
+.ThumbnailEncode - image
+[grid=none,frame=sides]
+|===
+|Field |Description |Constraint |Default
+
+| percentages
+|
+|
+| [25, 50, 75]
+
+| thumbnailWidth
+|
+|
+| -2
+
+| thumbnailHeight
+|
+|
+| 1080
+|===
+
+
+

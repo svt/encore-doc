@@ -1,3 +1,7 @@
+== The User Guide
+
+This part of the documentation describes suggestions get going with a quick start and installation hints.
+
 === Installation
 
 At the moment there are no *pre-ready-to-go* installation packages, pods, docker compose, docker Images etc, for *Encore*, but fear not - there are a few possibilities in how to get going. Continue reading!

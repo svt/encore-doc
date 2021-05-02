@@ -1,3 +1,7 @@
+== The Community Guide
+
+In short, general information like the F.A.Q and links to Encore mentions.
+
 === Frequently Asked Questions
 
 ==== I have great idea/bugfix/improvement Y to Encore, how to go further?
