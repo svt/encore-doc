@@ -23,17 +23,17 @@
 | 48000
 
 | channels
-| The number of channels
+| number of channels
 |
 | 2
 
 | suffix
-| the suffix for the audio output file
+| suffix for the audio output file
 |
 | {codec]_{nrofchannels}.ch
 
 | params
-| a map of FFmpeg parameters to the given codec - cutoff etc
+| map of FFmpeg parameters to the given codec - cutoff etc
 |
 |
 
@@ -87,7 +87,7 @@
 |
 
 | filters
-| For adding extra https://ffmpeg.org/ffmpeg-filters.html[FFmpeg Filters]
+| for adding extra https://ffmpeg.org/ffmpeg-filters.html[FFmpeg Filters]
 |
 |
 
@@ -97,7 +97,7 @@
 |
 
 | suffix
-| the suffix added to the output filename
+| suffix added to the output filename
 |
 |
 
@@ -110,12 +110,12 @@
 | codec
 | codec library to use
 |
-| Example: libx264
+| example: libx264
 
 | x264-params, x265-params
-| Specific coding parameters for a specific codec library and type,
+| specific coding parameters for a specific codec library and type,
 |
-| Examples: deblock, keyint
+| example: deblock, keyint
 |===
 
 [[x264encode]]

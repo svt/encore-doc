@@ -46,11 +46,10 @@ tasks {
         })
 
         resources {
-            from("${projectDir}") {
+            from("${projectDir}/src/") {
 
                 include("img/**")
             }
-            into("./")
 
             from("${projectDir}/src/") {
 
