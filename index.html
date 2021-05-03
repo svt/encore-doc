@@ -75,8 +75,8 @@ video {
 <span id="author" class="author">SVT Videocore</span><br>
 <span id="email" class="email"><a href="mailto:videocore@svt.se">videocore@svt.se</a></span><br>
 <span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-04-25</span>
-<br><span id="revremark">Alpha</span>
+<span id="revdate">2021-05-03</span>
+<br><span id="revremark">Alpha Edition</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -99,7 +99,7 @@ video {
 </li>
 <li><a href="#the-community-guide">The Community Guide</a>
 <ul class="sectlevel2">
-<li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+<li><a href="#faq">Frequently Asked Questions</a></li>
 <li><a href="#articles-and-talks">Articles and talks</a></li>
 <li><a href="#support">Support</a></li>
 <li><a href="#project-history">Project History</a></li>
@@ -138,11 +138,11 @@ video {
 <div class="sect1">
 <h2 id="introduction">Introduction</h2>
 <div class="sectionbody">
-<div class="admonitionblock warning">
+<div class="admonitionblock important">
 <table>
 <tr>
 <td class="icon">
-<i class="fa icon-warning" title="Warning"></i>
+<i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
 THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJECT RELEASE.
@@ -163,19 +163,19 @@ THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJ
 <p><strong><em>Why does it exist?</em></strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Encore</strong> was created to scale, and somewhat abstract the transcoding <em>power of FFmpeg</em>, and to offer a simple solution for Transcoding-as-a-Service.</p>
+<p><strong>Encore</strong> was created to scale, and abstract the transcoding <em>power of FFmpeg</em>, and to offer a simple solution to do   Transcoding-as-a-Service.</p>
 </div>
 <div class="paragraph">
 <p><strong><em>Who is it for?</em></strong></p>
 </div>
 <div class="paragraph">
-<p><strong>Encore</strong> is aimed at the advanced technical user that needs a scalable video transcoding tool - for example, as a part of their VOD (Video On Demand) Encoding pipeline.</p>
+<p><strong>Encore</strong> is aimed at the advanced technical user that needs a scalable video transcoding tool - for example, as a part of their VOD (Video On Demand) transcoding pipeline.</p>
 </div>
 <div class="paragraph">
 <p><strong><em>How can you use it?</em></strong></p>
 </div>
 <div class="paragraph">
-<p>For example, you could deploy a number of <strong>Encore</strong> instances within your existing Kubernetes/Docker/other container solution and let the instances communicate with a Redis cluster as a message broker for handling the Queues, so that you can scale your transcoding to many instances.</p>
+<p>For example, you could deploy a number of <strong>Encore</strong> instances within your existing Kubernetes/Docker/other container solution and let the running instances communicate with a Redis cluster (as a Queue message broker). Every instance can than pick the next job lot, and you can scale your transcoding as needed.</p>
 </div>
 <div class="paragraph">
 <p><strong><em>Features</em></strong></p>
@@ -183,10 +183,10 @@ THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJ
 <div class="ulist">
 <ul>
 <li>
-<p>Scalable, with queuing possibilities</p>
+<p>Scalable - queuing and concurrency options</p>
 </li>
 <li>
-<p>Profile Configuration</p>
+<p>Profile configuration</p>
 </li>
 <li>
 <p>Possibility to extend FFmpeg functionality</p>
@@ -205,7 +205,7 @@ THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJ
 <p>A live/stream transcoder</p>
 </li>
 <li>
-<p>Having packager functions (like Shaka, Bento and friends).</p>
+<p>Having packager functions (see <a href="#faq">Frequently Asked Questions</a>)</p>
 </li>
 <li>
 <p>Having a GUI</p>
@@ -221,16 +221,13 @@ THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJ
 <p>Kotlin</p>
 </li>
 <li>
-<p>Spring Boot</p>
-</li>
-<li>
 <p>Gradle</p>
 </li>
 <li>
-<p>FFmpeg</p>
+<p>Spring Boot</p>
 </li>
 <li>
-<p>mediainfo</p>
+<p>FFmpeg</p>
 </li>
 <li>
 <p>Redisson</p>
@@ -247,7 +244,8 @@ THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJ
 <i class="fa icon-warning" title="Warning"></i>
 </td>
 <td class="content">
-API, Profile and other formats might change now and then before we reach version 1.0.0 - <strong>Encore</strong> is currently considered beta (but it <strong>is</strong> tried, battle tested and in use in production at SVT)
+API, Profiles, and other formats will change now and then before we reach version 1.0.0 - <strong>Encore</strong> is currently considered a work-in-progress tool.
+It <strong>is</strong> used in daily production though.
 </td>
 </tr>
 </table>
@@ -258,12 +256,12 @@ API, Profile and other formats might change now and then before we reach version
 <h2 id="the-user-guide">The User Guide</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This part of the documentation describes suggestions get going with a quick start and installation hints.</p>
+<p>This part of the documentation describes how to get going with a quick start and installation hints.</p>
 </div>
 <div class="sect2">
 <h3 id="installation">Installation</h3>
 <div class="paragraph">
-<p>At the moment there are no <strong>pre-ready-to-go</strong> installation packages, pods, docker compose, docker Images etc, for <strong>Encore</strong>, but fear not - there are a few possibilities in how to get going. Continue reading!</p>
+<p>At the moment there are no <strong>pre-ready-to-go</strong> installation packages, pods, docker images offered for <strong>Encore</strong>, but fear not - there are a few possibilities in how to get going. Continue reading!</p>
 </div>
 <div class="sect3">
 <h4 id="quickstart">Quickstart</h4>
@@ -280,7 +278,7 @@ API, Profile and other formats might change now and then before we reach version
 <p>An available Redis instance (default configuration: locally installed port 6379)</p>
 </li>
 <li>
-<p>FFmpeg (we recommend the version present in <a href="https://github.com/svt/homebrew-avtools">svt/AVTools</a> repository, which is what we use in our production environment)</p>
+<p>FFmpeg (we recommend the version present in <a href="https://github.com/svt/homebrew-avtools">Homebrew-AVTools</a> repository, which is what we use in our production environment)</p>
 </li>
 </ul>
 </div>
@@ -299,9 +297,9 @@ API, Profile and other formats might change now and then before we reach version
 </div>
 </div>
 <div class="sect4">
-<h5 id="option-run-a-local-version-with-spring-boot-bootrun-for-a-developer-live-testingtry-out">Option: Run a local version with Spring Boot BootRun for a developer live testing/try-out</h5>
+<h5 id="option-run-a-local-version-with-spring-boot-bootrun-for-a-test-trial">Option: Run a local version with Spring Boot bootRun for a test trial</h5>
 <div class="paragraph">
-<p>You can run <strong>Encore</strong> on your local Developer machine for a quick test trial by using a local Developer Application Profile and start up <strong>Encore</strong>:</p>
+<p>You can run <strong>Encore</strong> on your local Developer machine for a quick test trial by starting up a local Developer Application Profile:</p>
 </div>
 <div class="listingblock">
 <div class="title">In the <strong>Encore</strong> root folder:</div>
@@ -316,22 +314,24 @@ API, Profile and other formats might change now and then before we reach version
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-This will use the "src/main/resources/application-local.yml" configuration profile in <strong>Encore</strong>.
+This will use the <em>src/main/resources/application-local.yml</em> configuration profile in <strong>Encore</strong>.
 </td>
 </tr>
 </table>
 </div>
 </div>
 <div class="sect4">
-<h5 id="option-create-an-encore-docker-image">Option: Create an Encore Docker Image</h5>
+<h5 id="option-run-encore-in-a-docker-image">Option: Run Encore in a Docker Image</h5>
 <div class="paragraph">
-<p>This quickstart option will show you how to use <a href="https://docs.brew.sh/Homebrew-on-Linux">Brew</a> and FFMpeg Docker to run Encore from a Docker Image.</p>
+<p>This quickstart option will show you how to use <a href="https://docs.brew.sh/Homebrew-on-Linux">Homebrew</a> and creating an FFmpeg Docker Image to run Encore from.</p>
 </div>
 <div class="paragraph">
-<p>First, you need to create base FFmpeg Docker image - the following skeleton example installs a recent version of FFmpeg, with a few SVT-proxy filters, and mediainfo. Modify it after your needs.</p>
+<p>First, you need to create a base FFmpeg Docker image.
+The following skeleton example installs a recent version of FFmpeg, with a few FFmpeg filters, and mediainfo.
+Modify as needed.</p>
 </div>
 <details>
-<summary class="title">An FFmpeg Dockerfile example, modify as per se, (click to expand)</summary>
+<summary class="title">An FFmpeg Dockerfile example (click to expand)</summary>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -388,7 +388,7 @@ This will use the "src/main/resources/application-local.yml" configuration profi
 </div>
 </div>
 <div class="paragraph">
-<p>Success?? Great - next, go and check out the <a href="#concepts">Concepts</a> or the <a href="#apiendpoints">API/Endpoints</a>.</p>
+<p>Success?? Great - you might want to check out the <a href="#concepts">Concepts</a> or the <a href="#apiendpoints">API/Endpoints</a> next.</p>
 </div>
 </div>
 </div>
@@ -414,18 +414,18 @@ TO-DO
 <h2 id="the-concepttechnical-guide">The Concept/Technical Guide</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you are looking for concepts, structures, API, methods, this part of the documentation is for you.</p>
+<p>If you are looking for concepts, structures and API-descriptions, this part of the documentation is for you.</p>
 </div>
 <div class="sect2">
 <h3 id="concepts">Concepts</h3>
 <div class="paragraph">
-<p>TODO:  PICTURE OF ENCORE OVERVIEW (FROM O&#8217;s presentation)</p>
+<p>TODO:  PICTURE OF ENCORE WORKFLOW OVERVIEW (FROM O&#8217;s presentation)</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="workflow">Workflow</h3>
 <div class="paragraph">
-<p>The workflow for an Encore Job can be described as:</p>
+<p>The workflow for an Encore Job:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -450,7 +450,7 @@ TO-DO
 </ol>
 </div>
 <details>
-<summary class="title">The Encore Job status field, roughly telling the observer the current position in the workflow (click to expand)</summary>
+<summary class="title">The Encore Job status field will roughly tell the observer where in the workflow it is currently (click to expand)</summary>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -462,21 +462,21 @@ TO-DO
 <div class="sect3">
 <h4 id="encore-job">Encore Job</h4>
 <div class="paragraph">
-<p><em>An <strong>Encore</strong> Job is the aggregate for the information needed to transcode a video - like streams, <strong>profiles</strong> and priorities.</em></p>
+<p><em>An <strong>Encore</strong> Job is the aggregate for the information needed to transcode an input - information like input filestream, <strong>profile</strong> and priority.</em></p>
 </div>
 <div class="ulist">
 <ul>
 <li>
-<p>An <strong>Encore</strong> Job describes how a video file should be processed.</p>
+<p>An <strong>Encore</strong> Job describes how an input file should be processed.</p>
 </li>
 <li>
-<p>An <strong>Encore</strong> Job can have several output streams, and one input stream.</p>
+<p>An <strong>Encore</strong> Job can have several output (file)streams, and one input (file)stream.</p>
 </li>
 <li>
 <p>An <strong>Encore</strong> Job has a <strong><em>profile</em></strong>, which essentially describes how the job should configure it&#8217;s transcoding.</p>
 </li>
 <li>
-<p>An <strong>Encore</strong> Job has a priority, which essentially describes how the job should be prioritized compared to other concurrent transcoding jobs.</p>
+<p>An <strong>Encore</strong> Job has a priority, which essentially describes how the job should be prioritized.</p>
 </li>
 </ul>
 </div>
@@ -489,24 +489,18 @@ TO-DO
 <div class="ulist">
 <ul>
 <li>
-<p>A <strong>Profile</strong> specifies the configuration for an <strong>Encore</strong> Job - general metadata, FFmpeg configuration and specific codec configuration.</p>
+<p>A <strong>Profile</strong> specifies the configuration for an <strong>Encore</strong> Job - metadata, FFmpeg configuration and specific codec configuration.</p>
 </li>
 <li>
 <p>A <strong>Profile</strong> is specified in the yaml-format.</p>
 </li>
-<li>
-<p>A <strong>Profile</strong> should a clear, describing name - for example, YouTube-X264.yml.</p>
-</li>
 </ul>
-</div>
-<div class="paragraph">
-<p>See the <a href="#profiles">Profiles</a> in the Appendix for examples.</p>
 </div>
 </div>
 <div class="sect3">
 <h4 id="scaling-distribution-and-queues">Scaling, distribution and queues</h4>
 <div class="paragraph">
-<p><em>By using Redis as a (message broker) Queue system through the framework Redisson and an internal concurrency scheduler, a great of number of <strong>Encore</strong> instances can be set up.</em></p>
+<p><em>By using Redis (as message broker Queue handler) and an internal concurrency scheduler, <strong>Encore</strong> can be scaled by setting up more instances and allowing more concurrency.</em></p>
 </div>
 <div class="ulist">
 <ul>
@@ -514,25 +508,25 @@ TO-DO
 <p>An <strong>Encore</strong> instance uses Redis through Redisson&#8217;s <em>Priority Blocking Queue</em>. Jobs are scheduled on an <strong>Encore</strong> instance according to a given priority.</p>
 </li>
 <li>
-<p>Furthermore, on an instance, The <strong>Encore</strong> concurrency setting affects how many transcoding jobs be run on the same instance at once.</p>
+<p>Furthermore, The <strong>Encore</strong> concurrency setting affects how many transcoding jobs be run on the same instance at once.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p><em>So, From an <strong>Encore</strong> instance&#8217;s point of view, the next EncoreJob is chosen for transcoding according to its priority (from Redis/Redisson Priority Queue) and according to how many concurrent tasks that are allowed.</em></p>
+<p><em>So, From an <strong>Encore</strong> instance&#8217;s point of view, the next EncoreJob is chosen for transcoding according to its priority and according to how many concurrent tasks that are allowed.</em></p>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="apiendpoints">API/Endpoints</h3>
 <div class="paragraph">
-<p><strong>Encore</strong> is built using the framework Spring Rest Data, so most of the current REST API is based on the <a href="https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources.fundamentals">default endpoints</a> generated from the usage of this framework. However, there also exists other Endpoints.</p>
+<p><strong>Encore</strong> is built using the framework Spring Rest Data, which most of the current REST API is based on the <a href="https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources.fundamentals">default endpoints</a> generated from the usage of this framework. However, other custom Endpoints exist.</p>
 </div>
 <div class="paragraph">
 <p><strong>Encore&#8217;s</strong> endpoints are described and self-documented in the <a href="https://www.openapis.org/">OpenAPIv3 format</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="live">Live</h4>
+<h4 id="dynamically-generated-endpoint-documentation">Dynamically generated Endpoint documentation</h4>
 <div class="paragraph">
 <p>To see and interact with the endpoints live, consult your</p>
 </div>
@@ -546,16 +540,23 @@ TO-DO
 <i class="fa icon-tip" title="Tip"></i>
 </td>
 <td class="content">
-This is the recommended way - dynamic, powerful and up-to-date.
+This is the recommended way - dynamic, powerful and
+always up-to-date.
 </td>
 </tr>
 </table>
 </div>
+<div class="imageblock">
+<div class="content">
+<img src="img/encore_api.png" alt="encore api">
+</div>
+<div class="title">Figure 1. Encore OpenAPI</div>
+</div>
 </div>
 <div class="sect3">
-<h4 id="static">Static</h4>
+<h4 id="statically-generated-endpoint-documentation">Statically generated Endpoint documentation</h4>
 <div class="paragraph">
-<p>To see a static version of the API/Endpoint documentation, head to <a href="openapi.html">Static Endpoints</a></p>
+<p>To see a static version, refer to the <a href="openapi.html">Static Endpoints</a> documentation.</p>
 </div>
 <div class="admonitionblock caution">
 <table>
@@ -564,36 +565,11 @@ This is the recommended way - dynamic, powerful and up-to-date.
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-The statically generated documentation needs to be improved, and cleaned up, as it is autogenerated, with quite a few quirks. This would be ideally happen when the project is more mature.
+The statically generated documentation needs to be cleaned up, as it is autogenerated, with quite a few quirks.
+This will happen when the project is mature.
 </td>
 </tr>
 </table>
-</div>
-<div class="sect4">
-<h5 id="configure-and-generate-openapi-documentation">Configure and Generate OpenAPI documentation</h5>
-<div class="paragraph">
-<p>To create your own OpenAPI-export from <strong>Encore</strong> so that you transform it as you wish:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  $ SPRING_PROFILES_ACTIVE=local ./gradlew clean generateOpenApiDocs</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>which will give you a <em>build/openapi.json</em> file for further processing.</p>
-</div>
-<div class="admonitionblock tip">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-tip" title="Tip"></i>
-</td>
-<td class="content">
-For further information on how you can configure the API-generation, check out the <a href="https://springdoc.org/">Springdoc Project</a>
-</td>
-</tr>
-</table>
-</div>
 </div>
 </div>
 </div>
@@ -602,16 +578,14 @@ For further information on how you can configure the API-generation, check out t
 <div class="sect3">
 <h4 id="encore-job-2">Encore Job</h4>
 <div class="paragraph">
-<p>The Encore Job is the most central object in Encore. This is the object you POST and GET in the API.</p>
-</div>
-<div class="paragraph">
-<p>The EncoreJob fields are documented in the <a href="#live">Live</a> API, but also in the</p>
+<p>The Encore Job is the most central object in Encore.
+The Encore Job fields are described in the <a href="#dynamically-generated-endpoint-documentation">Dynamically generated Endpoint documentation</a>, but also in the</p>
 </div>
 <div class="paragraph">
 <p><a href="openapi.html#_encorejob">EncoreJob static documentation</a></p>
 </div>
 <details>
-<summary class="title">The Encore Job class in Kotlin, for further clearification (click to expand)</summary>
+<summary class="title">The Encore Job class in Kotlin (click to expand)</summary>
 <div class="content">
 <div class="listingblock">
 <div class="content">
@@ -657,20 +631,20 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">name</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">profile name</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">description</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">A preferably helpful description for the profile</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a helpful description of the profile</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">scaling</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Directly matching the FFmpeg scaling algorithm options</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">If given, one of the <a href="https://ffmpeg.org/ffmpeg-scaler.html">FFmpeg Scaling algorithm options</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">directly matching the FFmpeg scaling algorithm options</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">if given, one of the <a href="https://ffmpeg.org/ffmpeg-scaler.html">FFmpeg Scaling algorithm options</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">lanczos</p></td>
 </tr>
 <tr>
@@ -725,19 +699,19 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">channels</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The number of channels</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">number of channels</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">suffix</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the suffix for the audio output file</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">suffix for the audio output file</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">{codec]_{nrofchannels}.ch</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">params</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">a map of FFmpeg parameters to the given codec - cutoff etc</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">map of FFmpeg parameters to the given codec - cutoff etc</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -811,7 +785,7 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">filters</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For adding extra <a href="https://ffmpeg.org/ffmpeg-filters.html">FFmpeg Filters</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">for adding extra <a href="https://ffmpeg.org/ffmpeg-filters.html">FFmpeg Filters</a></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -823,7 +797,7 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">suffix</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">the suffix added to the output filename</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">suffix added to the output filename</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -837,13 +811,13 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 <td class="tableblock halign-left valign-top"><p class="tableblock">codec</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">codec library to use</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Example: libx264</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">example: libx264</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">x264-params, x265-params</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Specific coding parameters for a specific codec library and type,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">specific coding parameters for a specific codec library and type,</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Examples: deblock, keyint</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">example: deblock, keyint</p></td>
 </tr>
 </tbody>
 </table>
@@ -1025,12 +999,44 @@ and  <a href="#profiles">Profiles</a> for examples</p></td>
 <h2 id="the-community-guide">The Community Guide</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>In short, general information like the F.A.Q and links to Encore mentions.</p>
+<p>General community information like the F.A.Q and links to Encore mentions.</p>
 </div>
 <div class="sect2">
-<h3 id="frequently-asked-questions">Frequently Asked Questions</h3>
+<h3 id="faq">Frequently Asked Questions</h3>
 <div class="sect3">
-<h4 id="i-have-great-ideabugfiximprovement-y-to-encore-how-to-go-further">I have great idea/bugfix/improvement Y to Encore, how to go further?</h4>
+<h4 id="how-can-i-package-my-transcoded-media-for-online-streaming-dash-and-hls">How can I package my transcoded media for online streaming (DASH and HLS)?</h4>
+<div class="paragraph">
+<p>You could have a look at <a href="https://google.github.io/shaka-packager/html/">Shaka Packager</a>, <a href="https://github.com/axiomatic-systems/Bento4">Bento4</a>, and configure them to process the output of <strong>Encore</strong>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="how-can-i-generate-my-own-openapi-documentation-for-import-into-x">How can I generate my own OpenAPI documentation, for import into X</h4>
+<div class="paragraph">
+<p>To create your own OpenAPI-export from <strong>Encore</strong> so that you can transform it as you wish:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  $ SPRING_PROFILES_ACTIVE=local ./gradlew clean generateOpenApiDocs</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>which will give you a <em>build/openapi.json</em> file for further processing.</p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+For further information on how you can configure the API-generation, see the <a href="https://springdoc.org/">Springdoc Project</a>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect3">
+<h4 id="i-have-great-ideabugfiximprovement-to-encore-how-to-go-further">I have great idea/bugfix/improvement to Encore, how to go further?</h4>
 <div class="paragraph">
 <p>See <a href="#contributorguide">The Contribute section</a></p>
 </div>
@@ -1038,10 +1044,10 @@ and  <a href="#profiles">Profiles</a> for examples</p></td>
 <div class="sect3">
 <h4 id="can-i-write-a-pluginextension-for-doing-x-in-encore">Can I write a plugin/extension for doing X in <strong>Encore</strong>?</h4>
 <div class="paragraph">
-<p>Currently, there are no extensions interface endpoints, but you could, for example, add transcoding functionality by writing an FFMpeg filter - some examples of how that can done can be found at <a href="https://github.com/SVT/ffmpeg-filter-proxy-filters">FFmpeg proxy filters</a> - have a peek at the <a href="https://github.com/svt/homebrew-avtools">SVT Brew AVTools</a> for how to build an FFmpeg with them.</p>
+<p>Currently, there are no extensions interface endpoints, but you could, for example, add transcoding functionality by writing an FFMpeg filter - some examples of how that can done can be found at <a href="https://github.com/SVT/ffmpeg-filter-proxy-filters">FFmpeg proxy filters</a> - have a peek at the <a href="https://github.com/svt/homebrew-avtools">Homebrew AVTools</a> for how to build an FFmpeg with them.</p>
 </div>
 <div class="paragraph">
-<p>And of course, open a discussion issue if you have any ideas regarding contributions about extensions to <strong>Encore</strong>.</p>
+<p>Also, open a discussion issue if you have any ideas regarding contributions about extensions to <strong>Encore</strong> that you want to discuss.</p>
 </div>
 </div>
 </div>
@@ -1053,25 +1059,25 @@ and  <a href="#profiles">Profiles</a> for examples</p></td>
 </div>
 <div class="paragraph">
 <p><a href="https://medium.com/the-svt-tech-blog/encore-video-transcoding-at-its-core-b80c3e5658b3">Article: Encore - video transcoding at it&#8217;s core</a>
-- interesting for the project origin, albeit containing some non-valid information as the project has been rewritten - however most are true.</p>
+- while interesting for the project origins, it contains partially <strong>non-valid information</strong> as the project has been rewritten.</p>
 </div>
 </div>
 <div class="sect2">
 <h3 id="support">Support</h3>
 <div class="paragraph">
-<p>There is <strong>no formal</strong> support - none, nada, nothing - for Encore directly from the main contributors / maintainers - but hey, we <strong>want</strong> people to use and improve the project so here are some suggestions for how you can get help.</p>
+<p>There is <strong>no formal</strong> support - none, nada, nothing - for <strong>Encore</strong> directly from the main contributors / maintainers - but we <strong>would love if</strong> people use and improve the project, so here are some suggestions if you are stuck.</p>
 </div>
 <div class="paragraph">
 <p><strong>File an Issue on GitHub</strong></p>
 </div>
 <div class="paragraph">
-<p>You can always file an issue, ask a question, open a discussion issue, and we will most likely respond when time allows.</p>
+<p>You can always file an issue, ask a question, open a discussion issue, and we will most likely respond to that when time allows.</p>
 </div>
 <div class="paragraph">
 <p><strong>Stack Overflow</strong></p>
 </div>
 <div class="paragraph">
-<p>If your question does not contain sensitive information, please ask a question on Stack Overflow and use the tag encore. Maybe some other users will help you.</p>
+<p>If your question does not contain sensitive information, please ask a question on <a href="https://stackoverflow.com/">Stack Overflow</a> and use the tag 'encore'. Maybe some other users will help you.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1080,38 +1086,39 @@ and  <a href="#profiles">Profiles</a> for examples</p></td>
 <p><strong><em>The initiative</em></strong></p>
 </div>
 <div class="paragraph">
-<p>It was around 2018, and it was time to yet again update the license and the hardware for proprietary non-flexible transcoding solution.
-Although that unnamed solution had served us well, we also had a history of less than optimal transcoding, flexibility and support when things went wrong.
-Around that period, it happened that, there was the next "Tekniksprint 2017" coming up at the organisation.
-A "Tekniksprint" is a "innovate what you want for an entire sprint", which SVT has two times a year.
-This time, a small team gathered, with the purpose of seeing how much of a video transcoding solution that could be build in two weeks.
-So, with warts, hacks and other shortcuts, we had a fun Sprint and ended up with something <a href="#articles-and-talks">almost usable, see links</a>.
-And, yes, it even had GUI so that we make it pretty demo friendly.
-Although, it  was not very robust, and something to aim to build further upon.</p>
+<p>It was around 2018, and it was time to yet again update the license and the hardware for our proprietary non-flexible transcoding solution.
+Although that unnamed solution had served us very well, we also had a history of less than optimal transcoding, flexibility and support when things went wrong.
+Around that period, it happened that, our organisation was preparing the next "Tekniksprint".
+A "Tekniksprint" is an "innovate for an entire sprint" period, which happens two times a year at our organisation.
+That time, a small team gathered, with the purpose of seeing how much of a video transcoding solution that could be built in two weeks.
+So, with warts, hacks and shortcuts, we had a fun Sprint period, and also ended up with something <a href="#articles-and-talks">almost usable, see links</a>.
+And, yes, it even had GUI, so that we could make it pretty demo friendly.
+However, it was not very robust, and something we could build further upon.</p>
 </div>
 <div class="paragraph">
-<p>The outcome from this was of course, that by having a Proof-of-Concept project, we now could now walk the long and winding internal organisation road of convincing everyone that we could, and that we should re-write the project seriously - weighting flexibility, features and support in comparison with others.
-But, cross-checking all already planned (and let&#8217;s not even mention the unplanned) projects took us almost <strong>one</strong> year after the initial Encore-Tekniksprint.</p>
+<p>By having a Proof-of-Concept project, we now could now walk the long and winding internal organisation road of convincing everyone that we could, and that we should re-write the project seriously - considering flexibility, features and support in comparison with others.</p>
 </div>
 <div class="paragraph">
-<p><strong><em>How we started developing Encore</em></strong></p>
+<p><strong><em>The development</em></strong></p>
 </div>
 <div class="paragraph">
-<p>It almost became a meme for us, but in 2019 we wrote ut, tested it, and ran it in production, with so good results that we finally could ditch out proprietary solution.
-In fact, it helped us achieve better quality, better flexibility, and saved us much money - the costs for developing the Encore solution was multitudes less than buying just another new stack.
-We now have an easier way to work with new codecs and transcoding features that would be impossible, had we chosen another proprietary solution.</p>
+<p>It almost became a meme for us, but in 2019 we wrote ut, tested it, and ran it in production, with so good results, that we could ditch out proprietary solution.
+In fact, <strong>Encore</strong> helped us achieve better quality, better flexibility, and saved us money - the costs for developing the Encore solution was multitudes less than buying just another new stack.</p>
 </div>
 <div class="paragraph">
-<p><strong><em>How we Open Source:d Encore</em></strong></p>
+<p>We now had an easier way to work with new codecs and transcoding features that would be impossible, had we chosen another proprietary solution.</p>
 </div>
 <div class="paragraph">
-<p>We always had the intention to Open Source the solution, as we guessed others, mainly Public Broadcast organisations, would have an interest in the product.
+<p><strong><em>The Open Source Encore</em></strong></p>
+</div>
+<div class="paragraph">
+<p>We always had the intention to Open Source the solution, as we heard that others, mainly friends in Public Broadcast organisations, had an interest in the product.
 So during 2019/20 , with almost every Sprint-period, we tried to have at least a task that was directly prepared with Open Sourcing Encore.
-Slow, but determined.
-From license research, documentation, basic code cleanups, removing the most SVT-specific code, and  releasing libraries that would make it possible to release the project itself at one point.</p>
+Slowly, but determined.</p>
 </div>
 <div class="paragraph">
-<p>And here we are, warts and all, but finally here.</p>
+<p>From license research, documentation, basic code cleanups, removing the most SVT-specific code, and releasing libraries that would make it possible to release the project itself.
+Warts and all, finally we got there.</p>
 </div>
 <div class="paragraph">
 <p>So far, Encore has been a success story for us at SVT.
@@ -1127,22 +1134,18 @@ We sincerely hope that it can benefit you, and with time grow to be an even grea
 <h2 id="contributorguide">The Contributor Guide</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>If you want to contribute to the project, read on.</p>
-</div>
-<div class="paragraph">
-<p>We gratefully accept contributions via
-<a href="https://help.github.com/articles/about-pull-requests/">pull requests</a>.</p>
+<p>We gratefully accept contributions via <a href="https://help.github.com/articles/about-pull-requests/">pull requests</a>.</p>
 </div>
 <div class="paragraph">
 <p>Use the issue tracker to suggest feature requests, report bugs, and ask questions.
-This is also a great way to connect with the developers of the project as well
-as others who are interested in this solution.</p>
+This is also a great way to connect with the developers of the project as well as others who are interested in this solution.</p>
 </div>
 <div class="sect2">
 <h3 id="changing-the-code-base">Changing the code-base</h3>
 <div class="paragraph">
 <p>Generally speaking, you should fork this repository, make changes in your
-own fork, and then submit a pull-request. This is often called the <a href="https://gist.github.com/Chaser324/ce0505fbed06b947d962">Fork-and-Pull model</a></p>
+own fork, and then submit a pull-request.
+This is often called the <a href="https://gist.github.com/Chaser324/ce0505fbed06b947d962">Fork-and-Pull model</a></p>
 </div>
 <div class="ulist">
 <ul>
@@ -1170,23 +1173,24 @@ and patterns in the existing code-base.</p>
 <div class="sect2">
 <h3 id="sign-off-and-optionally-sign-each-commit">Sign-off and optionally Sign each Commit</h3>
 <div class="paragraph">
-<p>As part of filing a pull request you agree to the DCO.
-<a href="https://developercertificate.org/">Developer Certificate of Origin</a></p>
+<p>As part of filing a pull request you agree to the DCO, <a href="https://developercertificate.org/">Developer Certificate of Origin</a></p>
 </div>
 <div class="paragraph">
-<p>A DCO is a lightweight way for a contributor to confirm that they wrote or otherwise have the right
-to submit code or documentation to a project.</p>
+<p>A DCO is a lightweight way for a contributor to confirm that they wrote or otherwise have the right to submit code or documentation to a project.</p>
 </div>
 <div class="paragraph">
-<p>To confirm that you agree to the DCO, you need to <strong>sign off</strong> your commits when sending us a pull request. Technically, this is done by supplying the <code>-s</code>/<code>--signoff</code> flag to git when committing:</p>
+<p>To confirm that you agree to the DCO, you need to <strong>sign off</strong> your commits when sending us a pull request.
+Technically, this is done by supplying the <code>-s</code>/<code>--signoff</code> flag to git when committing:</p>
 </div>
 <div class="paragraph">
 <p><code>$ git commit -s -m "add fix for the bug"</code></p>
 </div>
 <div class="paragraph">
 <p>Optionally, you can also sign the commit with <code>-S</code> which also gives your commit a nice verified button on GitHub,
-but, it requires that you have a GPG keypair set up.
-For mor information, see <a href="https://docs.github.com/en/github/authenticating-to-github/signing-commits">Sign commit on GitHub with GPG key</a></p>
+but, it requires that you have a GPG keypair set up.</p>
+</div>
+<div class="paragraph">
+<p>For mor information, see <a href="https://docs.github.com/en/github/authenticating-to-github/signing-commits">Sign commit on GitHub with GPG key</a></p>
 </div>
 <div class="paragraph">
 <p><code>$ git commit -s -S -m "add fix for the bug"</code></p>
@@ -1204,7 +1208,8 @@ For mor information, see <a href="https://docs.github.com/en/github/authenticati
 <div class="ulist">
 <ul>
 <li>
-<p>We pay more attention to the quality of commit messages. In general, we share the view on how commit messages should be written with
+<p>We pay more attention to the quality of commit messages.
+In general, we share the view on how commit messages should be written with
 <a href="https://github.com/git/git/blob/master/Documentation/SubmittingPatches">the Git project itself</a>:</p>
 </li>
 <li>
@@ -1213,24 +1218,21 @@ For example, pure formatting changes that do not affect software behaviour usual
 </li>
 <li>
 <p><a href="https://github.com/git/git/blob/e6932248fcb41fb94a0be484050881e03c7eb298/Documentation/SubmittingPatches#L101">Describe your changes well.</a>
-Do not just repeat in prose what is "obvious" from the code, but provide a rationale explaining <em>why</em> you believe
-your change is necessary.</p>
+Do not just repeat in prose what is "obvious" from the code, but provide a rationale explaining <em>why</em> you believe your change is necessary.</p>
 </li>
 <li>
 <p><a href="https://github.com/git/git/blob/e6932248fcb41fb94a0be484050881e03c7eb298/Documentation/SubmittingPatches#L133">Describe your changes in the imperative.</a>
-Instead of writing "Fixes an issue with transcoding" prefer "Fix an transcoding issue". Think about it like the commit
-only does something <em>if</em> it is applied. This usually results in more concise commit messages.</p>
+Instead of writing "Fixes an issue with transcoding" prefer "Fix an transcoding issue". Think about it like the commit only does something <em>if</em> it is applied.
+This usually results in more concise commit messages.</p>
 </li>
 <li>
 <p><a href="https://github.com/git/git/blob/e6932248fcb41fb94a0be484050881e03c7eb298/Documentation/SubmittingPatches#L95">We are picky about whitespaces.</a>
-Trailing whitespace and duplicate blank lines are simply a superfluous annoyance, and most Git tools flag them red
-in the diff anyway.</p>
+Trailing whitespace and duplicate blank lines are simply a superfluous annoyance, and most Git tools flag them red in the diff anyway.</p>
 </li>
 </ul>
 </div>
 <div class="paragraph">
-<p>Have a look at basically any of
-<a href="https://github.com/git/git/commits?author=peff">Jeff King&#8217;s commits</a> in the Git project.</p>
+<p>Have a look at basically any of <a href="https://github.com/git/git/commits?author=peff">Jeff King&#8217;s commits</a> in the Git project.</p>
 </div>
 <div class="paragraph">
 <p>Thank you for reading and happy contributing!</p>
@@ -1238,7 +1240,7 @@ in the diff anyway.</p>
 <div class="paragraph">
 <p><em>There are no more guides.
 You are now on your own.
-Thank you.</em></p>
+Thank you!.</em></p>
 </div>
 </div>
 </div>
@@ -1249,14 +1251,11 @@ Thank you.</em></p>
 <div class="sect2">
 <h3 id="homebrew-avtools">Homebrew AVTools</h3>
 <div class="paragraph">
-<p>So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew? The creators of <strong>Encore</strong>, SVT, have released their Brew Formulas on <a href="https://github.com/svt/homebrew-avtools">GitHub: Homebrew-AVTools</a>.</p>
+<p>So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew?
+The creators of <strong>Encore</strong>, have released their Brew Formulas on <a href="https://github.com/svt/homebrew-avtools">GitHub: Homebrew AVTools</a>.</p>
 </div>
 <div class="paragraph">
-<p>That means it will be easier for you to try out <strong>Encore</strong>.</p>
-</div>
-<div class="paragraph">
-<p>For example, here is the <strong>Encore</strong> FFmpeg Brew Formula that with minor modifications, uses formulas for X264, X265, and SVT&#8217;s subtitle filter.
-These Brew formulas be configured as you wish.</p>
+<p>For example, here is the <strong>Encore</strong> FFmpeg Brew Formula that with minor modifications, uses formulas for X264, X265, and SVT&#8217;s subtitle filter.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1392,7 +1391,7 @@ To use and install this version of FFmpeg locally, follow the examples given at 
 <i class="fa icon-caution" title="Caution"></i>
 </td>
 <td class="content">
-If you use Homebrew-AVTools, the version of FFmpeg in use might be updated without notice.
+If you use Homebrew-AVTools, the version of FFmpeg in use might be updated without <strong>any</strong> notice.
 </td>
 </tr>
 </table>
@@ -1607,7 +1606,8 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
 <div class="sect2">
 <h3 id="the-future">The Future</h3>
 <div class="paragraph">
-<p>We have a few ideas where we would like to go with Encore. We are focusing on the features we need, but we are always open to suggestion and discussion, if you would like to contribute to the project.</p>
+<p>We have a few ideas where we would like to go with Encore.
+We are focusing on the features we need, but we are always open to suggestion and discussion, if you would like to contribute to the project.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1633,7 +1633,7 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
 </dd>
 <dt class="hdlist1">imagesdir</dt>
 <dd>
-<p>../img</p>
+<p>{imagesdir}</p>
 </dd>
 </dl>
 </div>
@@ -1657,7 +1657,7 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
 <div id="footnotes">
 <hr>
 <div class="footnote" id="_footnotedef_1">
-<a href="#_footnoteref_1">1</a>. Encoding = source file is uncompressed, Transcoding = source file is compressed. The distinction might not matter much, but as the project creators use Encore for transcoding, that is preferred nomenclature
+<a href="#_footnoteref_1">1</a>. Encoding = source file is uncompressed, Transcoding = source file is compressed. The distinction might not matter much in practice, but we prefer to use the term Transcoding in the Encore documentation
 </div>
 <div class="footnote" id="_footnotedef_2">
 <a href="#_footnoteref_2">2</a>. In reality the Encore Job itself is not offered to, or polled from the queue - it is an Object QueueItem, which holds the needed metadata for the Encore Job
@@ -1666,7 +1666,7 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2021-05-02 08:54:39 UTC
+Last updated 2021-05-03 04:51:30 UTC
 </div>
 </div>
 <link rel="stylesheet" href="js/highlight/styles/darcula.min.css">
