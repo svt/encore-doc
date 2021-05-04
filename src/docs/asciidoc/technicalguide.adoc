@@ -1,19 +1,23 @@
 == The Concept/Technical Guide
 
-If you are looking for concepts, structures and API-descriptions, this part of the documentation is for you.
+If you are looking for concepts, structures and API descriptions, this part of the documentation is for you.
 
 === Concepts
 
-TODO:  PICTURE OF ENCORE WORKFLOW OVERVIEW (FROM O's presentation)
 
 === Workflow
 
-The workflow for an Encore Job:
+
+[.text-center]
+_The workflow for an Encore Job_
+
+image::img/encore_workflow.png[align="center",width=90%]
+
 
 1. An Encore Job is created
 2. It is offered to a Queuefootnote:[In reality the Encore Job itself is not offered to, or polled from the queue - it is an Object QueueItem, which holds the needed metadata for the Encore Job]
 3. At some point, the Encore Job is picked up from the Queue
-4. Metadata needed for the coming transcoding task is gathered - for example, the input stream is analyzed, the Profile is read.
+4. Metadata needed for the coming transcoding task is gathered - for example, the input file is analyzed, the Profile is read.
 5. The transcoding is started - (FFmpeg transcoding starts)
 6. Output files are written to the configured destination
 
@@ -28,10 +32,10 @@ include::https://raw.githubusercontent.com/svt/encore/master/src/main/kotlin/se/
 
 ==== Encore Job
 
-_An *Encore* Job is the aggregate for the information needed to transcode an input - information like input filestream, *profile* and priority._
+_An *Encore* Job is the aggregate for the information needed to transcode an input file - information like input files, *profile* and priority._
 
 * An *Encore* Job describes how an input file should be processed.
-* An *Encore* Job can have several output (file)streams, and one input (file)stream.
+* An *Encore* Job can have several output files, and one input file.
 * An *Encore* Job has a *_profile_*, which essentially describes how the job should configure it's transcoding.
 * An *Encore* Job has a priority, which essentially describes how the job should be prioritized.
 
@@ -39,22 +43,23 @@ _An *Encore* Job is the aggregate for the information needed to transcode an inp
 
 _A *Profile* can be seen as a general abstraction of an FFmpeg configuration - example, bitrate to use, thumbnail generation, the codec to use._
 
-* A *Profile* specifies the configuration for an *Encore* Job - metadata, FFmpeg configuration and specific codec configuration.
+* A *Profile* specifies a big part of the configuration used by an *Encore* Job - metadata, FFmpeg configuration and specific codec configuration.
 * A *Profile* is specified in the yaml-format.
 
 ==== Scaling, distribution and queues
 
-_By using Redis (as message broker Queue handler) and an internal concurrency scheduler, *Encore* can be scaled by setting up more instances and allowing more concurrency._
+_By using Redis (as a message broker/queue handler) and an internal concurrency scheduler, *Encore* can be scaled by setting up more instances, and allowing more concurrency._
 
-* An *Encore* instance uses Redis through Redisson's _Priority Blocking Queue_. Jobs are scheduled on an *Encore* instance according to a given priority.
+* An *Encore* instance uses Redis through Redisson's  https://javadoc.io/doc/org.redisson/redisson/3.7.5/org/redisson/RedissonPriorityBlockingQueue.html[_Priority Blocking Queue_]. Jobs are scheduled on an *Encore* instance according to a given priority.
 * Furthermore, The *Encore* concurrency setting affects how many transcoding jobs be run on the same instance at once.
 
-_So, From an *Encore* instance's point of view, the next EncoreJob is chosen for transcoding according to its priority and according to how many concurrent tasks that are allowed._
+_So, From an *Encore* instance's point of view, the next Encore Job is chosen for transcoding according to its priority and according to how many concurrent tasks that are allowed on that instance._
 
 [[apiendpoints]]
 === API/Endpoints
 
-*Encore* is built using the framework Spring Rest Data, which most of the current REST API is based on the https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources.fundamentals[default endpoints] generated from the usage of this framework. However, other custom Endpoints exist.
+*Encore* is built using the framework Spring Rest Data  https://docs.spring.io/spring-data/rest/docs/current/reference/html/#repository-resources.fundamentals[offering the default endpoints] generated from the usage of this framework.
+However, other custom Endpoints exist.
 
 *Encore's* endpoints are described and self-documented in the https://www.openapis.org/[OpenAPIv3 format].
 
@@ -68,7 +73,7 @@ TIP: This is the recommended way - dynamic, powerful and
 always up-to-date.
 
 .Encore OpenAPI
-image::img/encore_api.png[]
+image::img/encore_api.png[align="center",width=90%]
 
 ==== Statically generated Endpoint documentation
 
@@ -94,6 +99,8 @@ xref:openapi.adoc#_encorejob[EncoreJob static documentation]
 include::https://raw.githubusercontent.com/svt/encore/master/src/main/kotlin/se/svt/oss/encore/model/EncoreJob.kt[]
 ----
 ====
+
+image::img/encore_job_processing.png[align="center",width=90%]
 
 ==== Profile
 

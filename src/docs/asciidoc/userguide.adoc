@@ -4,7 +4,7 @@ This part of the documentation describes how to get going with a quick start and
 
 === Installation
 
-At the moment there are no *pre-ready-to-go* installation packages, pods, docker images offered for *Encore*, but fear not - there are a few possibilities in how to get going. Continue reading!
+Currently, there are no *pre-ready-to-go* installation packages, pods, docker images offered for *Encore*, but fear not - there are a few possibilities in how to get going. Continue reading!
 
 ==== Quickstart
 
@@ -22,9 +22,9 @@ Run all tests and static analysis using:
 $ ./gradlew clean check
 ....
 
-===== Option: Run a local version with Spring Boot bootRun for a test trial
+===== Option - Quick Test Trial: Run a local version with Spring Boot bootRun
 
-You can run *Encore* on your local Developer machine for a quick test trial by starting up a local Developer Application Profile:
+You can run *Encore* on your local developer machine for a quick test trial by starting up a local developer Application Profile:
 
 .In the *Encore* root folder:
 [source,bash]
@@ -34,9 +34,9 @@ foobar@foo:~$ SPRING_PROFILES_ACTIVE=local ./gradlew clean bootRun
 
 NOTE: This will use the _src/main/resources/application-local.yml_ configuration profile in *Encore*.
 
-===== Option: Run Encore in a Docker Image
+===== Option - Docker Image: Run Encore in a Docker Image
 
-This quickstart option will show you how to use https://docs.brew.sh/Homebrew-on-Linux[Homebrew] and creating an FFmpeg Docker Image to run Encore from.
+This quickstart option will show you how to use https://docs.brew.sh/Homebrew-on-Linux[Homebrew] and create an FFmpeg Docker Image to run Encore from.
 
 First, you need to create a base FFmpeg Docker image.
 The following skeleton example installs a recent version of FFmpeg, with a few FFmpeg filters, and mediainfo.
