@@ -1,14 +1,26 @@
 
+===== Audio
+
+The <<audioencode>> type is, as the name implies, for audio encoding.
+
+The AudioEncode type can exist at two levels in a Profile configuration:
+
+1. As a field, audioEncode, in _encodes:_ <<videoencode,VideoEncode>> - the audio stream will be embedded in the output video container.
+2. As a separate Encode type in the _encodes_ list - the audio stream will be written to a separate output filestream.
+
+TODO: Describe the new mapping logic
+
 ***
 
+
 [[audioencode]]
-.AudioEncode - audio
+.AudioEncode
 [grid=none,frame=sides]
 |===
 | Field | Description | Constraint | Default
 
 | codec
-| audio library to use
+| https://ffmpeg.org/ffmpeg-codecs.html#Audio-Decoders[FFmpeg audio codec library]
 |
 | https://wiki.hydrogenaud.io/index.php?title=Fraunhofer_FDK_AAC[libfdk_aac]
 
@@ -60,8 +72,15 @@
 
 ***
 
+===== Video
+
+The <<videoencode>> type is, as the name implies, for video encoding.
+
+VideoEncode is a base type, for building concrete (n)Encode type implementations on. Existing examples are <<x264encode>> and <<x265encode>>.
+It is not intended for direct usage.
+
 [[videoencode]]
-.VideoEncode - (base for <<x264encode, X264Encode>>, <<x265encode, X265Encode>>):
+.VideoEncode
 [grid=none,frame=sides]
 |===
 | Field | Description | Constraint | Default
@@ -93,7 +112,7 @@
 
 | audioEncode
 |
-|
+| <<audioencode>> or null
 |
 
 | suffix
@@ -111,15 +130,12 @@
 | codec library to use
 |
 | example: libx264
-
-| x264-params, x265-params
-| specific coding parameters for a specific codec library and type,
-|
-| example: deblock, keyint
 |===
 
+The <<x264encode>> will encode to AVC (H.264) video using https://www.videolan.org/developers/x264.html[libx264].
+
 [[x264encode]]
-.X264Encode - video
+.X264Encode
 [grid=none,frame=sides]
 |===
 | Field | Description | Constraint | Default
@@ -143,8 +159,10 @@ and  <<profiles>> for examples
 
 |===
 
+The <<x265encode>> will encode to HEVC (H.265) video using https://www.videolan.org/developers/x265.html[libx265].
+
 [[x265encode]]
-.X265Encode - video
+.X265Encode
 [grid=none,frame=sides]
 |===
 | Field | Description | Constraint | Default
@@ -170,8 +188,12 @@ and  <<profiles>> for examples
 
 ***
 
+===== Image
+
+<<thumbnailmapencode>> generates a thumbnailmap from the input video.
+
 [[thumbnailmapencode]]
-.ThumbnailMapEncode - image
+.ThumbnailMapEncode
 [grid=none,frame=sides]
 |===
 |Field |Description |Constraint |Default
@@ -202,8 +224,11 @@ and  <<profiles>> for examples
 | 20
 |===
 
+<<thumbnailencode>> generates an image/images from the video.
+The extraction point/points are given as either a specific time, or, a list of percentages.
+
 [[thumbnailencode]]
-.ThumbnailEncode - image
+.ThumbnailEncode
 [grid=none,frame=sides]
 |===
 |Field |Description |Constraint |Default
@@ -219,6 +244,12 @@ and  <<profiles>> for examples
 | -2
 
 | thumbnailHeight
+|
+|
+| 1080
+
+
+| thumbnailTime
 |
 |
 | 1080

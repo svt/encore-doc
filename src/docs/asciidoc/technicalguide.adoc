@@ -81,7 +81,7 @@ This will happen when the project is mature.
 
 ==== Encore Job
 
-The Encore Job is the most central object in Encore.
+The Encore Job is a central object in Encore.
 The Encore Job fields are described in the <<dynamically-generated-endpoint-documentation>>, but also in the
 
 xref:openapi.adoc#_encorejob[EncoreJob static documentation]
@@ -134,7 +134,7 @@ A *Profile* consists of toplevel metadata, and a list of encoding configuration 
 |
 |===
 
-===== (n)Encode Description
+==== Profile Encode Types
 
 include::encodes.adoc[]
 
