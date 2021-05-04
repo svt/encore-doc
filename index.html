@@ -75,7 +75,7 @@ video {
 <span id="author" class="author">SVT Videocore</span><br>
 <span id="email" class="email"><a href="mailto:videocore@svt.se">videocore@svt.se</a></span><br>
 <span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-05-03</span>
+<span id="revdate">2021-05-04</span>
 <br><span id="revremark">Alpha Edition</span>
 </div>
 <div id="toc" class="toc2">
@@ -578,7 +578,7 @@ This will happen when the project is mature.
 <div class="sect3">
 <h4 id="encore-job-2">Encore Job</h4>
 <div class="paragraph">
-<p>The Encore Job is the most central object in Encore.
+<p>The Encore Job is a central object in Encore.
 The Encore Job fields are described in the <a href="#dynamically-generated-endpoint-documentation">Dynamically generated Endpoint documentation</a>, but also in the</p>
 </div>
 <div class="paragraph">
@@ -659,11 +659,33 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sect3">
+<h4 id="profile-encode-types">Profile Encode Types</h4>
 <div class="sect4">
-<h5 id="nencode-description">(n)Encode Description</h5>
+<h5 id="audio">Audio</h5>
+<div class="paragraph">
+<p>The <a href="#audioencode">AudioEncode</a> type is, as the name implies, for audio encoding.</p>
+</div>
+<div class="paragraph">
+<p>The AudioEncode type can exist at two levels in a Profile configuration:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>As a field, audioEncode, in <em>encodes:</em> <a href="#videoencode">VideoEncode</a> - the audio stream will be embedded in the output video container.</p>
+</li>
+<li>
+<p>As a separate Encode type in the <em>encodes</em> list - the audio stream will be written to a separate output filestream.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>TODO: Describe the new mapping logic</p>
+</div>
 <hr>
 <table id="audioencode" class="tableblock frame-sides grid-none stripes-even stretch">
-<caption class="title">Table 2. AudioEncode - audio</caption>
+<caption class="title">Table 2. AudioEncode</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -681,7 +703,7 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">codec</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">audio library to use</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://ffmpeg.org/ffmpeg-codecs.html#Audio-Decoders">FFmpeg audio codec library</a></p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://wiki.hydrogenaud.io/index.php?title=Fraunhofer_FDK_AAC">libfdk_aac</a></p></td>
 </tr>
@@ -742,8 +764,18 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 </tbody>
 </table>
 <hr>
+</div>
+<div class="sect4">
+<h5 id="video">Video</h5>
+<div class="paragraph">
+<p>The <a href="#videoencode">VideoEncode</a> type is, as the name implies, for video encoding.</p>
+</div>
+<div class="paragraph">
+<p>VideoEncode is a base type, for building concrete (n)Encode type implementations on. Existing examples are <a href="#x264encode">X264Encode</a> and <a href="#x265encode">X265Encode</a>.
+It is not intended for direct usage.</p>
+</div>
 <table id="videoencode" class="tableblock frame-sides grid-none stripes-even stretch">
-<caption class="title">Table 3. VideoEncode - (base for <a href="#x264encode">X264Encode</a>, <a href="#x265encode">X265Encode</a>):</caption>
+<caption class="title">Table 3. VideoEncode</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -792,7 +824,7 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">audioEncode</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#audioencode">AudioEncode</a> or null</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
 <tr>
@@ -813,16 +845,13 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">example: libx264</p></td>
 </tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">x264-params, x265-params</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">specific coding parameters for a specific codec library and type,</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">example: deblock, keyint</p></td>
-</tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The <a href="#x264encode">X264Encode</a> will encode to AVC (H.264) video using <a href="https://www.videolan.org/developers/x264.html">libx264</a>.</p>
+</div>
 <table id="x264encode" class="tableblock frame-sides grid-none stripes-even stretch">
-<caption class="title">Table 4. X264Encode - video</caption>
+<caption class="title">Table 4. X264Encode</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -862,8 +891,11 @@ and  <a href="#profiles">Profiles</a> for examples</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>The <a href="#x265encode">X265Encode</a> will encode to HEVC (H.265) video using <a href="https://www.videolan.org/developers/x265.html">libx265</a>.</p>
+</div>
 <table id="x265encode" class="tableblock frame-sides grid-none stripes-even stretch">
-<caption class="title">Table 5. X265Encode - video</caption>
+<caption class="title">Table 5. X265Encode</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -904,8 +936,14 @@ and  <a href="#profiles">Profiles</a> for examples</p></td>
 </tbody>
 </table>
 <hr>
+</div>
+<div class="sect4">
+<h5 id="image">Image</h5>
+<div class="paragraph">
+<p><a href="#thumbnailmapencode">ThumbnailMapEncode</a> generates a thumbnailmap from the input video.</p>
+</div>
 <table id="thumbnailmapencode" class="tableblock frame-sides grid-none stripes-even stretch">
-<caption class="title">Table 6. ThumbnailMapEncode - image</caption>
+<caption class="title">Table 6. ThumbnailMapEncode</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -953,8 +991,12 @@ and  <a href="#profiles">Profiles</a> for examples</p></td>
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p><a href="#thumbnailencode">ThumbnailEncode</a> generates an image/images from the video.
+The extraction point/points are given as either a specific time, or, a list of percentages.</p>
+</div>
 <table id="thumbnailencode" class="tableblock frame-sides grid-none stripes-even stretch">
-<caption class="title">Table 7. ThumbnailEncode - image</caption>
+<caption class="title">Table 7. ThumbnailEncode</caption>
 <colgroup>
 <col style="width: 25%;">
 <col style="width: 25%;">
@@ -984,6 +1026,12 @@ and  <a href="#profiles">Profiles</a> for examples</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">thumbnailHeight</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1080</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">thumbnailTime</p></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">1080</p></td>
@@ -1666,7 +1714,7 @@ We are focusing on the features we need, but we are always open to suggestion an
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2021-05-03 04:51:30 UTC
+Last updated 2021-05-04 07:06:31 UTC
 </div>
 </div>
 <link rel="stylesheet" href="js/highlight/styles/darcula.min.css">
