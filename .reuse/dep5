@@ -1,5 +1,5 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Encore Documentation
+Upstream-Name: SVT Encore Documentation
 Upstream-Contact: Videocore <videocore@svt.se>
 Source: https://github.com/svt/encore-doc
 
@@ -27,7 +27,11 @@ Files: **/FFmpegDockerfile
 Copyright: 2021 Sveriges Television AB <opensource@svt.se>
 License: CC-BY-SA-4.0
 
-Files: **/encore_doc_logo.png
+Files: **/*.png
+Copyright: 2021 Sveriges Television AB <opensource@svt.se>
+License: CC-BY-SA-4.0
+
+Files: README.*
 Copyright: 2021 Sveriges Television AB <opensource@svt.se>
 License: CC-BY-SA-4.0
 

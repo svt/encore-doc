@@ -22,7 +22,7 @@ which will give you a _build/openapi.json_ file for further processing.
 
 TIP: For further information on how you can configure the API-generation, see the https://springdoc.org/[Springdoc Project]
 
-==== I have great idea/bugfix/improvement to Encore, how to go further?
+==== I have great idea/bugfix/improvement to Encore, how do I submit it?
 
 See <<contributorguide, The Contribute section>>
 
@@ -34,11 +34,11 @@ Also, open a discussion issue if you have any ideas regarding contributions abou
 
 === Articles and talks
 
-https://conf.tube/videos/watch/751d41f4-72fd-4bfe-aa26-8d8b0e8054c2[Video: FOSS made us do it]
+https://conf.tube/videos/watch/751d41f4-72fd-4bfe-aa26-8d8b0e8054c2[Video: 2019 - FOSS made us do it]
 - How *Encore* and FOSS tools enables the Video Encoding at SVT
 
-https://medium.com/the-svt-tech-blog/encore-video-transcoding-at-its-core-b80c3e5658b3[Article: Encore - video transcoding at it's core]
-- while interesting for the project origins, it contains partially *non-valid information* as the project has been rewritten.
+https://medium.com/the-svt-tech-blog/encore-video-transcoding-at-its-core-b80c3e5658b3[Article: 2018 Encore - video transcoding at it's core]
+- while interesting for the project origins, it contains partially *non-valid information* as the code has been largely rewritten since then.
 
 === Support
 
@@ -52,6 +52,7 @@ You can always file an issue, ask a question, open a discussion issue, and we wi
 
 If your question does not contain sensitive information, please ask a question on https://stackoverflow.com/[Stack Overflow] and use the tag 'encore'. Maybe some other users will help you.
 
+[[projecthistory]]
 === Project History
 
 *_The initiative_*

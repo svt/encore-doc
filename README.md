@@ -1,11 +1,11 @@
-# Encore Documentation
+# SVT Encore Documentation
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![REUSE status](https://api.reuse.software/badge/github.com/fsfe/reuse-tool)](https://api.reuse.software/info/github.com/fsfe/reuse-tool)
 
 <img align="right" height="120" src="https://raw.githubusercontent.com/svt/encore-doc/main/src/img/encore_doc_logo.png">
 
-This is the documentation for the [Encore](https://github.com/svt/encore) project.
+This is the documentation for the SVT [Encore](https://github.com/svt/encore) project.
 It is mainly aimed at advanced technical users, like developers.
 
 **Encore** is a scalable tool for video transcoding,
@@ -48,7 +48,15 @@ Install the [Asciidoctor plugin](https://plugins.jetbrains.com/plugin/7391-ascii
 
 ## License
 
+This documentation is 
+
+* Copyright 2021 Sveriges Television AB
+
+and released under
+
 <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+
+Note: The main project SVT Encore itself was initiated in 2018.
 
 ## Credits
 
