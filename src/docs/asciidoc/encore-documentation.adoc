@@ -32,7 +32,7 @@ Copyright 2021 Sveriges Television AB
 
 == Introduction
 
-IMPORTANT: THIS DOCUMENTATION IS CURRENTLY IN A WORK-IN-PROGRESS STATE FOR AN UPCOMING PROJECT RELEASE.
+IMPORTANT: This documentation is work-in-progress and not yet complete
 
 *This is a living, breathing guide*. If you’d like to contribute,  https://github.com/svt/encore-doc[fork us on GitHub!]
 
@@ -64,8 +64,8 @@ For example, you could deploy a number of *Encore* instances within your existin
 *_Encore is not_*
 
 * A live/stream transcoder
-* A Video package (see <<faq>>)
-* An GUI application
+* A Video packager (see <<faq>>)
+* A GUI application
 
 *_Built with_*
 
@@ -83,7 +83,7 @@ It *is* used in daily production though.
 [.text-center]
 _Encore - built on Open Source Giants_
 
-image::img/encore_at_a_glance.png[align="center",width=90%]
+image::img/svt_encore_at_a_glance.png[align="center",width=90%]
 
 include::userguide.adoc[]
 

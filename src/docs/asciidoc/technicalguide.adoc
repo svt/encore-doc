@@ -11,7 +11,7 @@ If you are looking for concepts, structures and API descriptions, this part of t
 [.text-center]
 _The workflow for an Encore Job_
 
-image::img/encore_workflow.png[align="center",width=90%]
+image::img/svt_encore_workflow.png[align="center",width=90%]
 
 
 1. An Encore Job is created
@@ -55,6 +55,8 @@ _By using Redis (as a message broker/queue handler) and an internal concurrency 
 
 _So, From an *Encore* instance's point of view, the next Encore Job is chosen for transcoding according to its priority and according to how many concurrent tasks that are allowed on that instance._
 
+image::img/svt_encore_queue.png[align="center",width=90%]
+
 [[apiendpoints]]
 === API/Endpoints
 
@@ -73,7 +75,7 @@ TIP: This is the recommended way - dynamic, powerful and
 always up-to-date.
 
 .Encore OpenAPI
-image::img/encore_api.png[align="center",width=90%]
+image::img/svt_encore_api.png[align="center",width=90%]
 
 ==== Statically generated Endpoint documentation
 
@@ -100,7 +102,7 @@ include::https://raw.githubusercontent.com/svt/encore/master/src/main/kotlin/se/
 ----
 ====
 
-image::img/encore_job_processing.png[align="center",width=90%]
+image::img/svt_encore_job_processing.png[align="center",width=90%]
 
 ==== Profile
 
