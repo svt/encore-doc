@@ -64,7 +64,7 @@ For example, you could deploy a number of *Encore* instances within your existin
 *_Encore is not_*
 
 * A live/stream transcoder
-* A Video package (see <<faq>>)
+* A Video packager (see <<faq>>)
 * An GUI application
 
 *_Built with_*
