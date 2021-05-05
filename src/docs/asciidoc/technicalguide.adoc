@@ -15,11 +15,10 @@ image::img/encore_workflow.png[align="center",width=90%]
 
 
 1. An Encore Job is created
-2. It is offered to a Queuefootnote:[In reality the Encore Job itself is not offered to, or polled from the queue - it is an Object QueueItem, which holds the needed metadata for the Encore Job]
-3. At some point, the Encore Job is picked up from the Queue
-4. Metadata needed for the coming transcoding task is gathered - for example, the input file is analyzed, the Profile is read.
-5. The transcoding is started - (FFmpeg transcoding starts)
-6. Output files are written to the configured destination
+2. It is offered to a Queuefootnote:[In reality the Encore Job itself is not offered to, or polled from the queue - it is an Object QueueItem, which holds the needed metadata for the Encore Job]. At some point, the Encore Job is picked up from the Queue
+3. Metadata needed for the coming transcoding task is gathered - for example, the input file is analyzed, the Profile is read.
+4. The transcoding is started - (FFmpeg transcoding starts)
+5. Output files are written to the configured destination
 
 .The Encore Job status field will roughly tell the observer where in the workflow it is currently (click to expand)
 [%collapsible]
