@@ -5,7 +5,7 @@
 
 <img align="right" height="120" src="https://raw.githubusercontent.com/svt/encore-doc/main/src/img/encore_doc_logo.png">
 
-This is the documentation for the SVT [Encore](https://github.com/svt/encore) project.
+This is the documentation for the [SVT Encore](https://github.com/svt/encore) project.
 It is mainly aimed at advanced technical users, like developers.
 
 **Encore** is a scalable tool for video transcoding,
