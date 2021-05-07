@@ -46,11 +46,11 @@ There is *no formal* support - none, nada, nothing - for *Encore* directly from 
 
 *File an Issue on GitHub*
 
-You can always file an issue, ask a question, open a discussion issue, and we will most likely respond to that when time allows.
+You can always file an issue, ask a question, open a discussion issue, and we will most likely respond to that, when time allows.
 
 *Stack Overflow*
 
-If your question does not contain sensitive information, please ask a question on https://stackoverflow.com/[Stack Overflow] and use the tag 'encore'. Maybe some other users will help you.
+If your question does not contain sensitive information, please ask a question on https://stackoverflow.com/[Stack Overflow] and use the tag 'svtencore'. Maybe some other users will help you.
 
 [[projecthistory]]
 === Project History

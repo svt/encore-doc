@@ -61,7 +61,3 @@ foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=<yourd
 Success?? Great - you might want to check out the <<concepts>> or the <<apiendpoints>> next.
 
 
-=== Configuration
-
-NOTE: TO-DO
-
