@@ -1,5 +1,72 @@
 == Appendix
 
+=== Application Properties
+
+Beside the rich configuration possibilities of https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html[Spring Boot and friends], a few custom properties can be specified inside your application.properties file, inside your application.yml file, or as command line switches.
+
+[[customapplicationproperties]]
+.Custom Application Properties - *prefix: encore-settings*
+[grid=none,frame=sides]
+|===
+| Key | Default | Description
+
+| local-temporary-encode
+| false
+| if true, encoding is done in a temporary folder on the Encore instance currently running the job. When done, the results are moved to the where the Encore Job's output folder path is pointing.
+
+| audio-mix-presets
+|
+| TODO
+
+| concurrency
+| 2
+| Max nr of currently running encoding tasks (property starts at 0, so 0 gives 1 task).
+
+| poll-initial-delay
+| 10
+| initial wait time in seconds before task starts.
+
+| poll-delay
+| 5
+| wait before polling, in seconds, for next task after compilation of the current task.
+
+| redis-key-prefix
+| encore
+| the prefix to identify your redis queue. Redis keys are named "$redisKeyPrefix-queue-$queueNo"
+
+| security.enabled
+| false
+| enables basic auth, TODO: describe basic security logic
+
+| security.user-password
+|
+| password for regular user
+
+| security.admin-password
+|
+| password for the admin user
+
+| open-api.title
+| SVT Encore OpenAPI
+| title shown in the OpenAPI url summary header
+
+| open-api.description
+| "Endpoints for Encore"
+| description shown in the OpenAPI url summary header
+
+| open-api.contact-name
+|
+| contact name shown in the OpenAPI gui summary header
+
+| open-api.contact-email
+|
+| contact email shown in the OpenAPI gui summary header
+
+| open-api.contact-url
+|
+| contact url shown in the OpenAPI gui summary header
+|===
+
 === Homebrew AVTools
 
 So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew?

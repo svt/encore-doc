@@ -32,7 +32,7 @@ Copyright 2021 Sveriges Television AB
 
 == Introduction
 
-IMPORTANT: This documentation is work-in-progress and not yet complete
+IMPORTANT: This documentation is in a work-in-progress state. Not all features are yet described.
 
 *This is a living, breathing guide*. If you’d like to contribute,  https://github.com/svt/encore-doc[fork us on GitHub!]
 
@@ -107,7 +107,3 @@ safe-mode-name:: {safe-mode-name}
 docdir:: {docdir}
 docfile:: {docfile}
 imagesdir:: {imagesdir}
-
-.Custom
-sourcedir:: {sourcedir}
-endpoint-url:: {endpoint-url}
