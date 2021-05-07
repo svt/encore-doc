@@ -75,7 +75,7 @@ video {
 <span id="author" class="author">SVT Videocore</span><br>
 <span id="email" class="email"><a href="mailto:videocore@svt.se">videocore@svt.se</a></span><br>
 <span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-05-06</span>
+<span id="revdate">2021-05-07</span>
 <br><span id="revremark">Alpha Edition</span>
 </div>
 <div id="toc" class="toc2">
@@ -86,7 +86,6 @@ video {
 <li><a href="#the-user-guide">The User Guide</a>
 <ul class="sectlevel2">
 <li><a href="#installation">Installation</a></li>
-<li><a href="#configuration">Configuration</a></li>
 </ul>
 </li>
 <li><a href="#the-concepttechnical-guide">The Concept/Technical Guide</a>
@@ -114,6 +113,7 @@ video {
 </li>
 <li><a href="#appendix">Appendix</a>
 <ul class="sectlevel2">
+<li><a href="#application-properties">Application Properties</a></li>
 <li><a href="#homebrew-avtools">Homebrew AVTools</a></li>
 <li><a href="#profiles">Profiles</a></li>
 <li><a href="#the-future">The Future</a></li>
@@ -145,7 +145,7 @@ video {
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
-This documentation is work-in-progress and not yet complete
+This documentation is in a work-in-progress state. Not all features are yet described.
 </td>
 </tr>
 </table>
@@ -402,21 +402,6 @@ Modify as needed.</p>
 <p>Success?? Great - you might want to check out the <a href="#concepts">Concepts</a> or the <a href="#apiendpoints">API/Endpoints</a> next.</p>
 </div>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="configuration">Configuration</h3>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<i class="fa icon-note" title="Note"></i>
-</td>
-<td class="content">
-TO-DO
-</td>
-</tr>
-</table>
 </div>
 </div>
 </div>
@@ -1391,13 +1376,13 @@ For further information on how you can configure the API-generation, see the <a 
 <p><strong>File an Issue on GitHub</strong></p>
 </div>
 <div class="paragraph">
-<p>You can always file an issue, ask a question, open a discussion issue, and we will most likely respond to that when time allows.</p>
+<p>You can always file an issue, ask a question, open a discussion issue, and we will most likely respond to that, when time allows.</p>
 </div>
 <div class="paragraph">
 <p><strong>Stack Overflow</strong></p>
 </div>
 <div class="paragraph">
-<p>If your question does not contain sensitive information, please ask a question on <a href="https://stackoverflow.com/">Stack Overflow</a> and use the tag 'encore'. Maybe some other users will help you.</p>
+<p>If your question does not contain sensitive information, please ask a question on <a href="https://stackoverflow.com/">Stack Overflow</a> and use the tag 'svtencore'. Maybe some other users will help you.</p>
 </div>
 </div>
 <div class="sect2">
@@ -1568,6 +1553,99 @@ Thank you!.</em></p>
 <div class="sect1">
 <h2 id="appendix">Appendix</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="application-properties">Application Properties</h3>
+<div class="paragraph">
+<p>Beside the rich configuration possibilities of <a href="https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html">Spring Boot and friends</a>, a few custom properties can be specified inside your application.properties file, inside your application.yml file, or as command line switches.</p>
+</div>
+<table id="customapplicationproperties" class="tableblock frame-sides grid-none stripes-even stretch">
+<caption class="title">Table 8. Custom Application Properties - <strong>prefix: encore-settings</strong></caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Key</th>
+<th class="tableblock halign-left valign-top">Default</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">local-temporary-encode</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">if true, encoding is done in a temporary folder on the Encore instance currently running the job. When done, the results are moved to the where the Encore Job&#8217;s output folder path is pointing.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">audio-mix-presets</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">TODO</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">concurrency</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max nr of currently running encoding tasks (property starts at 0, so 0 gives 1 task).</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">poll-initial-delay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">10</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">initial wait time in seconds before task starts.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">poll-delay</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">wait before polling, in seconds, for next task after compilation of the current task.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">redis-key-prefix</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">encore</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the prefix to identify your redis queue. Redis keys are named "$redisKeyPrefix-queue-$queueNo"</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">security.enabled</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">enables basic auth, TODO: describe basic security logic</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">security.user-password</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">password for regular user</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">security.admin-password</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">password for the admin user</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">open-api.title</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SVT Encore OpenAPI</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">title shown in the OpenAPI url summary header</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">open-api.description</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"Endpoints for Encore"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">description shown in the OpenAPI url summary header</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">open-api.contact-name</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contact name shown in the OpenAPI gui summary header</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">open-api.contact-email</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contact email shown in the OpenAPI gui summary header</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">open-api.contact-url</p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">contact url shown in the OpenAPI gui summary header</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="sect2">
 <h3 id="homebrew-avtools">Homebrew AVTools</h3>
 <div class="paragraph">
@@ -1957,19 +2035,6 @@ We are focusing on the features we need, but we are always open to suggestion an
 </dd>
 </dl>
 </div>
-<div class="dlist">
-<div class="title">Custom</div>
-<dl>
-<dt class="hdlist1">sourcedir</dt>
-<dd>
-<p>{sourcedir}</p>
-</dd>
-<dt class="hdlist1">endpoint-url</dt>
-<dd>
-<p>{endpoint-url}</p>
-</dd>
-</dl>
-</div>
 </div>
 </div>
 </div>
@@ -1986,7 +2051,7 @@ We are focusing on the features we need, but we are always open to suggestion an
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2021-05-06 20:28:22 UTC
+Last updated 2021-05-07 14:08:17 UTC
 </div>
 </div>
 <link rel="stylesheet" href="js/highlight/styles/darcula.min.css">
