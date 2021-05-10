@@ -15,8 +15,8 @@ Beside the rich configuration possibilities of https://docs.spring.io/spring-boo
 | if true, encoding is done in a temporary folder on the Encore instance currently running the job. When done, the results are moved to the where the Encore Job's output folder path is pointing.
 
 | audio-mix-presets
-|
-| TODO
+| a default <<audiomixpreset>> is created
+| a list of <<audiomixpreset>>s to use
 
 | concurrency
 | 2
@@ -67,6 +67,54 @@ Beside the rich configuration possibilities of https://docs.spring.io/spring-boo
 | contact url shown in the OpenAPI gui summary header
 |===
 
+
+[[audiomixpreset]]
+.AudioMixPreset
+[grid=none,frame=sides]
+|===
+| Field | Description | Constraint | Default
+
+| fallback-to-auto
+| if true, sets the output audio channels to the number given by the <<audioencode>> field channel.
+| the following conditions needs to apply for it to take effect:
+
+    set to true
+
+    nr of audio channels in input file > 0
+
+<<audioencode>> channels = 2 OR between 1 and the "nr of audio channels in input file"
+
+| true
+
+| default-pan
+| if configured, maps "autofound input audio channels" to the configured output channel configuration
+| input file channels: configured <<audioencode>> channel: the https://ffmpeg.org/ffmpeg-filters.html#pan[pan filter] configuration to use
+
+ See the concrete <<profiles>> for yaml example.
+
+ Any configuration found in pan-mapping would take precedence over this configuration
+
+|
+
+| pan-mapping
+| if configured, maps "found input audio channels" to the configured matching output channel configurations
+| input file channels: configured <<audioencode>> channel: https://ffmpeg.org/ffmpeg-filters.html#pan[the pan filter] configuration which should be used.
+
+  See the concrete <<configurationexample>> for yaml-examples.
+
+  Any configuration here takes precedence over configurations in default-pan
+
+|
+|===
+
+_For, clarity, here is how an encore-setting configuration with audio-mix-presets could look like in real life._
+
+
+.encore-settings configuration example
+[source, yaml]
+----
+include::https://raw.githubusercontent.com/svt/encore-doc/main/src/docs/asciidoc/examples/configuration/application-prod.yml[]
+----
 === Homebrew AVTools
 
 So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew?

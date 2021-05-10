@@ -34,6 +34,9 @@ Also, open a discussion issue if you have any ideas regarding contributions abou
 
 === Articles and talks
 
+https://medium.com/the-svt-tech-blog/encore-open-source-licensed-to-once-again-transcode-bbf854f7a812[Article: 2021 - Encore - licensed to once again transcode]
+- an article about how, and why, we released *Encore* as Open Source and an introduction to how it basically works.
+
 https://conf.tube/videos/watch/751d41f4-72fd-4bfe-aa26-8d8b0e8054c2[Video: 2019 - FOSS made us do it]
 - How *Encore* and FOSS tools enables the Video Encoding at SVT
 
