@@ -8,26 +8,19 @@ profile:
 encore-settings:
   local-temporary-encode: true
   audio-mix-presets:
-    default: # Important! Make sure to have mapping for all cases
-      6:
+    default:
+      fallback-to-auto: false
+      default-pan:
         2: stereo| c0 = c0 + 0.707*c2 + 0.707*c4 | c1 = c1 + 0.707*c2 + 0.707*c5
-        6: 5.1| c0 = c0 | c1 = c1 | c2 = c2 | c3 = c3 | c4 = c4 | c5 = c5
-      5:
-        2: stereo| c0 = c0 | c1 = c1
-      4:
-        2: stereo| c0 = c0 | c1 = c1
-      3:
-        2: stereo| c0 = c0 + 0.707*c2 | c1 = c1 + 0.707*c2
-      2:
-        2: stereo| c0 = c0 | c1 = c1
-      1:
-        2: stereo| c0 = 0.707*c0 | c1 = 0.707*c0
-    de:
-      6:
-        2: stereo|c0<0.25*c0+1.5*c2+0.25*c4|c1<0.25*c1+1.5*c2+0.25*c5
-      3:
-        2: stereo|c0<0.4*c0+1.5*c2|c1<0.4*c1+1.5*c2
 
+      pan-mapping:
+        6:
+          2: stereo|c0=1.0*c0+0.707*c2+0.707*c4|c1=1.0*c1+0.707*c2+0.707*c5
+    de:
+      fallback-to-auto: false
+      pan-mapping:
+        6:
+          2: stereo|c0<0.25*c0+1.5*c2+0.25*c4|c1<0.25*c1+1.5*c2+0.25*c5
 
 redis:
   subscription-connection-pool-size: 25

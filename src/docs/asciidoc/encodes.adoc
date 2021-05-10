@@ -55,13 +55,13 @@ TODO: Describe the new mapping logic
 |
 
 | audioMixPreset
-| define presents for audio mixes
+| the name of the default <<audiomixpreset>> to use, if any
 |
-| default
+| "default"
 
 | skipIfNoAudioMixPreset
 | don't encode audio if no mix was found
-| Boolean
+| boolean
 | false
 
 | format
@@ -69,6 +69,8 @@ TODO: Describe the new mapping logic
 |
 | mp4
 |===
+
+
 
 ***
 
