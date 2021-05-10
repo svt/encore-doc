@@ -75,7 +75,7 @@ video {
 <span id="author" class="author">SVT Videocore</span><br>
 <span id="email" class="email"><a href="mailto:videocore@svt.se">videocore@svt.se</a></span><br>
 <span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-05-07</span>
+<span id="revdate">2021-05-10</span>
 <br><span id="revremark">Alpha Edition</span>
 </div>
 <div id="toc" class="toc2">
@@ -1002,14 +1002,14 @@ See the <a href="#profiles">Profiles</a> section in the Appendix for concrete <a
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">audioMixPreset</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">define presents for audio mixes</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the name of the default <a href="#audiomixpreset">AudioMixPreset</a> to use, if any</p></td>
 <td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">default</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">"default"</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">skipIfNoAudioMixPreset</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">don&#8217;t encode audio if no mix was found</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Boolean</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">boolean</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">false</p></td>
 </tr>
 <tr>
@@ -1359,6 +1359,10 @@ For further information on how you can configure the API-generation, see the <a 
 <div class="sect2">
 <h3 id="articles-and-talks">Articles and talks</h3>
 <div class="paragraph">
+<p><a href="https://medium.com/the-svt-tech-blog/encore-open-source-licensed-to-once-again-transcode-bbf854f7a812">Article: 2021 - Encore - licensed to once again transcode</a>
+- an article about how, and why, we released <strong>Encore</strong> as Open Source and an introduction to how it basically works.</p>
+</div>
+<div class="paragraph">
 <p><a href="https://conf.tube/videos/watch/751d41f4-72fd-4bfe-aa26-8d8b0e8054c2">Video: 2019 - FOSS made us do it</a>
 - How <strong>Encore</strong> and FOSS tools enables the Video Encoding at SVT</p>
 </div>
@@ -1580,8 +1584,8 @@ Thank you!.</em></p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">audio-mix-presets</p></td>
-<td class="tableblock halign-left valign-top"></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">TODO</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a default <a href="#audiomixpreset">AudioMixPreset</a> is created</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">a list of <a href="#audiomixpreset">AudioMixPreset</a>s to use</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">concurrency</p></td>
@@ -1645,6 +1649,88 @@ Thank you!.</em></p>
 </tr>
 </tbody>
 </table>
+<table id="audiomixpreset" class="tableblock frame-sides grid-none stripes-even stretch">
+<caption class="title">Table 9. AudioMixPreset</caption>
+<colgroup>
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Field</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Constraint</th>
+<th class="tableblock halign-left valign-top">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">fallback-to-auto</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">if true, sets the output audio channels to the number given by the <a href="#audioencode">AudioEncode</a> field channel.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">the following conditions needs to apply for it to take effect:</p>
+<p class="tableblock">    set to true</p>
+<p class="tableblock">    nr of audio channels in input file &gt; 0</p>
+<p class="tableblock"><a href="#audioencode">AudioEncode</a> channels = 2 OR between 1 and the "nr of audio channels in input file"</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">default-pan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">if configured, maps "autofound input audio channels" to the configured output channel configuration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">input file channels: configured <a href="#audioencode">AudioEncode</a> channel: the <a href="https://ffmpeg.org/ffmpeg-filters.html#pan">pan filter</a> configuration to use</p>
+<p class="tableblock"> See the concrete <a href="#profiles">Profiles</a> for yaml example.</p>
+<p class="tableblock"> Any configuration found in pan-mapping would take precedence over this configuration</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">pan-mapping</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">if configured, maps "found input audio channels" to the configured matching output channel configurations</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">input file channels: configured <a href="#audioencode">AudioEncode</a> channel: <a href="https://ffmpeg.org/ffmpeg-filters.html#pan">the pan filter</a> configuration which should be used.</p>
+<p class="tableblock">  See the concrete <a href="#configurationexample">[configurationexample]</a> for yaml-examples.</p>
+<p class="tableblock">  Any configuration here takes precedence over configurations in default-pan</p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><em>For, clarity, here is how an encore-setting configuration with audio-mix-presets could look like in real life.</em></p>
+</div>
+<div class="listingblock">
+<div class="title">encore-settings configuration example</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">  spring:
+    jackson:
+      time-zone: Europe/Stockholm
+
+  profile:
+    location: url:http://YOURPROFILESERVERURL/encore/prod/master/profiles.yml
+
+  encore-settings:
+    local-temporary-encode: true
+    audio-mix-presets:
+      default:
+        fallback-to-auto: false
+        default-pan:
+          2: stereo| c0 = c0 + 0.707*c2 + 0.707*c4 | c1 = c1 + 0.707*c2 + 0.707*c5
+
+        pan-mapping:
+          6:
+            2: stereo|c0=1.0*c0+0.707*c2+0.707*c4|c1=1.0*c1+0.707*c2+0.707*c5
+      de:
+        fallback-to-auto: false
+        pan-mapping:
+          6:
+            2: stereo|c0&lt;0.25*c0+1.5*c2+0.25*c4|c1&lt;0.25*c1+1.5*c2+0.25*c5
+
+  redis:
+    subscription-connection-pool-size: 25
+    connection-pool-size: 32
+    connection-minimum-idle-size: 5
+    uri: redis://YOURINSTANCE:6379
+    db: 1</code></pre>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="homebrew-avtools">Homebrew AVTools</h3>
@@ -2051,7 +2137,7 @@ We are focusing on the features we need, but we are always open to suggestion an
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2021-05-07 14:08:17 UTC
+Last updated 2021-05-10 12:56:37 UTC
 </div>
 </div>
 <link rel="stylesheet" href="js/highlight/styles/darcula.min.css">
