@@ -10,7 +10,7 @@ buildscript {
 
 plugins {
     `java-library`
-    id("org.asciidoctor.jvm.convert") version "3.2.0"
+    id("org.asciidoctor.jvm.convert") version "3.3.2"
 //    id("org.asciidoctor.jvm.gems") version "3.3.1"
 }
 
@@ -77,7 +77,7 @@ tasks {
 
 tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = "7.0"
+    gradleVersion = "7.2"
 }
 /*
 
