@@ -75,7 +75,7 @@ video {
 <span id="author" class="author">SVT Videocore</span><br>
 <span id="email" class="email"><a href="mailto:videocore@svt.se">videocore@svt.se</a></span><br>
 <span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-05-10</span>
+<span id="revdate">2021-10-08</span>
 <br><span id="revremark">Alpha Edition</span>
 </div>
 <div id="toc" class="toc2">
@@ -276,7 +276,7 @@ It <strong>is</strong> used in daily production though.
 </div>
 <div class="sect3">
 <h4 id="quickstart">Quickstart</h4>
-<div class="ulist">
+<div id="requirements-run-local-boot" class="ulist">
 <ul>
 <li>
 <p>Encore requires:</p>
@@ -330,6 +330,15 @@ This will use the <em>src/main/resources/application-local.yml</em> configuratio
 </tr>
 </table>
 </div>
+<div class="paragraph">
+<p>If the startup fails, verify that you are fulfilling the <a href="#requirements-run-local-boot">requirements</a></p>
+</div>
+<div class="paragraph">
+<p>Otherwise, verify that you can see the OpenAPI3 Swagger Gui in your browser, see <a href="#dynamicapiendpoints">Dynamically generated Endpoint documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>Success?? Great - you might want to check out the <a href="#concepts">Concepts</a> next.</p>
+</div>
 </div>
 <div class="sect4">
 <h5 id="option-docker-image-run-encore-in-a-docker-image">Option - Docker Image: Run Encore in a Docker Image</h5>
@@ -346,12 +355,14 @@ Modify as needed.</p>
 <div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="dockerfile" class="language-dockerfile hljs">  FROM ubuntu:rolling
+<pre class="highlightjs highlight"><code data-lang="dockerfile" class="language-dockerfile hljs">  FROM ubuntu:20.04
 
   ENV LC_ALL C.UTF-8
   ENV LANG C.UTF-8
   ENV TZ Europe/Stockholm
   RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
+
+  ARG USR="user"
 
   RUN apt-get update &amp;&amp; apt-get -y --no-install-recommends install \
   build-essential \
@@ -364,28 +375,33 @@ Modify as needed.</p>
   expect \
   openssh-client  \
   ca-certificates \
+  openjdk-11-jre-headless \
   zip \
   unzip
 
   RUN localedef -i en_US -f UTF-8 en_US.UTF-8 &amp;&amp; \
-  useradd -ms /bin/bash YOURUSER &amp;&amp; \
-  echo 'YOURUSER ALL=(ALL) NOPASSWD:ALL' &gt;&gt;/etc/sudoers &amp;&amp; \
+  useradd -ms /bin/bash ${USR} &amp;&amp; \
+  echo '${USR}  ALL=(ALL) NOPASSWD:ALL' &gt;&gt;/etc/sudoers &amp;&amp; \
   echo 'Set disable_coredump false' &gt;&gt; /etc/sudo.conf
 
   RUN mkdir -m777 /ffmpeg-filters
-  COPY --chown=YOURUSER:YOURUSER script /script
 
-  RUN su YOURUSER -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-  USER YOURUSER
+  RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
   ENV PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
+  ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
 
   RUN brew tap svt/avtools &amp;&amp; \
+      brew install openssl@1.1 &amp;&amp; \
+      brew unlink openssl@1.1 &amp;&amp; \
+      brew install openssl@3 &amp;&amp; \
       brew install ffmpeg-encore libsvg-proxy-filter libsrf-proxy-filter mediainfo &amp;&amp; \
       sudo rm -rf "$(brew --cache)"
 
   RUN cp $(brew --prefix)/lib/libsvg_filter.so $(brew --prefix)/lib/libsrf_filter.so /ffmpeg-filters/
+
+  USER ${USR}
+
 
   CMD ["ffmpeg", "-version"]</code></pre>
 </div>
@@ -395,11 +411,16 @@ Modify as needed.</p>
 <div class="listingblock">
 <div class="title">With env variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=&lt;yourdockerbaseimage&gt;. &amp;&amp; docker run -e SPRING_PROFILES_ACTIVE='local' encore-docker</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=&lt;yourdockerbaseimage:youjustbuiltfromexample&gt; .
+
+  foobar@foo:~$ docker run --network=host -e SPRING_PROFILES_ACTIVE='local' encore-docker</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Success?? Great - you might want to check out the <a href="#concepts">Concepts</a> or the <a href="#apiendpoints">API/Endpoints</a> next.</p>
+<p>Verify that you can see the OpenAPI3 Swagger Gui in your browser, see <a href="#dynamicapiendpoints">Dynamically generated Endpoint documentation</a>.</p>
+</div>
+<div class="paragraph">
+<p>Success?? Great - you might want to check out the <a href="#concepts">Concepts</a> next.</p>
 </div>
 </div>
 </div>
@@ -544,12 +565,18 @@ However, other custom Endpoints exist.</p>
 <p><strong>Encore&#8217;s</strong> endpoints are described and self-documented in the <a href="https://www.openapis.org/">OpenAPIv3 format</a>.</p>
 </div>
 <div class="sect3">
-<h4 id="dynamically-generated-endpoint-documentation">Dynamically generated Endpoint documentation</h4>
+<h4 id="dynamicapiendpoints">Dynamically generated Endpoint documentation</h4>
 <div class="paragraph">
 <p>To see and interact with the endpoints live, consult your</p>
 </div>
 <div class="paragraph">
 <p><a href="https://YOUR_RUNNING_ENCORE_INSTANCE/swagger-ui.html" class="bare">https://YOUR_RUNNING_ENCORE_INSTANCE/swagger-ui.html</a></p>
+</div>
+<div class="paragraph">
+<p>for example, if you ran it on your localhost:</p>
+</div>
+<div class="paragraph">
+<p><a href="http://localhost:8080/swagger-ui.html" class="bare">http://localhost:8080/swagger-ui.html</a></p>
 </div>
 <div class="admonitionblock tip">
 <table>
@@ -597,7 +624,7 @@ This will happen when the project is mature.
 <h4 id="encore-job-2">Encore Job</h4>
 <div class="paragraph">
 <p>The Encore Job is a central object in Encore.
-The Encore Job fields are described in the <a href="#dynamically-generated-endpoint-documentation">Dynamically generated Endpoint documentation</a>, but also in the</p>
+The Encore Job fields are described in the <a href="#dynamically-generated-endpoint-documentation">[dynamically-generated-endpoint-documentation]</a>, but also in the</p>
 </div>
 <div class="paragraph">
 <p><a href="openapi.html#_encorejob">EncoreJob static documentation</a></p>
@@ -620,24 +647,19 @@ The Encore Job fields are described in the <a href="#dynamically-generated-endpo
   import org.springframework.data.redis.core.RedisHash
   import org.springframework.data.redis.core.index.Indexed
   import org.springframework.validation.annotation.Validated
-  import se.svt.oss.mediaanalyzer.file.FractionString
+  import se.svt.oss.encore.model.input.Input
   import se.svt.oss.mediaanalyzer.file.MediaFile
-  import se.svt.oss.mediaanalyzer.file.VideoFile
   import java.net.URI
   import java.time.OffsetDateTime
   import java.util.UUID
   import javax.validation.constraints.Max
   import javax.validation.constraints.Min
   import javax.validation.constraints.NotBlank
-  import javax.validation.constraints.Pattern
+  import javax.validation.constraints.NotEmpty
   import javax.validation.constraints.Positive
-  import javax.validation.constraints.PositiveOrZero
-
-  private const val AR_REGEX = "^[1-9]\\d*[:/][1-9]\\d*$"
-  private const val AR_MESSAGE = "Must be positive fraction, e.g. 16:9"
 
   @Validated
-  @RedisHash("encore-jobs", timeToLive = 60 * 60 * 24 * 7) // 1 week ttl
+  @RedisHash("encore-jobs", timeToLive = (60 * 60 * 24 * 7).toLong()) // 1 week ttl
   @Tag(name = "encorejob")
   data class EncoreJob(
 
@@ -654,13 +676,6 @@ The Encore Job fields are described in the <a href="#dynamically-generated-endpo
       val externalId: String? = null,
 
       @Schema(
-          description = "The input file that the EncoreJob should process",
-          example = "/path/to/a/file/file.mxf", required = true
-      )
-      @NotBlank
-      val filename: String,
-
-      @Schema(
           description = "The name of the encoding profile to use",
           example = "x264-animated", required = true
       )
@@ -675,10 +690,18 @@ The Encore Job fields are described in the <a href="#dynamically-generated-endpo
       val outputFolder: String,
 
       @Schema(
+          description = "Base filename of output files",
+          example = "any_file", required = true
+      )
+      @NotBlank
+      val baseName: String,
+
+      @Schema(
           description = "The Creation date for the EncoreJob",
           example = "2021-04-22T03:00:48.759168+02:00", accessMode = Schema.AccessMode.READ_ONLY,
           defaultValue = "now()"
       )
+      @Indexed
       val createdDate: OffsetDateTime = OffsetDateTime.now(),
 
       @Schema(
@@ -694,27 +717,6 @@ The Encore Job fields are described in the <a href="#dynamically-generated-endpo
       @Min(0)
       @Max(100)
       val priority: Int = 0,
-
-      @Schema(
-          description = "The Display Aspect Ratio to use if the input is anamorphic." +
-              " Overrides DAR found from input metadata (for corrupt video metadata)",
-          example = "16:9", nullable = true
-      )
-      @get:Pattern(regexp = AR_REGEX, message = AR_MESSAGE)
-      val dar: FractionString? = null,
-
-      @Schema(
-          description = "List of FFmpeg filters to apply to all video outputs",
-          example = "proxy=filter_path=/ffmpeg-filters/libsvg_filter.so:config='svg=/path/logo-white.svg",
-          defaultValue = "[]"
-      )
-      val globalVideoFilters: List&lt;String&gt; = emptyList(),
-
-      @Schema(
-          description = "List of FFmpeg filters to apply to all audio outputs",
-          example = "to-do", defaultValue = "[]"
-      )
-      val globalAudioFilters: List&lt;String&gt; = emptyList(),
 
       @Schema(
           description = "The exception message, if the EncoreJob failed",
@@ -757,55 +759,22 @@ The Encore Job fields are described in the <a href="#dynamically-generated-endpo
       )
       val logContext: Map&lt;String, String&gt; = emptyMap(),
 
-      @Schema(
-          description = "Crop output video to given aspect ratio",
-          example = "1:1", nullable = true
-      )
-      @get:Pattern(regexp = AR_REGEX, message = AR_MESSAGE)
-      val cropTo: FractionString? = null,
+      @Schema(description = "Seek to given time in seconds before encoding output.", nullable = true, example = "60.0")
+      val seekTo: Double? = null,
+
+      @Schema(description = "Limit output to given duration.", nullable = true, example = "60.0")
+      val duration: Double? = null,
 
       @Schema(
-          description = "Pad output video to given aspect ratio",
-          example = "16:9", nullable = true
-      )
-      @get:Pattern(regexp = AR_REGEX, message = AR_MESSAGE)
-      val padTo: FractionString? = null,
-
-      @Schema(
-          description = "Seek in video stream to given start time in ms (end time must currently be given)",
-          example = "10000", nullable = true
-      )
-      @PositiveOrZero
-      val startTime: Int? = null,
-
-      @Schema(
-          description = "Seek in video stream to given end time in ms (start time must currently be given)",
-          example = "20000", nullable = true
+          description = "Time in seconds for when the thumbnail should be picked. Overrides profile configuration for thumbnails",
+          example = "1800.5", nullable = true
       )
       @Positive
-      val endTime: Int? = null,
+      val thumbnailTime: Double? = null,
 
-      @Schema(
-          description = "Time in ms for when the thumbnail should be picked. Overrides profile configuration for thumbnails",
-          example = "5000", nullable = true
-      )
-      @PositiveOrZero
-      val thumbnailTime: Int? = null,
-
-      @Schema(
-          description = "Only the audio input streams up to the given value",
-          example = "2", nullable = true
-      )
-      @Positive
-      val useFirstAudioStreams: Int? = null
+      @NotEmpty
+      val inputs: List&lt;Input&gt; = emptyList()
   ) {
-
-      @Schema(
-          description = "Analyzed model of the input file",
-          accessMode = Schema.AccessMode.READ_ONLY,
-          nullable = true
-      )
-      var input: VideoFile? = null
 
       @Schema(
           description = "Analyzed models of the output files",
@@ -813,14 +782,11 @@ The Encore Job fields are described in the <a href="#dynamically-generated-endpo
       )
       var output = emptyList&lt;MediaFile&gt;()
 
-      val inputOrThrow: VideoFile
-          @JsonIgnore
-          get() = input ?: throw RuntimeException("Missing media information for $filename!")
-
       @Schema(
           description = "The Job Status",
           accessMode = Schema.AccessMode.READ_ONLY
       )
+
       @Indexed
       var status = Status.NEW
           set(value) {
@@ -837,7 +803,7 @@ The Encore Job fields are described in the <a href="#dynamically-generated-endpo
           @JsonIgnore
           get() = mapOf(
               "id" to id.toString(),
-              "file" to filename,
+              "file" to baseName,
               "externalId" to (externalId ?: ""),
               "profile" to profile
           ) + logContext
@@ -2137,7 +2103,7 @@ We are focusing on the features we need, but we are always open to suggestion an
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2021-05-10 12:56:37 UTC
+Last updated 2021-10-08 19:14:10 UTC
 </div>
 </div>
 <link rel="stylesheet" href="js/highlight/styles/darcula.min.css">
