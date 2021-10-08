@@ -8,6 +8,7 @@ Currently, there are no *pre-ready-to-go* installation packages, pods, docker im
 
 ==== Quickstart
 
+[#requirements-run-local-boot]
 * Encore requires:
 ** JDK 11 or later
 ** An available Redis instance (default configuration: locally installed port 6379)
@@ -34,6 +35,12 @@ foobar@foo:~$ SPRING_PROFILES_ACTIVE=local ./gradlew clean bootRun
 
 NOTE: This will use the _src/main/resources/application-local.yml_ configuration profile in *Encore*.
 
+If the startup fails, verify that you are fulfilling the <<requirements-run-local-boot,requirements>>
+
+Otherwise, verify that you can see the OpenAPI3 Swagger Gui in your browser, see <<dynamicapiendpoints>>.
+
+Success?? Great - you might want to check out the <<concepts>> next.
+
 ===== Option - Docker Image: Run Encore in a Docker Image
 
 This quickstart option will show you how to use https://docs.brew.sh/Homebrew-on-Linux[Homebrew] and create an FFmpeg Docker Image to run Encore from.
@@ -55,9 +62,13 @@ include::examples/docker/FFmpegDockerfile[]
 .With env variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image
 [source,bash]
 ----
-foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=<yourdockerbaseimage>. && docker run -e SPRING_PROFILES_ACTIVE='local' encore-docker
+foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=<yourdockerbaseimage:youjustbuiltfromexample> . 
+
+foobar@foo:~$ docker run --network=host -e SPRING_PROFILES_ACTIVE='local' encore-docker
 ----
 
-Success?? Great - you might want to check out the <<concepts>> or the <<apiendpoints>> next.
+Verify that you can see the OpenAPI3 Swagger Gui in your browser, see <<dynamicapiendpoints>>.
+
+Success?? Great - you might want to check out the <<concepts>> next.
 
 
