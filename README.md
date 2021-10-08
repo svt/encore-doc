@@ -39,13 +39,14 @@ The online documentation (GitHub Pages) is updated when something is committed t
 
 ### Requirements
 
--   Gradle 6.x.x
+-   Gradle 7.x.x
 
 -   Optional: Intellij with the Asciidoctor Plugin
 
-### IntelliJ Plugin
+### Optional for development: IntelliJ Plugin
 
-Install the [Asciidoctor plugin](https://plugins.jetbrains.com/plugin/7391-asciidoc) and get writing, with a preview window, export to HTML, PDF and more. It is great actually.
+Install the [Asciidoctor plugin](https://plugins.jetbrains.com/plugin/7391-asciidoc) and get writing, with a preview window, export to HTML, PDF and more. 
+It is great actually.
 
 ## License
 
@@ -61,7 +62,7 @@ Note: The main project SVT Encore itself was initiated in 2018.
 
 ## Credits
 
--   [Write The Docs](https://www.writethedocs.org/) and everyone driving the Docs-As-Code philosophy.
+-   [Write The Docs](https://www.writethedocs.org/) and everyone driving the Docs-As-Code philosophy, thanks.
 
 - [Asciidoctor skins project](https://github.com/darshandsoni/asciidoctor-skins)
 

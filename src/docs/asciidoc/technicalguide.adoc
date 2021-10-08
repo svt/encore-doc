@@ -64,11 +64,17 @@ However, other custom Endpoints exist.
 
 *Encore's* endpoints are described and self-documented in the https://www.openapis.org/[OpenAPIv3 format].
 
+
+[[dynamicapiendpoints]]
 ==== Dynamically generated Endpoint documentation
 
 To see and interact with the endpoints live, consult your
 
 https://YOUR_RUNNING_ENCORE_INSTANCE/swagger-ui.html
+
+for example, if you ran it on your localhost:
+
+http://localhost:8080/swagger-ui.html
 
 TIP: This is the recommended way - dynamic, powerful and
 always up-to-date.
