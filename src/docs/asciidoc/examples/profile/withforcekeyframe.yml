@@ -165,4 +165,4 @@ encodes:
     suffix: SURROUND
     channels: 6
   - type: ThumbnailMapEncode
-  - type: ThumbnailEncode (edited) 
+  - type: ThumbnailEncode
