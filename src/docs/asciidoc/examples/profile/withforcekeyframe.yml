@@ -143,21 +143,5 @@ encodes:
     suffix: STEREO_LB
     params:
       cutoff: 14000
-  - type: AudioEncode
-    codec: aac
-    bitrate: 192k
-    suffix: STEREO_DE
-    audioMixPreset: de
-    skipIfNoAudioMixPreset: true
-    params:
-      cutoff: 20000
-  - type: AudioEncode
-    codec: aac
-    bitrate: 64k
-    suffix: STEREO_DELB
-    audioMixPreset: de
-    skipIfNoAudioMixPreset: true
-    params:
-      cutoff: 14000
   - type: ThumbnailMapEncode
   - type: ThumbnailEncode
