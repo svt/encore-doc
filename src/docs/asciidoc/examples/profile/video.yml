@@ -23,5 +23,6 @@ encodes:
       ref: 8
     audioEncode:
       type: AudioEncode
+      codec: aac
       bitrate: 256k
       suffix: STEREO
