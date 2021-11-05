@@ -159,10 +159,5 @@ encodes:
     skipIfNoAudioMixPreset: true
     params:
       cutoff: 14000
-  - type: AudioEncode
-    codec: ac3
-    bitrate: 448k
-    suffix: SURROUND
-    channels: 6
   - type: ThumbnailMapEncode
   - type: ThumbnailEncode
