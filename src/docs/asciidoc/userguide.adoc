@@ -1,141 +1,81 @@
 == The User Guide
 
-This part of the documentation describes how to get going with a quick start and installation hints.
+This part of the documentation describes how to build the project, a gives a few examples of how you can try-it-out locally.
 
-=== Usage
+=== Building the project
 
-==== Quicktest - do an encoding with Docker Compose
-
-This is for you who would like to just take Encore for a quick test, probally locally
-
-WARN: THIS way is not recommended or intended for any production use. **Don't**
-
-It will let you start encoding files, and later lets you dig into the details with an installation of you options. 
-
-* This step requires:
-** Docker-compose installed on your machine.
-
-1. Save this in a file in called docker-compose.yml
-TO-DO
-
-In the project root do:
-
-[source,console]
-....
-$ ./docker-compose up
-....
-
-and hopefully you should see Encore starting up without errors.
-
-IMPORTANT: There are two folders mapped to your host system by using the default docker-compose file. 
-**/tmp/input and /tmp/output.**, from now called **inputdir** **outputdir**
-_Change these (in the docker-compose file) to anything else if you run on a operating system not having the /tmp-folder, or prefer something else_.
-
- 
-2. Take a test mp4 file, and put in into your **inputdir** folder.
-You might have to change access permissions on the **inputdir** and **outputdir**. You need at least write access to the *inputdir** 
-In this example, we use one of the files from the test resources in the Encore project - let's copy this to **inputdir**:
-
-[source,console]
-....
-$ cp src/test/resources/input/test.mp4 /tmp/input
-....
-
-3. Before you post a job to Encore, you need to know the IP of the Docker-Compose created network first. Localhost wont work here.
-
-Show all networks docker-compose created. You are looing for one with <nameOfFolderYouAreRunningFrom>_default
-
-[source,console]
-....
-$ docker network list 
-....
-
-and to see the IP Docker is using
-
-[source,console]
-....
-$ docker inspect <nameOfFolderYouAreRunningFrom>_default
-....
-
-Got it - great!
-
-4. Now, fire up a browser and go to the http://<THE_DOCKER_IP>:8082/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/encorejob/postCollectionResource-encorejob-post - i.e directly to the Encore Swagger Interface for Posting an EncoreJob.
-
-
-5. Finally, push the try it out button and try with this example
-
-
-[source,json]
-....
-{
-	"id": "850e9058-4ec0-42ee-8fcc-fe974d50abc5",
-	"externalId": "externalId",
-	"profile": "program",
-	"outputFolder": "/tmp/output",
-	"baseName": "test",
-	"progressCallbackUri": "",
-	"priority": 0,
-	"message": null,
-	"progress": 0,
-	"speed": null,
-	"startedDate": null,
-	"completedDate": null,
-	"debugOverlay": true,
-	"logContext": {
-		"FlowId": "00a021f6-f285-4ae6-8b45-0aa0f67f42a4"
-	},
-	"seekTo": null,
-	"duration": null,
-	"thumbnailTime": null,
-	"inputs": [{
-		"uri": "/tmp/test.mp4",
-		"videoLabel": "main",
-		"audioLabel": "main",
-		"params": {},
-		"dar": null,
-		"useFirstAudioStreams": 2,
-		"cropTo": null,
-		"padTo": null,
-		"videoFilters": [],
-		"audioFilters": [],
-		"analyzed": null,
-		"videoStream": null,
-		"audioStream": null,
-		"probeInterlaced": true,
-		"type": "AudioVideo"
-	}],
-	"output": [],
-	"status": "NEW"
-}
-....
-
-You can now see some output in the terminal, and after a while you should see a couple of encoded files in the output dir. 
-Congratulations, you did your first encoding with Encore!
-
-==== Quickstart - build with gradle
-
-
-* This step requires:
+_Note: This step is not needed if you are trying out Encore with the_ <<example-using-docker-compose,Docker Compose example>>.
 
 [#requirements-run-local-boot]
-* Encore requires:
+* Requires:
 ** JDK 11 or later
 ** An available Redis instance (default configuration: locally installed port 6379)
-** FFmpeg (we recommend the version present in https://github.com/svt/homebrew-avtools[Homebrew-AVTools] repository, which is what we use in our production environment)
+** FFmpeg and Mediainfo (we recommend the versions present in https://github.com/svt/homebrew-avtools[Homebrew-AVTools] repository, which has been tested to work with Encore).
 
 
-===== Build the project
-
-Run all tests and static analysis using:
+To build **Encore**, with all tests, do:
 
 [source,bash]
 ....
 $ ./gradlew clean build
 ....
 
-===== Option - Quick Test Trial: Run a local version with Spring Boot bootRun
+[source,bash]
+....
+$ ./gradlew clean build -x test
+....
 
-You can run *Encore* on your local developer machine for a quick test trial by starting up a local developer Application Profile:
+=== Try-it-out examples
+
+A few examples on how you can try out **Encore**.
+
+* Using Docker-Compose
+* Using Spring Boot BootRun 
+* Building an Docker Image and run Encore in a Docker Container
+
+==== Example: using Docker Compose
+
+* This step requires:
+** https://docs.docker.com/compose/install/Docker-compose[Docker Compose]
+
+
+- Use a docker-compose.yml
+
+[source,yaml]
+....
+include::examples/docker/docker-compose.yml[]
+....
+
+and then
+
+[source,console]
+....
+$ ./docker-compose up
+....
+
+and you should see Encore starting up.
+
+IMPORTANT: By default, there are two folders mapped to your host system by using the example docker-compose file. 
+**/tmp/input and /tmp/output**, which we will refer to as the **inputdir** and the **outputdir**
+_Change these (in the docker-compose file) to something that suits your environment. 
+The default should be fine on mac/linux._
+
+- To find the IP Docker-Compose creates (so that you can access Encore's api).
+
+
+[source,console]
+....
+$ docker inspect <nameOfDirectoryYouAreRunningFrom>_encorenet
+....
+
+NOTE: By design Docker-compose creates a network called <nameOfDirectoryYouAreRunningFrom>_encorenet
+
+
+Got the IP? - great! Continue to <<posting-your-first-encorejob>>
+
+==== Example: run Encore with Spring Boot bootRun
+
+You can run *Encore* on your local machine by starting up a local developer Application Profile:
 
 .In the *Encore* root folder:
 [source,bash]
@@ -147,19 +87,16 @@ NOTE: This will use the _src/main/resources/application-local.yml_ configuration
 
 If the startup fails, verify that you are fulfilling the <<requirements-run-local-boot,requirements>>
 
-Otherwise, verify that you can see the OpenAPI3 Swagger Gui in your browser, see <<dynamicapiendpoints>>.
+Continue to <<posting-your-first-encorejob>>
 
-Success?? Great - you might want to check out the <<concepts>> next.
+==== Example: run Encore in a Docker Image
 
-===== Option - Docker Image: Run Encore in a Docker Image you build yourself
+- Create or find a base FFmpeg/Mediainfo Docker image.
 
-This quickstart option will show you how to use https://docs.brew.sh/Homebrew-on-Linux[Homebrew] and create an FFmpeg Docker Image to run Encore from.
+The given example installs a recent version of FFmpeg, with a few FFmpeg filters, and mediainfo.
+Modify as needed, using a tap of https://docs.brew.sh/Homebrew-on-Linux[Homebrew] as an installation base.
 
-First, you need to create a base FFmpeg Docker image.
-The following skeleton example installs a recent version of FFmpeg, with a few FFmpeg filters, and mediainfo.
-Modify as needed.
-
-.An FFmpeg Dockerfile example (click to expand)
+.A FFmpeg Dockerfile example (click to expand)
 [%collapsible]
 ====
 [source,dockerfile]
@@ -169,16 +106,54 @@ include::examples/docker/FFmpegDockerfile[]
 
 ====
 
-.With env variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image
+.With the environment variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image
 [source,bash]
 ----
-foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=<yourdockerbaseimage:youjustbuiltfromexample> . 
+foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=<yourdockerbaseimage:youjustbuilt> . 
 
-foobar@foo:~$ docker run --network=host -e SPRING_PROFILES_ACTIVE='local' encore-docker
+foobar@foo:~$ docker run --network=host -v /tmp/input:/tmp/input -v /tmp/output:/tmp/output -e SPRING_PROFILES_ACTIVE='local' encore-docker
 ----
 
-Verify that you can see the OpenAPI3 Swagger Gui in your browser, see <<dynamicapiendpoints>>.
+Continue to <<posting-your-first-encorejob>>
 
-Success?? Great - you might want to check out the <<concepts>> next.
+=== Posting your first EncoreJob
+
+* This step requires:
+** A running instance of Encore
+** A inputdir - where you put source files
+** A outputdir - where you want the encoded files to end up
 
 
+1) Use one of the files from the test resources in the Encore project and copy this to your **inputdir**
+(Verify that you have access permissions to the **inputdir** and **outputdir**.)
+
+[source,console]
+....
+$ cp src/test/resources/input/test.mp4 /tmp/input
+....
+
+2) Fire up a browser and http://<ENCORE_IP>:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/ - i.e directly to the Encore Swagger Interface for Posting an EncoreJob.
+
+3) Finally, Under POST, hit the "Try it out" button and POST this example. 
+(Replace the *outputFolder* and *uri* with your **outputdir** and **inputdir**/filename.)
+
+
+[source,json]
+....
+
+  {
+  	"profile": "program",
+  	"outputFolder": "/tmp/output",
+  	"baseName": "quicktest_",
+  	"inputs": [{
+  		"uri": "/tmp/input/test.mp4",
+  		"useFirstAudioStreams": 2,
+  		"type": "AudioVideo"
+  	}]
+  }
+....
+
+You can now see some output in your terminal, and after a while you should see a couple of encoded files in the **outputdir**. 
+Congratulations, you did your first encoding with Encore!
+
+Now, find out more about specific options, see <<dynamicapiendpoints>>, or see the <<concepts>>.

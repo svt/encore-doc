@@ -110,6 +110,7 @@ Beside the rich configuration possibilities of https://docs.spring.io/spring-boo
 _For, clarity, here is how an encore-setting configuration with audio-mix-presets could look like in real life._
 
 
+[[configurationexample]]
 .encore-settings configuration example
 [source, yaml]
 ----
