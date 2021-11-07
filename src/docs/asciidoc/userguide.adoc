@@ -48,18 +48,28 @@ include::examples/docker/docker-compose.yml[]
 
 and then
 
+Linux
 [source,console]
 ....
 $ ./docker-compose up
+....
+
+Mac
+[source,console]
+....
+$ ./docker compose up
 ....
 
 and you should see Encore starting up.
 
 IMPORTANT: By default, there are two folders mapped to your host system by using the example docker-compose file. 
 **/tmp/input and /tmp/output**, which we will refer to as the **inputdir** and the **outputdir**
-_Change these (in the docker-compose file) to something that suits your environment. 
-The default should be fine on mac/linux._
+_Change these (in the docker-compose file) to something that suits your environment if you are not running on Linux. 
+For example /Users/<YOURUSER>/input:/tmp/input should be fine on macos._
 
+====== Get the IP
+
+On Linux:
 - To find the IP Docker-Compose creates (so that you can access Encore's api).
 
 
@@ -70,6 +80,8 @@ $ docker inspect <nameOfDirectoryYouAreRunningFrom>_encorenet
 
 NOTE: By design Docker-compose creates a network called <nameOfDirectoryYouAreRunningFrom>_encorenet
 
+On macos:
+Use 'localhost'
 
 Got the IP? - great! Continue to <<posting-your-first-encorejob>>
 

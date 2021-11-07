@@ -7,13 +7,13 @@ services:
     - encorenet 
 
   encore:
-    image: ghcr.io/janderssonse/encore-debian:latest
+    image: ghcr.io/svt/encore-debian:latest
     depends_on:
       - redis
     environment:
       - SPRING_PROFILES_ACTIVE=local
       - SPRING_REDIS_HOST=redis
-      - PROFILE_LOCATION=url:https://raw.githubusercontent.com/janderssonse/encore-doc/improvequickstart/src/docs/asciidoc/examples/profile/profiles.yml
+      - PROFILE_LOCATION=url:https://raw.githubusercontent.com/svt/encore-doc/main/src/docs/asciidoc/examples/profile/profiles.yml
 
     ports:
       - "8080:8080"
