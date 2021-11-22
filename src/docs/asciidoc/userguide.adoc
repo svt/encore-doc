@@ -1,6 +1,8 @@
 == The User Guide
 
-This part of the documentation describes how to build the project, a gives a few examples of how you can try-it-out locally.
+This part of the documentation describes how to build the project, and/or just use the pre-built jar to run it directly.
+
+NOTE: The <<running_encore,appendix>> gives a few other examples of how you can run Encore
 
 === Building the project
 
@@ -11,7 +13,6 @@ _Note: This step is not needed if you are trying out Encore with the_ <<example-
 ** JDK 11 or later
 ** An available Redis instance (default configuration: locally installed port 6379)
 ** FFmpeg and Mediainfo (we recommend the versions present in https://github.com/svt/homebrew-avtools[Homebrew-AVTools] repository, which has been tested to work with Encore).
-
 
 To build **Encore**, with all tests, do:
 
@@ -25,108 +26,21 @@ $ ./gradlew clean build
 $ ./gradlew clean build -x test
 ....
 
-=== Try-it-out examples
+=== Run Encore as a runnable jar
 
-A few examples on how you can try out **Encore**.
+You can run *Encore* on your local machine by starting up a local developer Application Profile.
+Get the https://github.com/svt/encore/release[pre-built encore jar], or first <<building-the-project,build the project>> and get the jar from ./build/libs/ 
 
-* Using Docker-Compose
-* Using Spring Boot BootRun 
-* Building an Docker Image and run Encore in a Docker Container
-
-==== Example: using Docker Compose
-
-* This step requires:
-** https://docs.docker.com/compose/install/Docker-compose[Docker Compose]
-
-
-- Use a docker-compose.yml
-
-[source,yaml]
-....
-include::examples/docker/docker-compose.yml[]
-....
-
-and then
-
-Linux
-[source,console]
-....
-$ ./docker-compose up
-....
-
-Mac
-[source,console]
-....
-$ ./docker compose up
-....
-
-and you should see Encore starting up.
-
-IMPORTANT: By default, there are two folders mapped to your host system by using the example docker-compose file. 
-**/tmp/input and /tmp/output**, which we will refer to as the **inputdir** and the **outputdir**
-_Change these (in the docker-compose file) to something that suits your environment if you are not running on Linux. 
-For example /Users/<YOURUSER>/input:/tmp/input should be fine on macos._
-
-====== Get the IP
-
-On Linux:
-- To find the IP Docker-Compose creates (so that you can access Encore's api).
-
-
-[source,console]
-....
-$ docker inspect <nameOfDirectoryYouAreRunningFrom>_encorenet
-....
-
-NOTE: By design Docker-compose creates a network called <nameOfDirectoryYouAreRunningFrom>_encorenet
-
-On macos:
-Use 'localhost'
-
-Got the IP? - great! Continue to <<posting-your-first-encorejob>>
-
-==== Example: run Encore with Spring Boot bootRun
-
-You can run *Encore* on your local machine by starting up a local developer Application Profile:
-
-.In the *Encore* root folder:
 [source,bash]
 ----
-foobar@foo:~$ SPRING_PROFILES_ACTIVE=local ./gradlew clean bootRun
+foobar@foo:~$ SPRING_PROFILES_ACTIVE=local java -jar encore-x.y.z.jar
 ----
 
 NOTE: This will use the _src/main/resources/application-local.yml_ configuration profile in *Encore*.
 
 If the startup fails, verify that you are fulfilling the <<requirements-run-local-boot,requirements>>
 
-Continue to <<posting-your-first-encorejob>>
-
-==== Example: run Encore in a Docker Image
-
-- Create or find a base FFmpeg/Mediainfo Docker image.
-
-The given example installs a recent version of FFmpeg, with a few FFmpeg filters, and mediainfo.
-Modify as needed, using a tap of https://docs.brew.sh/Homebrew-on-Linux[Homebrew] as an installation base.
-
-.A FFmpeg Dockerfile example (click to expand)
-[%collapsible]
-====
-[source,dockerfile]
-----
-include::examples/docker/FFmpegDockerfile[]
-----
-
-====
-
-.With the environment variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image
-[source,bash]
-----
-foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=<yourdockerbaseimage:youjustbuilt> . 
-
-foobar@foo:~$ docker run --network=host -v /tmp/input:/tmp/input -v /tmp/output:/tmp/output -e SPRING_PROFILES_ACTIVE='local' encore-docker
-----
-
-Continue to <<posting-your-first-encorejob>>
+Next, Continue to <<posting-your-first-encorejob>>
 
 === Posting your first EncoreJob
 

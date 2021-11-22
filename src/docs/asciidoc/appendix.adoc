@@ -116,6 +116,114 @@ _For, clarity, here is how an encore-setting configuration with audio-mix-preset
 ----
 include::https://raw.githubusercontent.com/svt/encore-doc/main/src/docs/asciidoc/examples/configuration/application-prod.yml[]
 ----
+
+
+
+[[running_encore]]
+=== Running Encore
+
+As a complement to the UserGuide, here is a few more examples on how you can try out **Encore**.
+
+* Using Docker-Compose
+* Using Spring Boot BootRun
+* Building an Docker Image and run Encore in a Docker Container
+
+
+==== Example: using Docker Compose
+
+* This step requires:
+** https://docs.docker.com/compose/install/Docker-compose[Docker Compose]
+
+
+- Use a docker-compose.yml
+
+[source,yaml]
+....
+include::examples/docker/docker-compose.yml[]
+....
+
+and then
+
+Linux
+[source,console]
+....
+$ ./docker-compose up
+....
+
+Mac
+[source,console]
+....
+$ ./docker compose up
+....
+
+and you should see Encore starting up.
+
+IMPORTANT: By default, there are two folders mapped to your host system by using the example docker-compose file. 
+**/tmp/input and /tmp/output**, which we will refer to as the **inputdir** and the **outputdir**
+_Change these (in the docker-compose file) to something that suits your environment if you are not running on Linux. 
+For example /Users/<YOURUSER>/input:/tmp/input should be fine on macos._
+
+===== Get the IP
+
+On Linux:
+- To find the IP Docker-Compose creates (so that you can access Encore's api).
+
+
+[source,console]
+....
+$ docker inspect <nameOfDirectoryYouAreRunningFrom>_encorenet
+....
+
+NOTE: By design Docker-compose creates a network called <nameOfDirectoryYouAreRunningFrom>_encorenet
+
+On macos:
+Use 'localhost'
+
+Got the IP? - great! Continue to <<posting-your-first-encorejob>>
+
+==== Example: run Encore with Spring Boot bootRun
+
+You can run *Encore* on your local machine by starting up a local developer Application Profile:
+
+.In the *Encore* root folder:
+[source,bash]
+----
+foobar@foo:~$ SPRING_PROFILES_ACTIVE=local ./gradlew clean bootRun
+----
+
+NOTE: This will use the _src/main/resources/application-local.yml_ configuration profile in *Encore*.
+
+If the startup fails, verify that you are fulfilling the <<requirements-run-local-boot,requirements>>
+
+Continue to <<posting-your-first-encorejob>>
+
+==== Example: run Encore in a Docker Image
+
+- Create or find a base FFmpeg/Mediainfo Docker image.
+
+The given example installs a recent version of FFmpeg, with a few FFmpeg filters, and mediainfo.
+Modify as needed, using a tap of https://docs.brew.sh/Homebrew-on-Linux[Homebrew] as an installation base.
+
+.A FFmpeg Dockerfile example (click to expand)
+[%collapsible]
+====
+[source,dockerfile]
+----
+include::examples/docker/FFmpegDockerfile[]
+----
+
+====
+
+.With the environment variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image
+[source,bash]
+----
+foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=<yourdockerbaseimage:youjustbuilt> . 
+
+foobar@foo:~$ docker run --network=host -v /tmp/input:/tmp/input -v /tmp/output:/tmp/output -e SPRING_PROFILES_ACTIVE='local' encore-docker
+----
+
+Continue to <<posting-your-first-encorejob>>
+
 === Homebrew AVTools
 
 So you noticed that the FFmpeg Docker Example in the quickstart used the Repository Manager Brew?
