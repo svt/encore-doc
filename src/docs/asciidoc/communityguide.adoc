@@ -32,6 +32,13 @@ Currently, there are no extensions interface endpoints, but you could, for examp
 
 Also, open a discussion issue if you have any ideas regarding contributions about extensions to *Encore* that you want to discuss.
 
+
+==== How can I create a profile doing X?
+
+Have a look at a few profiles from the documentation or project test examples to learn how you can set different options.
+Also, see if you can do what you can do what you want with pure FFmpeg.
+It should then be doable to map that configuration to a custom profile.
+
 === Articles and talks
 
 https://medium.com/the-svt-tech-blog/encore-open-source-licensed-to-once-again-transcode-bbf854f7a812[Article: 2021 - Encore - licensed to once again transcode]
@@ -42,6 +49,10 @@ https://conf.tube/videos/watch/751d41f4-72fd-4bfe-aa26-8d8b0e8054c2[Video: 2019 
 
 https://medium.com/the-svt-tech-blog/encore-video-transcoding-at-its-core-b80c3e5658b3[Article: 2018 Encore - video transcoding at it's core]
 - while interesting for the project origins, it contains partially *non-valid information* as the code has been largely rewritten since then.
+
+=== Third-party extensions
+
+Eyevinn IAF plugin: https://dev.to/video/locally-transcode-vod-content-with-eyevinn-ingest-application-framework-and-svt-encore-2md7IAF[An IAF plugin for SVT Encore]
 
 === Support
 

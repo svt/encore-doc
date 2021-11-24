@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  redis:
+    image: redis:alpine
+    networks:
+    - encorenet 
+
+  encore:
+    image: ghcr.io/svt/encore-debian:latest
+    depends_on:
+      - redis
+    environment:
+      - SPRING_PROFILES_ACTIVE=local
+      - SPRING_REDIS_HOST=redis
+      - PROFILE_LOCATION=url:https://raw.githubusercontent.com/svt/encore-doc/main/src/docs/asciidoc/examples/profile/profiles.yml
+
+    ports:
+      - "8080:8080"
+    volumes:
+      - /tmp/input:/tmp/input:rw # where your put your source files
+      - /tmp/output:/tmp/output:rw #put your output here
+    networks:
+    - encorenet 
+
+networks:
+ encorenet:
+   driver: bridge

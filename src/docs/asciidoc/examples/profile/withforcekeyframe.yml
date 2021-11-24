@@ -25,6 +25,7 @@ encodes:
       ref: 4
     audioEncode:
       type: AudioEncode
+      codec: aac
       bitrate: 192k
       suffix: STEREO
   - type: X264Encode
@@ -50,6 +51,7 @@ encodes:
       ref: 4
     audioEncode:
       type: AudioEncode
+      codec: aac
       bitrate: 128k
       suffix: STEREO
   - type: X264Encode
@@ -75,6 +77,7 @@ encodes:
       ref: 4
     audioEncode:
       type: AudioEncode
+      codec: aac
       bitrate: 96k
       suffix: STEREO
   - type: X264Encode
@@ -100,6 +103,7 @@ encodes:
       ref: 4
     audioEncode:
       type: AudioEncode
+      codec: aac
       bitrate: 96k
       suffix: STEREO
   - type: X264Encode
@@ -124,36 +128,20 @@ encodes:
       ref: 3
     audioEncode:
       type: AudioEncode
+      codec: aac
       bitrate: 96k
       suffix: STEREO
   - type: AudioEncode
+    codec: aac
     bitrate: 192k
     suffix: STEREO
     params:
       cutoff: 20000
   - type: AudioEncode
+    codec: aac
     bitrate: 64k
     suffix: STEREO_LB
     params:
       cutoff: 14000
-  - type: AudioEncode
-    bitrate: 192k
-    suffix: STEREO_DE
-    audioMixPreset: de
-    skipIfNoAudioMixPreset: true
-    params:
-      cutoff: 20000
-  - type: AudioEncode
-    bitrate: 64k
-    suffix: STEREO_DELB
-    audioMixPreset: de
-    skipIfNoAudioMixPreset: true
-    params:
-      cutoff: 14000
-  - type: AudioEncode
-    codec: ac3
-    bitrate: 448k
-    suffix: SURROUND
-    channels: 6
   - type: ThumbnailMapEncode
-  - type: ThumbnailEncode (edited) 
+  - type: ThumbnailEncode
