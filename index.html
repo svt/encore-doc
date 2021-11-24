@@ -75,7 +75,7 @@ video {
 <span id="author" class="author">SVT Videocore</span><br>
 <span id="email" class="email"><a href="mailto:videocore@svt.se">videocore@svt.se</a></span><br>
 <span id="revnumber">version 0.1,</span>
-<span id="revdate">2021-10-08</span>
+<span id="revdate">2021-11-24</span>
 <br><span id="revremark">Alpha Edition</span>
 </div>
 <div id="toc" class="toc2">
@@ -85,7 +85,9 @@ video {
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#the-user-guide">The User Guide</a>
 <ul class="sectlevel2">
-<li><a href="#installation">Installation</a></li>
+<li><a href="#building-the-project">Building the project</a></li>
+<li><a href="#run-encore-as-a-runnable-jar">Run Encore as a runnable jar</a></li>
+<li><a href="#posting-your-first-encorejob">Posting your first EncoreJob</a></li>
 </ul>
 </li>
 <li><a href="#the-concepttechnical-guide">The Concept/Technical Guide</a>
@@ -100,6 +102,7 @@ video {
 <ul class="sectlevel2">
 <li><a href="#faq">Frequently Asked Questions</a></li>
 <li><a href="#articles-and-talks">Articles and talks</a></li>
+<li><a href="#third-party-extensions">Third-party extensions</a></li>
 <li><a href="#support">Support</a></li>
 <li><a href="#projecthistory">Project History</a></li>
 </ul>
@@ -114,6 +117,7 @@ video {
 <li><a href="#appendix">Appendix</a>
 <ul class="sectlevel2">
 <li><a href="#application-properties">Application Properties</a></li>
+<li><a href="#running_encore">Running Encore</a></li>
 <li><a href="#homebrew-avtools">Homebrew AVTools</a></li>
 <li><a href="#profiles">Profiles</a></li>
 <li><a href="#the-future">The Future</a></li>
@@ -267,19 +271,29 @@ It <strong>is</strong> used in daily production though.
 <h2 id="the-user-guide">The User Guide</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This part of the documentation describes how to get going with a quick start and installation hints.</p>
+<p>This part of the documentation describes how to build the project, and/or just use the pre-built jar to run it directly.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <a href="#running_encore">appendix</a> gives a few other examples of how you can run Encore
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
-<h3 id="installation">Installation</h3>
+<h3 id="building-the-project">Building the project</h3>
 <div class="paragraph">
-<p>Currently, there are no <strong>pre-ready-to-go</strong> installation packages, pods, docker images offered for <strong>Encore</strong>, but fear not - there are a few possibilities in how to get going. Continue reading!</p>
+<p><em>Note: This step is not needed if you are trying out Encore with the</em> <a href="#example-using-docker-compose">Docker Compose example</a>.</p>
 </div>
-<div class="sect3">
-<h4 id="quickstart">Quickstart</h4>
 <div id="requirements-run-local-boot" class="ulist">
 <ul>
 <li>
-<p>Encore requires:</p>
+<p>Requires:</p>
 <div class="ulist">
 <ul>
 <li>
@@ -289,33 +303,36 @@ It <strong>is</strong> used in daily production though.
 <p>An available Redis instance (default configuration: locally installed port 6379)</p>
 </li>
 <li>
-<p>FFmpeg (we recommend the version present in <a href="https://github.com/svt/homebrew-avtools">Homebrew-AVTools</a> repository, which is what we use in our production environment)</p>
+<p>FFmpeg and Mediainfo (we recommend the versions present in <a href="https://github.com/svt/homebrew-avtools">Homebrew-AVTools</a> repository, which has been tested to work with Encore).</p>
 </li>
 </ul>
 </div>
 </li>
 </ul>
 </div>
-<div class="sect4">
-<h5 id="build-the-project">Build the project</h5>
 <div class="paragraph">
-<p>Run all tests and static analysis using:</p>
+<p>To build <strong>Encore</strong>, with all tests, do:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  $ ./gradlew clean check</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  $ ./gradlew clean build</code></pre>
 </div>
-</div>
-</div>
-<div class="sect4">
-<h5 id="option-quick-test-trial-run-a-local-version-with-spring-boot-bootrun">Option - Quick Test Trial: Run a local version with Spring Boot bootRun</h5>
-<div class="paragraph">
-<p>You can run <strong>Encore</strong> on your local developer machine for a quick test trial by starting up a local developer Application Profile:</p>
 </div>
 <div class="listingblock">
-<div class="title">In the <strong>Encore</strong> root folder:</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ SPRING_PROFILES_ACTIVE=local ./gradlew clean bootRun</code></pre>
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  $ ./gradlew clean build -x test</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="run-encore-as-a-runnable-jar">Run Encore as a runnable jar</h3>
+<div class="paragraph">
+<p>You can run <strong>Encore</strong> on your local machine by starting up a local developer Application Profile.
+Get the <a href="https://github.com/svt/encore/release">pre-built encore jar</a>, or first <a href="#building-the-project">build the project</a> and get the jar from ./build/libs/</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ SPRING_PROFILES_ACTIVE=local java -jar encore-x.y.z.jar</code></pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -334,95 +351,67 @@ This will use the <em>src/main/resources/application-local.yml</em> configuratio
 <p>If the startup fails, verify that you are fulfilling the <a href="#requirements-run-local-boot">requirements</a></p>
 </div>
 <div class="paragraph">
-<p>Otherwise, verify that you can see the OpenAPI3 Swagger Gui in your browser, see <a href="#dynamicapiendpoints">Dynamically generated Endpoint documentation</a>.</p>
+<p>Next, Continue to <a href="#posting-your-first-encorejob">Posting your first EncoreJob</a></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="posting-your-first-encorejob">Posting your first EncoreJob</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>This step requires:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A running instance of Encore</p>
+</li>
+<li>
+<p>A inputdir - where you put source files</p>
+</li>
+<li>
+<p>A outputdir - where you want the encoded files to end up</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>Success?? Great - you might want to check out the <a href="#concepts">Concepts</a> next.</p>
+<p>1) Use one of the files from the test resources in the Encore project and copy this to your <strong>inputdir</strong>
+(Verify that you have access permissions to the <strong>inputdir</strong> and <strong>outputdir</strong>.)</p>
 </div>
-</div>
-<div class="sect4">
-<h5 id="option-docker-image-run-encore-in-a-docker-image">Option - Docker Image: Run Encore in a Docker Image</h5>
-<div class="paragraph">
-<p>This quickstart option will show you how to use <a href="https://docs.brew.sh/Homebrew-on-Linux">Homebrew</a> and create an FFmpeg Docker Image to run Encore from.</p>
-</div>
-<div class="paragraph">
-<p>First, you need to create a base FFmpeg Docker image.
-The following skeleton example installs a recent version of FFmpeg, with a few FFmpeg filters, and mediainfo.
-Modify as needed.</p>
-</div>
-<details>
-<summary class="title">An FFmpeg Dockerfile example (click to expand)</summary>
-<div class="content">
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="dockerfile" class="language-dockerfile hljs">  FROM ubuntu:20.04
-
-  ENV LC_ALL C.UTF-8
-  ENV LANG C.UTF-8
-  ENV TZ Europe/Stockholm
-  RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
-
-  ARG USR="user"
-
-  RUN apt-get update &amp;&amp; apt-get -y --no-install-recommends install \
-  build-essential \
-  curl \
-  sudo \
-  file \
-  locales \
-  ruby \
-  git \
-  expect \
-  openssh-client  \
-  ca-certificates \
-  openjdk-11-jre-headless \
-  zip \
-  unzip
-
-  RUN localedef -i en_US -f UTF-8 en_US.UTF-8 &amp;&amp; \
-  useradd -ms /bin/bash ${USR} &amp;&amp; \
-  echo '${USR}  ALL=(ALL) NOPASSWD:ALL' &gt;&gt;/etc/sudoers &amp;&amp; \
-  echo 'Set disable_coredump false' &gt;&gt; /etc/sudo.conf
-
-  RUN mkdir -m777 /ffmpeg-filters
-
-  RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-  ENV PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
-  ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
-
-  RUN brew tap svt/avtools &amp;&amp; \
-      brew install openssl@1.1 &amp;&amp; \
-      brew unlink openssl@1.1 &amp;&amp; \
-      brew install openssl@3 &amp;&amp; \
-      brew install ffmpeg-encore libsvg-proxy-filter libsrf-proxy-filter mediainfo &amp;&amp; \
-      sudo rm -rf "$(brew --cache)"
-
-  RUN cp $(brew --prefix)/lib/libsvg_filter.so $(brew --prefix)/lib/libsrf_filter.so /ffmpeg-filters/
-
-  USER ${USR}
-
-
-  CMD ["ffmpeg", "-version"]</code></pre>
+<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">  $ cp src/test/resources/input/test.mp4 /tmp/input</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>2) Fire up a browser and <a href="http://&lt;ENCORE_IP&gt;:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/" class="bare">http://&lt;ENCORE_IP&gt;:8080/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/</a> - i.e directly to the Encore Swagger Interface for Posting an EncoreJob.</p>
 </div>
-</details>
+<div class="paragraph">
+<p>3) Finally, Under POST, hit the "Try it out" button and POST this example.
+(Replace the <strong>outputFolder</strong> and <strong>uri</strong> with your <strong>outputdir</strong> and <strong>inputdir</strong>/filename.)</p>
+</div>
 <div class="listingblock">
-<div class="title">With env variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image</div>
 <div class="content">
-<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=&lt;yourdockerbaseimage:youjustbuiltfromexample&gt; .
-
-  foobar@foo:~$ docker run --network=host -e SPRING_PROFILES_ACTIVE='local' encore-docker</code></pre>
+<pre class="highlightjs highlight"><code data-lang="json" class="language-json hljs">  {
+  	"profile": "program",
+  	"outputFolder": "/tmp/output",
+  	"baseName": "quicktest_",
+  	"inputs": [{
+  		"uri": "/tmp/input/test.mp4",
+  		"useFirstAudioStreams": 2,
+  		"type": "AudioVideo"
+  	}]
+  }</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Verify that you can see the OpenAPI3 Swagger Gui in your browser, see <a href="#dynamicapiendpoints">Dynamically generated Endpoint documentation</a>.</p>
+<p>You can now see some output in your terminal, and after a while you should see a couple of encoded files in the <strong>outputdir</strong>.
+Congratulations, you did your first encoding with Encore!</p>
 </div>
 <div class="paragraph">
-<p>Success?? Great - you might want to check out the <a href="#concepts">Concepts</a> next.</p>
-</div>
-</div>
+<p>Now, find out more about specific options, see <a href="#dynamicapiendpoints">Dynamically generated Endpoint documentation</a>, or see the <a href="#concepts">Concepts</a>.</p>
 </div>
 </div>
 </div>
@@ -624,7 +613,7 @@ This will happen when the project is mature.
 <h4 id="encore-job-2">Encore Job</h4>
 <div class="paragraph">
 <p>The Encore Job is a central object in Encore.
-The Encore Job fields are described in the <a href="#dynamically-generated-endpoint-documentation">[dynamically-generated-endpoint-documentation]</a>, but also in the</p>
+The Encore Job fields are described in the <a href="#dynamicapiendpoints">Dynamically generated Endpoint documentation</a>, but also in the</p>
 </div>
 <div class="paragraph">
 <p><a href="openapi.html#_encorejob">EncoreJob static documentation</a></p>
@@ -1321,6 +1310,14 @@ For further information on how you can configure the API-generation, see the <a 
 <p>Also, open a discussion issue if you have any ideas regarding contributions about extensions to <strong>Encore</strong> that you want to discuss.</p>
 </div>
 </div>
+<div class="sect3">
+<h4 id="how-can-i-create-a-profile-doing-x">How can I create a profile doing X?</h4>
+<div class="paragraph">
+<p>Have a look at a few profiles from the documentation or project test examples to learn how you can set different options.
+Also, see if you can do what you can do what you want with pure FFmpeg.
+It should then be doable to map that configuration to a custom profile.</p>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="articles-and-talks">Articles and talks</h3>
@@ -1335,6 +1332,12 @@ For further information on how you can configure the API-generation, see the <a 
 <div class="paragraph">
 <p><a href="https://medium.com/the-svt-tech-blog/encore-video-transcoding-at-its-core-b80c3e5658b3">Article: 2018 Encore - video transcoding at it&#8217;s core</a>
 - while interesting for the project origins, it contains partially <strong>non-valid information</strong> as the code has been largely rewritten since then.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="third-party-extensions">Third-party extensions</h3>
+<div class="paragraph">
+<p>Eyevinn IAF plugin: <a href="https://dev.to/video/locally-transcode-vod-content-with-eyevinn-ingest-application-framework-and-svt-encore-2md7IAF">An IAF plugin for SVT Encore</a></p>
 </div>
 </div>
 <div class="sect2">
@@ -1653,7 +1656,7 @@ Thank you!.</em></p>
 <td class="tableblock halign-left valign-top"><p class="tableblock">pan-mapping</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">if configured, maps "found input audio channels" to the configured matching output channel configurations</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">input file channels: configured <a href="#audioencode">AudioEncode</a> channel: <a href="https://ffmpeg.org/ffmpeg-filters.html#pan">the pan filter</a> configuration which should be used.</p>
-<p class="tableblock">  See the concrete <a href="#configurationexample">[configurationexample]</a> for yaml-examples.</p>
+<p class="tableblock">  See the concrete <a href="#configurationexample">encore-settings configuration example</a> for yaml-examples.</p>
 <p class="tableblock">  Any configuration here takes precedence over configurations in default-pan</p></td>
 <td class="tableblock halign-left valign-top"></td>
 </tr>
@@ -1662,7 +1665,7 @@ Thank you!.</em></p>
 <div class="paragraph">
 <p><em>For, clarity, here is how an encore-setting configuration with audio-mix-presets could look like in real life.</em></p>
 </div>
-<div class="listingblock">
+<div id="configurationexample" class="listingblock">
 <div class="title">encore-settings configuration example</div>
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">  spring:
@@ -1695,6 +1698,262 @@ Thank you!.</em></p>
     connection-minimum-idle-size: 5
     uri: redis://YOURINSTANCE:6379
     db: 1</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="running_encore">Running Encore</h3>
+<div class="paragraph">
+<p>As a complement to the UserGuide, here is a few more examples on how you can try out <strong>Encore</strong>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Using Docker-Compose</p>
+</li>
+<li>
+<p>Using Spring Boot BootRun</p>
+</li>
+<li>
+<p>Building an Docker Image and run Encore in a Docker Container</p>
+</li>
+</ul>
+</div>
+<div class="sect3">
+<h4 id="example-using-docker-compose">Example: using Docker Compose</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>This step requires:</p>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://docs.docker.com/compose/install/Docker-compose">Docker Compose</a></p>
+<div class="ulist">
+<ul>
+<li>
+<p>Use a docker-compose.yml</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="yaml" class="language-yaml hljs">  version: "3.7"
+
+  services:
+    redis:
+      image: redis:alpine
+      networks:
+      - encorenet
+
+    encore:
+      image: ghcr.io/svt/encore-debian:latest
+      depends_on:
+        - redis
+      environment:
+        - SPRING_PROFILES_ACTIVE=local
+        - SPRING_REDIS_HOST=redis
+        - PROFILE_LOCATION=url:https://raw.githubusercontent.com/svt/encore-doc/main/src/docs/asciidoc/examples/profile/profiles.yml
+
+      ports:
+        - "8080:8080"
+      volumes:
+        - /tmp/input:/tmp/input:rw # where your put your source files
+        - /tmp/output:/tmp/output:rw #put your output here
+      networks:
+      - encorenet
+
+  networks:
+   encorenet:
+     driver: bridge</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and then</p>
+</div>
+<div class="paragraph">
+<p>Linux</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">  $ ./docker-compose up</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Mac</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">  $ ./docker compose up</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>and you should see Encore starting up.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+By default, there are two folders mapped to your host system by using the example docker-compose file.
+<strong>/tmp/input and /tmp/output</strong>, which we will refer to as the <strong>inputdir</strong> and the <strong>outputdir</strong>
+<em>Change these (in the docker-compose file) to something that suits your environment if you are not running on Linux.
+For example /Users/&lt;YOURUSER&gt;/input:/tmp/input should be fine on macos.</em>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect4">
+<h5 id="get-the-ip">Get the IP</h5>
+<div class="paragraph">
+<p>On Linux:
+- To find the IP Docker-Compose creates (so that you can access Encore&#8217;s api).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="console" class="language-console hljs">  $ docker inspect &lt;nameOfDirectoryYouAreRunningFrom&gt;_encorenet</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+By design Docker-compose creates a network called &lt;nameOfDirectoryYouAreRunningFrom&gt;_encorenet
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>On macos:
+Use 'localhost'</p>
+</div>
+<div class="paragraph">
+<p>Got the IP? - great! Continue to <a href="#posting-your-first-encorejob">Posting your first EncoreJob</a></p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="example-run-encore-with-spring-boot-bootrun">Example: run Encore with Spring Boot bootRun</h4>
+<div class="paragraph">
+<p>You can run <strong>Encore</strong> on your local machine by starting up a local developer Application Profile:</p>
+</div>
+<div class="listingblock">
+<div class="title">In the <strong>Encore</strong> root folder:</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ SPRING_PROFILES_ACTIVE=local ./gradlew clean bootRun</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This will use the <em>src/main/resources/application-local.yml</em> configuration profile in <strong>Encore</strong>.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>If the startup fails, verify that you are fulfilling the <a href="#requirements-run-local-boot">requirements</a></p>
+</div>
+<div class="paragraph">
+<p>Continue to <a href="#posting-your-first-encorejob">Posting your first EncoreJob</a></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="example-run-encore-in-a-docker-image">Example: run Encore in a Docker Image</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Create or find a base FFmpeg/Mediainfo Docker image.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The given example installs a recent version of FFmpeg, with a few FFmpeg filters, and mediainfo.
+Modify as needed, using a tap of <a href="https://docs.brew.sh/Homebrew-on-Linux">Homebrew</a> as an installation base.</p>
+</div>
+<details>
+<summary class="title">A FFmpeg Dockerfile example (click to expand)</summary>
+<div class="content">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="dockerfile" class="language-dockerfile hljs">  FROM ubuntu:20.04
+
+  ENV LC_ALL C.UTF-8
+  ENV LANG C.UTF-8
+  ENV TZ Europe/Stockholm
+  RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime &amp;&amp; echo $TZ &gt; /etc/timezone
+
+  ARG USR="user"
+
+  RUN apt-get update &amp;&amp; apt-get -y --no-install-recommends install \
+  build-essential \
+  curl \
+  sudo \
+  file \
+  locales \
+  ruby \
+  git \
+  expect \
+  openssh-client  \
+  ca-certificates \
+  openjdk-11-jre-headless \
+  zip \
+  unzip
+
+  RUN localedef -i en_US -f UTF-8 en_US.UTF-8 &amp;&amp; \
+  useradd -ms /bin/bash ${USR} &amp;&amp; \
+  echo '${USR}  ALL=(ALL) NOPASSWD:ALL' &gt;&gt;/etc/sudoers &amp;&amp; \
+  echo 'Set disable_coredump false' &gt;&gt; /etc/sudo.conf
+
+  RUN mkdir -m777 /ffmpeg-filters
+
+  RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+  ENV PATH=/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH
+  ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64/
+
+  RUN brew tap svt/avtools &amp;&amp; \
+      brew install openssl@1.1 &amp;&amp; \
+      brew unlink openssl@1.1 &amp;&amp; \
+      brew install openssl@3 &amp;&amp; \
+      brew install ffmpeg-encore libsvg-proxy-filter libsrf-proxy-filter mediainfo &amp;&amp; \
+      sudo rm -rf "$(brew --cache)"
+
+  RUN cp $(brew --prefix)/lib/libsvg_filter.so $(brew --prefix)/lib/libsrf_filter.so /ffmpeg-filters/
+
+  USER ${USR}
+
+
+  CMD ["ffmpeg", "-version"]</code></pre>
+</div>
+</div>
+</div>
+</details>
+<div class="listingblock">
+<div class="title">With the environment variable DOCKER_BASE_IMAGE pointing to your FFmpeg Docker Image</div>
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">  foobar@foo:~$ docker build -t encore-docker --build-arg DOCKER_BASE_IMAGE=&lt;yourdockerbaseimage:youjustbuilt&gt; .
+
+  foobar@foo:~$ docker run --network=host -v /tmp/input:/tmp/input -v /tmp/output:/tmp/output -e SPRING_PROFILES_ACTIVE='local' encore-docker</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Continue to <a href="#posting-your-first-encorejob">Posting your first EncoreJob</a></p>
 </div>
 </div>
 </div>
@@ -1732,15 +1991,16 @@ To use and install this version of FFmpeg locally, follow the examples given at 
     homepage "https://ffmpeg.org/"
     url "https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.xz"
     sha256 "ad009240d46e307b4e03a213a0f49c11b650e445b1f8be0dda2a9212b34d2ffb"
-    license "GPL-2.0-only"
+    license "GPL-3.0-or-later"
     revision 1
     head "https://github.com/FFmpeg/FFmpeg.git"
+
     option "with-ffplay", "Enable ffplay"
 
     depends_on "nasm" =&gt; :build
     depends_on "pkg-config" =&gt; :build
     depends_on "aom"
-    depends_on "fdk-aac"
+    depends_on "fdk-aac" =&gt; :recommended
     depends_on "fontconfig"
     depends_on "freetype"
     depends_on "lame"
@@ -1750,7 +2010,7 @@ To use and install this version of FFmpeg locally, follow the examples given at 
     depends_on "libvmaf"
     depends_on "libvorbis"
     depends_on "libvpx"
-    depends_on "openssl"
+    depends_on "openssl@3"
     depends_on "x264-encore"
     depends_on "x265-encore"
 
@@ -1770,17 +2030,6 @@ To use and install this version of FFmpeg locally, follow the examples given at 
     end
 
     def install
-      resource("proxy_filter").stage do |stage|
-        @proxyfilterpath = Dir.pwd
-        stage.staging.retain!
-      end
-      cp_r Dir.glob("#{@proxyfilterpath}/*.c"), "libavfilter", verbose: true
-      inreplace "libavfilter/allfilters.c",
-                "extern AVFilter ff_vf_yadif;",
-                "extern AVFilter ff_vf_yadif;\nextern AVFilter ff_vf_proxy;\n"
-      inreplace "libavfilter/Makefile",
-                "# video filters",
-                "# video filters\nOBJS-\$(CONFIG_PROXY_FILTER) += vf_proxy.o\n"
 
       args = %W[
         --prefix=#{prefix}
@@ -1808,12 +2057,37 @@ To use and install this version of FFmpeg locally, follow the examples given at 
         --enable-libaom
         --enable-openssl
         --enable-libssh
-        --enable-libfdk-aac
         --enable-libvmaf
         --enable-nonfree
       ]
+
+      if !build.without? "fdk-aac"
+        args &lt;&lt; "--enable-libfdk-aac"
+      end
+
       args &lt;&lt; "--enable-ffplay" if build.with? "ffplay"
       args &lt;&lt; "--enable-videotoolbox" if OS.mac?
+
+      # GPL-incompatible libraries, requires ffmpeg to build with "--enable-nonfree" flag, (unredistributable libraries)
+      # Openssl IS GPL compatible since 3, but due to this patch
+      # https://patchwork.ffmpeg.org/project/ffmpeg/patch/20200609001340.52369-1-rcombs@rcombs.me/
+      # not being in this version we build from, we have to enable non-free anyway.
+      # When FFmpeg base is upgraded (including that patch), we should only enable-nonfree when
+      # fdk-aac is enabled (the default option)
+      # args &lt;&lt; "--enable-nonfree" if !build.without?("fdk-aac")
+
+      resource("proxy_filter").stage do |stage|
+        @proxyfilterpath = Dir.pwd
+        stage.staging.retain!
+      end
+      cp_r Dir.glob("#{@proxyfilterpath}/*.c"), "libavfilter", verbose: true
+      inreplace "libavfilter/allfilters.c",
+                "extern AVFilter ff_vf_yadif;",
+                "extern AVFilter ff_vf_yadif;\nextern AVFilter ff_vf_proxy;\n"
+      inreplace "libavfilter/Makefile",
+                "# video filters",
+                "# video filters\nOBJS-\$(CONFIG_PROXY_FILTER) += vf_proxy.o\n"
+
       system "./configure", *args
       system "make", "install"
 
@@ -1886,6 +2160,7 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
         ref: 4
       audioEncode:
         type: AudioEncode
+        codec: aac
         bitrate: 192k
         suffix: STEREO
     - type: X264Encode
@@ -1911,6 +2186,7 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
         ref: 4
       audioEncode:
         type: AudioEncode
+        codec: aac
         bitrate: 128k
         suffix: STEREO
     - type: X264Encode
@@ -1936,6 +2212,7 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
         ref: 4
       audioEncode:
         type: AudioEncode
+        codec: aac
         bitrate: 96k
         suffix: STEREO
     - type: X264Encode
@@ -1961,6 +2238,7 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
         ref: 4
       audioEncode:
         type: AudioEncode
+        codec: aac
         bitrate: 96k
         suffix: STEREO
     - type: X264Encode
@@ -1985,39 +2263,23 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
         ref: 3
       audioEncode:
         type: AudioEncode
+        codec: aac
         bitrate: 96k
         suffix: STEREO
     - type: AudioEncode
+      codec: aac
       bitrate: 192k
       suffix: STEREO
       params:
         cutoff: 20000
     - type: AudioEncode
+      codec: aac
       bitrate: 64k
       suffix: STEREO_LB
       params:
         cutoff: 14000
-    - type: AudioEncode
-      bitrate: 192k
-      suffix: STEREO_DE
-      audioMixPreset: de
-      skipIfNoAudioMixPreset: true
-      params:
-        cutoff: 20000
-    - type: AudioEncode
-      bitrate: 64k
-      suffix: STEREO_DELB
-      audioMixPreset: de
-      skipIfNoAudioMixPreset: true
-      params:
-        cutoff: 14000
-    - type: AudioEncode
-      codec: ac3
-      bitrate: 448k
-      suffix: SURROUND
-      channels: 6
     - type: ThumbnailMapEncode
-    - type: ThumbnailEncode (edited)</code></pre>
+    - type: ThumbnailEncode</code></pre>
 </div>
 </div>
 <div class="listingblock">
@@ -2048,6 +2310,7 @@ If you use Homebrew-AVTools, the version of FFmpeg in use might be updated witho
         ref: 8
       audioEncode:
         type: AudioEncode
+        codec: aac
         bitrate: 256k
         suffix: STEREO</code></pre>
 </div>
@@ -2103,7 +2366,7 @@ We are focusing on the features we need, but we are always open to suggestion an
 <div id="footer">
 <div id="footer-text">
 Version 0.1<br>
-Last updated 2021-10-08 19:14:10 UTC
+Last updated 2021-11-24 05:58:14 UTC
 </div>
 </div>
 <link rel="stylesheet" href="js/highlight/styles/darcula.min.css">
