@@ -29,7 +29,7 @@ $ ./gradlew clean build -x test
 === Run Encore as a runnable jar
 
 You can run *Encore* on your local machine by starting up a local developer Application Profile.
-Get the https://github.com/svt/encore/release[pre-built encore jar], or first <<building-the-project,build the project>> and get the jar from ./build/libs/ 
+Get the https://github.com/svt/encore/releases[pre-built encore jar], or first <<building-the-project,build the project>> and get the jar from ./build/libs/ 
 
 [source,bash]
 ----
