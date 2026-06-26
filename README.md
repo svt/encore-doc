@@ -1,3 +1,15 @@
+# ⚠️ Obsolete — the SVT Encore documentation has moved
+
+> **This repository is no longer maintained and its contents are outdated.**
+>
+> The SVT Encore documentation now lives at **<https://svt.github.io/encore/>**,
+> built from the [`encore`](https://github.com/svt/encore) repository.
+>
+> Please update your bookmarks. The old site at <https://svt.github.io/encore-doc/>
+> now redirects to the new documentation.
+
+---
+
 # SVT Encore Documentation
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -10,9 +22,8 @@ It is mainly aimed at advanced technical users, like developers.
 
 SVT **Encore** is a scalable tool for video transcoding,
 
-[Online documentation](https://svt.github.io/encore-doc/)
-
-Contributions are encouraged and welcomed.
+**The documentation has moved** — see the [current online documentation](https://svt.github.io/encore/).
+The content below is kept for historical reference only and is no longer updated.
 
 ## Development
 
@@ -29,13 +40,6 @@ View the generated documentation in a browser of choice, for example
 ```console
 foo@bar:~$firefox build/docs/asciidoc/index.html
 ```
-
----
-**Note**
-
-The online documentation (GitHub Pages) is updated when something is committed to main branch of this repo.
-
----
 
 ### Requirements
 
@@ -67,4 +71,3 @@ Note: The main project SVT Encore itself was initiated in 2018.
 - [Asciidoctor skins project](https://github.com/darshandsoni/asciidoctor-skins)
 
 - [Highlights](https://highlightjs.org/)
-
