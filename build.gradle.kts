@@ -1,42 +1,59 @@
-//PLEASE DONT REMOVE SWAGGER2MARKUP, THIS IS JUST WAITING FOR NEXT RELEASE TO BE USED
-//import io.github.swagger2markup.tasks.Swagger2MarkupTask
-
-buildscript {
-    dependencies {
-        classpath("io.github.swagger2markup:swagger2markup-gradle-plugin:1.3.3")
-        classpath("io.github.swagger2markup:swagger2markup-import-files-ext:1.3.3")
-    }
-}
-
 plugins {
     `java-library`
     id("org.asciidoctor.jvm.convert") version "3.3.2"
-//    id("org.asciidoctor.jvm.gems") version "3.3.1"
-}
-
-apply(plugin = "io.github.swagger2markup")
-
-tasks.withType<io.github.swagger2markup.tasks.Swagger2MarkupTask> {
-
-    swaggerInput = "${projectDir}/src/docs/openapi/swagger2.json"
-    outputDir = file("${projectDir}/src/docs/asciidoc/openapi/")
-    config = mapOf(
-        "swagger2markup.extensions.dynamicPaths.contentPath" to file("asciidoc/extensions/paths").absolutePath
-    )
+    id("org.openapi.generator") version "7.0.1"
 }
 
 repositories {
     mavenCentral()
 }
-dependencies {
-    //implementation("io.github.swagger2markup:swagger2markup-gradle-plugin:1.3.3") //waiting for new release that supports
-    //   asciidoctorGems("rubygems:rouge:3.26.0")
+
+// OpenAPI Generator configuration
+tasks.register<org.openapitools.generator.gradle.plugin.tasks.GenerateTask>("generateApiDocs") {
+    generatorName.set("asciidoc")
+    inputSpec.set("${projectDir}/src/docs/openapi/swagger2.json")
+    outputDir.set("${projectDir}/build/generated/openapi")
+    configOptions.set(mapOf(
+        "specDir" to "src/docs/openapi",
+        "markupLanguage" to "asciidoc",
+        "headerAttributes" to "false",
+        "useMethodAndPath" to "true",
+        "skipOverview" to "true"
+    ))
+    
+    // Process the generated file to remove the top-level heading and Operation Id lines
+    doLast {
+        val generatedFile = file("${projectDir}/build/generated/openapi/index.adoc")
+        if (generatedFile.exists()) {
+            var content = generatedFile.readText()
+            
+            // Remove the first heading and abstract, since we add our own
+            val headingPattern = """(?s)^= .*?(?=\n==)""".toRegex()
+            content = content.replace(headingPattern, "")
+            
+            // Remove Operation Id lines
+            val operationIdPattern = """Operation Id:: .*\n+""".toRegex()
+            content = content.replace(operationIdPattern, "")
+
+            // Fix problems with tables in openapi docs
+            content = content.replace("asc|desc", "asc\\|desc")
+            
+            // Write back to file
+            generatedFile.writeText(content)
+        }
+        
+        // Copy the processed file to the asciidoc directory
+        copy {
+            from("${projectDir}/build/generated/openapi")
+            into("${projectDir}/src/docs/asciidoc/openapi")
+            include("**/*.adoc")
+        }
+    }
 }
 
 tasks {
     "asciidoctor"(org.asciidoctor.gradle.jvm.AsciidoctorTask::class) {
-        //dependsOn convertSwagger2markup
-
+        dependsOn("generateApiDocs")
         logDocuments = true
 
         baseDirFollowsSourceDir()
@@ -47,12 +64,10 @@ tasks {
 
         resources {
             from("${projectDir}/src/") {
-
                 include("img/**")
             }
 
             from("${projectDir}/src/") {
-
                 include("js/**", "css/**", "examples/**")
             }
         }
@@ -60,7 +75,6 @@ tasks {
         attributes(
             mapOf(
                 "allow-uri-read" to "",
-                // use provided highlighter
                 "source-highlighter" to "highlight.js",
                 "highlightjsdir" to "js/highlight",
                 "highlightjs-theme" to "darcula",
@@ -74,29 +88,7 @@ tasks {
     }
 }
 
-
 tasks.wrapper {
     distributionType = Wrapper.DistributionType.ALL
     gradleVersion = "7.2"
-}
-/*
-
-asciidoctor {
-    baseDirFollowsSourceFile()
-
-    attributes \
-    'build-gradle': file('build.gradle'),
-    'sourcedir': project.sourceSets.main.java.srcDirs[0],
-    'endpoint-url': 'http://example.org',
-    'imagesdir': 'images',
-    'toc': 'left',
-    'icons': 'font',
-    'setanchors': '',
-    'idprefix': '',
-    'idseparator': '-',
-    'docinfo': 'shared'
-
-    doLast {
-      file("${outputDir}/encore-documentation.html").rename('index.html')
-    }
 }

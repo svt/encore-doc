@@ -20,8 +20,7 @@ SVT Videocore <videocore@svt.se>
 
 xref:index.adoc[Main Documentation]
 
-include::openapi/paths.adoc[]
-include::openapi/definitions.adoc[]
+include::openapi/index.adoc[]
 
 xref:index.adoc[To Main Documentation]
 

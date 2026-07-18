@@ -1,0 +1,1774 @@
+
+== Endpoints
+
+
+[.Encorejob]
+=== Encorejob
+
+
+[.cancel]
+==== POST /encoreJobs/{jobId}/cancel
+
+Cancel an EncoreJob
+
+===== Description
+
+Cancels an EncoreJob with thw given JobId
+
+
+// markup not found, no include::{specDir}encoreJobs/\{jobId\}/cancel/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| jobId
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+<<String>>
+
+
+===== Content Type
+
+* application/hal+json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| OK
+|  <<String>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{jobId\}/cancel/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{jobId\}/cancel/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :encoreJobs/{jobId}/cancel/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}encoreJobs/\{jobId\}/cancel/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteItemResourceEncorejobDelete]
+==== DELETE /encoreJobs/{id}
+
+===== Description
+
+delete-encorejob
+
+
+// markup not found, no include::{specDir}encoreJobs/\{id\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| id
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 204
+| No Content
+|  <<>>
+
+
+| 404
+| Not Found
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{id\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{id\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :encoreJobs/{id}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}encoreJobs/\{id\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.executeSearchEncorejobGet]
+==== GET /encoreJobs/search/findByStatus
+
+Finds EncoreJobs By Status
+
+===== Description
+
+Returns EncoreJobs according to the given Status
+
+
+// markup not found, no include::{specDir}encoreJobs/search/findByStatus/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| status
+|  
+| -
+| null
+| 
+
+| page
+| Zero-based page index (0..N) 
+| -
+| 0
+| 
+
+| size
+| The size of the page to be returned 
+| -
+| 20
+| 
+
+| sort
+| Sorting criteria in the format: property(,asc\|desc). Default sort order is ascending. Multiple sort criteria are supported. <<String>>
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+<<PagedModelEncoreJob>>
+
+
+===== Content Type
+
+* application/hal+json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| OK
+|  <<PagedModelEncoreJob>>
+
+
+| 404
+| Not Found
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}encoreJobs/search/findByStatus/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}encoreJobs/search/findByStatus/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :encoreJobs/search/findByStatus/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}encoreJobs/search/findByStatus/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getCollectionResourceEncorejobGet1]
+==== GET /encoreJobs
+
+===== Description
+
+get-encorejob
+
+
+// markup not found, no include::{specDir}encoreJobs/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| page
+| Zero-based page index (0..N) 
+| -
+| 0
+| 
+
+| size
+| The size of the page to be returned 
+| -
+| 20
+| 
+
+| sort
+| Sorting criteria in the format: property(,asc\|desc). Default sort order is ascending. Multiple sort criteria are supported. <<String>>
+| -
+| null
+| 
+
+|===
+
+
+===== Return Type
+
+<<CollectionModelEntityModelEncoreJob>>
+
+
+===== Content Type
+
+* application/hal+json
+* text/uri-list
+* application/x-spring-data-compact+json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| OK
+|  <<CollectionModelEntityModelEncoreJob>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}encoreJobs/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}encoreJobs/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :encoreJobs/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}encoreJobs/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getItemResourceEncorejobGet]
+==== GET /encoreJobs/{id}
+
+===== Description
+
+get-encorejob
+
+
+// markup not found, no include::{specDir}encoreJobs/\{id\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| id
+|  
+| X
+| null
+| 
+
+|===
+
+
+
+
+
+
+===== Return Type
+
+<<EntityModelEncoreJob>>
+
+
+===== Content Type
+
+* application/hal+json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| OK
+|  <<EntityModelEncoreJob>>
+
+
+| 404
+| Not Found
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{id\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{id\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :encoreJobs/{id}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}encoreJobs/\{id\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.patchItemResourceEncorejobPatch]
+==== PATCH /encoreJobs/{id}
+
+===== Description
+
+patch-encorejob
+
+
+// markup not found, no include::{specDir}encoreJobs/\{id\}/PATCH/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| id
+|  
+| X
+| null
+| 
+
+|===
+
+====== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| body
+|  <<EncoreJob>>
+| -
+| 
+| 
+
+|===
+
+
+
+
+
+===== Return Type
+
+<<EntityModelEncoreJob>>
+
+
+===== Content Type
+
+* application/hal+json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| OK
+|  <<EntityModelEncoreJob>>
+
+
+| 204
+| No Content
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{id\}/PATCH/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{id\}/PATCH/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :encoreJobs/{id}/PATCH/PATCH.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}encoreJobs/\{id\}/PATCH/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.postCollectionResourceEncorejobPost]
+==== POST /encoreJobs
+
+===== Description
+
+create-encorejob
+
+
+// markup not found, no include::{specDir}encoreJobs/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+====== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| body
+|  <<EncoreJob>>
+| -
+| 
+| 
+
+|===
+
+
+
+
+
+===== Return Type
+
+<<EntityModelEncoreJob>>
+
+
+===== Content Type
+
+* application/hal+json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 201
+| Created
+|  <<EntityModelEncoreJob>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}encoreJobs/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}encoreJobs/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :encoreJobs/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}encoreJobs/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.putItemResourceEncorejobPut]
+==== PUT /encoreJobs/{id}
+
+===== Description
+
+update-encorejob
+
+
+// markup not found, no include::{specDir}encoreJobs/\{id\}/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| id
+|  
+| X
+| null
+| 
+
+|===
+
+====== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| body
+|  <<EncoreJob>>
+| -
+| 
+| 
+
+|===
+
+
+
+
+
+===== Return Type
+
+<<EntityModelEncoreJob>>
+
+
+===== Content Type
+
+* application/hal+json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| OK
+|  <<EntityModelEncoreJob>>
+
+
+| 201
+| Created
+|  <<EntityModelEncoreJob>>
+
+
+| 204
+| No Content
+|  <<>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{id\}/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}encoreJobs/\{id\}/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :encoreJobs/{id}/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}encoreJobs/\{id\}/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Queue]
+=== Queue
+
+
+[.getQueue]
+==== GET /queue
+
+Get Queues
+
+===== Description
+
+Returns a list of queues (QueueItems)
+
+
+// markup not found, no include::{specDir}queue/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+array[<<QueueItem>>]
+
+
+===== Content Type
+
+* application/hal+json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| OK
+| List[<<QueueItem>>] 
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}queue/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}queue/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :queue/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}queue/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[#models]
+== Models
+
+
+[#AudioFile]
+=== _AudioFile_ 
+
+
+
+[.fields-AudioFile]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| file
+| X
+| String 
+| 
+|  
+
+| fileSize
+| X
+| Long 
+| 
+| int64 
+
+| format
+| X
+| String 
+| 
+|  
+
+| type
+| X
+| String 
+| 
+|  
+
+| audioStreams
+| 
+| List  of <<AudioStream>>
+| 
+|  
+
+| duration
+| 
+| Double 
+| 
+| double 
+
+| overallBitrate
+| 
+| Long 
+| 
+| int64 
+
+|===
+
+
+[#AudioStream]
+=== _AudioStream_ 
+
+
+
+[.fields-AudioStream]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| bitrate
+| 
+| Long 
+| 
+| int64 
+
+| channels
+| X
+| Integer 
+| 
+| int32 
+
+| codec
+| 
+| String 
+| 
+|  
+
+| duration
+| 
+| Double 
+| 
+| double 
+
+| format
+| 
+| String 
+| 
+|  
+
+| samplingRate
+| 
+| Integer 
+| 
+| int32 
+
+|===
+
+
+[#CollectionModelEntityModelEncoreJob]
+=== _CollectionModelEntityModelEncoreJob_ 
+
+
+
+[.fields-CollectionModelEntityModelEncoreJob]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| _embedded
+| 
+| CollectionModelEntityModelEncoreJob__embedded 
+| 
+|  
+
+| _links
+| 
+| Map  of <<Link>>
+| 
+|  
+
+|===
+
+
+[#CollectionModelEntityModelEncoreJobEmbedded]
+=== _CollectionModelEntityModelEncoreJobEmbedded_ 
+
+
+
+[.fields-CollectionModelEntityModelEncoreJobEmbedded]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| encoreJobs
+| 
+| List  of <<EntityModelEncoreJob>>
+| 
+|  
+
+|===
+
+
+[#EncoreJob]
+=== _EncoreJob_ 
+
+
+
+[.fields-EncoreJob]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| completedDate
+| 
+| Date 
+| The time for when the EncoreJob was completed (fail or success)
+| date-time 
+
+| createdDate
+| X
+| Date 
+| The Creation date for the EncoreJob
+| date-time 
+
+| cropTo
+| 
+| String 
+| Crop output video to given aspect ratio
+|  
+
+| dar
+| 
+| String 
+| The Display Aspect Ratio to use if the input is anamorphic. Overrides DAR found from input metadata (for corrupt video metadata)
+|  
+
+| debugOverlay
+| X
+| Boolean 
+| Instruct Encore to overlay encoding metadata on the encoded video stream
+|  
+
+| endTime
+| 
+| Integer 
+| Seek in video stream to given end time in ms (start time must currently be given)
+| int32 
+
+| externalId
+| 
+| String 
+| External id - for external backreference
+|  
+
+| filename
+| X
+| String 
+| The input file that the EncoreJob should process
+|  
+
+| globalAudioFilters
+| X
+| List  of <<string>>
+| List of FFmpeg filters to apply to all audio outputs
+|  
+
+| globalVideoFilters
+| X
+| List  of <<string>>
+| List of FFmpeg filters to apply to all video outputs
+|  
+
+| id
+| X
+| UUID 
+| The Encore Internal EncoreJob Identity
+| uuid 
+
+| input
+| 
+| VideoFile 
+| 
+|  
+
+| logContext
+| X
+| Map  of <<string>>
+| Key/Values to append to the MDC log context
+|  
+
+| message
+| 
+| String 
+| The exception message, if the EncoreJob failed
+|  
+
+| output
+| X
+| List  of <<object>>
+| Analyzed models of the output files
+|  
+
+| outputFolder
+| X
+| String 
+| A directory path to where the output should be written
+|  
+
+| padTo
+| 
+| String 
+| Pad output video to given aspect ratio
+|  
+
+| priority
+| X
+| Integer 
+| The queue priority of the EncoreJob
+| int32 
+
+| profile
+| X
+| String 
+| The name of the encoding profile to use
+|  
+
+| progress
+| X
+| Integer 
+| The EncoreJob progress
+| int32 
+
+| progressCallbackUri
+| 
+| URI 
+| An url to which the progress status callback should be directed
+| uri 
+
+| speed
+| 
+| Double 
+| The Encoding speed of the job (compared to it&#39;s play speed/input duration)
+| double 
+
+| startTime
+| 
+| Integer 
+| Seek in video stream to given start time in ms (end time must currently be given)
+| int32 
+
+| startedDate
+| 
+| Date 
+| The time for when the EncoreJob was picked from the queue)
+| date-time 
+
+| status
+| X
+| String 
+| The Job Status
+|  _Enum:_ NEW, QUEUED, IN_PROGRESS, SUCCESSFUL, FAILED, CANCELLED, 
+
+| thumbnailTime
+| 
+| Integer 
+| Time in ms for when the thumbnail should be picked. Overrides profile configuration for thumbnails
+| int32 
+
+| useFirstAudioStreams
+| 
+| Integer 
+| Only the audio input streams up to the given value
+| int32 
+
+|===
+
+
+[#EntityModelEncoreJob]
+=== _EntityModelEncoreJob_ 
+
+
+
+[.fields-EntityModelEncoreJob]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| _links
+| 
+| Map  of <<Link>>
+| 
+|  
+
+| completedDate
+| 
+| Date 
+| The time for when the EncoreJob was completed (fail or success)
+| date-time 
+
+| createdDate
+| 
+| Date 
+| The Creation date for the EncoreJob
+| date-time 
+
+| cropTo
+| 
+| String 
+| Crop output video to given aspect ratio
+|  
+
+| dar
+| 
+| String 
+| The Display Aspect Ratio to use if the input is anamorphic. Overrides DAR found from input metadata (for corrupt video metadata)
+|  
+
+| debugOverlay
+| 
+| Boolean 
+| Instruct Encore to overlay encoding metadata on the encoded video stream
+|  
+
+| endTime
+| 
+| Integer 
+| Seek in video stream to given end time in ms (start time must currently be given)
+| int32 
+
+| externalId
+| 
+| String 
+| External id - for external backreference
+|  
+
+| filename
+| 
+| String 
+| The input file that the EncoreJob should process
+|  
+
+| globalAudioFilters
+| 
+| List  of <<string>>
+| List of FFmpeg filters to apply to all audio outputs
+|  
+
+| globalVideoFilters
+| 
+| List  of <<string>>
+| List of FFmpeg filters to apply to all video outputs
+|  
+
+| id
+| 
+| UUID 
+| The Encore Internal EncoreJob Identity
+| uuid 
+
+| input
+| 
+| VideoFile 
+| 
+|  
+
+| logContext
+| 
+| Map  of <<string>>
+| Key/Values to append to the MDC log context
+|  
+
+| message
+| 
+| String 
+| The exception message, if the EncoreJob failed
+|  
+
+| output
+| 
+| List  of <<MediaFile>>
+| Analyzed models of the output files
+|  
+
+| outputFolder
+| 
+| String 
+| A directory path to where the output should be written
+|  
+
+| padTo
+| 
+| String 
+| Pad output video to given aspect ratio
+|  
+
+| priority
+| 
+| Integer 
+| The queue priority of the EncoreJob
+| int32 
+
+| profile
+| 
+| String 
+| The name of the encoding profile to use
+|  
+
+| progress
+| 
+| Integer 
+| The EncoreJob progress
+| int32 
+
+| progressCallbackUri
+| 
+| URI 
+| An url to which the progress status callback should be directed
+| uri 
+
+| speed
+| 
+| Double 
+| The Encoding speed of the job (compared to it&#39;s play speed/input duration)
+| double 
+
+| startTime
+| 
+| Integer 
+| Seek in video stream to given start time in ms (end time must currently be given)
+| int32 
+
+| startedDate
+| 
+| Date 
+| The time for when the EncoreJob was picked from the queue)
+| date-time 
+
+| status
+| 
+| String 
+| The Job Status
+|  _Enum:_ NEW, QUEUED, IN_PROGRESS, SUCCESSFUL, FAILED, CANCELLED, 
+
+| thumbnailTime
+| 
+| Integer 
+| Time in ms for when the thumbnail should be picked. Overrides profile configuration for thumbnails
+| int32 
+
+| useFirstAudioStreams
+| 
+| Integer 
+| Only the audio input streams up to the given value
+| int32 
+
+|===
+
+
+[#ImageFile]
+=== _ImageFile_ 
+
+
+
+[.fields-ImageFile]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| file
+| X
+| String 
+| 
+|  
+
+| fileSize
+| X
+| Long 
+| 
+| int64 
+
+| format
+| X
+| String 
+| 
+|  
+
+| type
+| X
+| String 
+| 
+|  
+
+| height
+| 
+| Integer 
+| 
+| int32 
+
+| width
+| 
+| Integer 
+| 
+| int32 
+
+|===
+
+
+[#Link]
+=== _Link_ 
+
+
+
+[.fields-Link]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| deprecation
+| 
+| String 
+| 
+|  
+
+| href
+| 
+| String 
+| 
+|  
+
+| hreflang
+| 
+| String 
+| 
+|  
+
+| name
+| 
+| String 
+| 
+|  
+
+| profile
+| 
+| String 
+| 
+|  
+
+| templated
+| 
+| Boolean 
+| 
+|  
+
+| title
+| 
+| String 
+| 
+|  
+
+| type
+| 
+| String 
+| 
+|  
+
+|===
+
+
+[#MediaFile]
+=== _MediaFile_ 
+
+Analyzed models of the output files
+
+[.fields-MediaFile]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| file
+| X
+| String 
+| 
+|  
+
+| fileSize
+| X
+| Long 
+| 
+| int64 
+
+| format
+| X
+| String 
+| 
+|  
+
+| type
+| X
+| String 
+| 
+|  
+
+|===
+
+
+[#PageMetadata]
+=== _PageMetadata_ 
+
+
+
+[.fields-PageMetadata]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| number
+| 
+| Long 
+| 
+| int64 
+
+| size
+| 
+| Long 
+| 
+| int64 
+
+| totalElements
+| 
+| Long 
+| 
+| int64 
+
+| totalPages
+| 
+| Long 
+| 
+| int64 
+
+|===
+
+
+[#PagedModelEncoreJob]
+=== _PagedModelEncoreJob_ 
+
+
+
+[.fields-PagedModelEncoreJob]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| _embedded
+| 
+| PagedModelEncoreJob__embedded 
+| 
+|  
+
+| _links
+| 
+| Map  of <<Link>>
+| 
+|  
+
+| page
+| 
+| PageMetadata 
+| 
+|  
+
+|===
+
+
+[#PagedModelEncoreJobEmbedded]
+=== _PagedModelEncoreJobEmbedded_ 
+
+
+
+[.fields-PagedModelEncoreJobEmbedded]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| encoreJobs
+| 
+| List  of <<EncoreJob>>
+| 
+|  
+
+|===
+
+
+[#QueueItem]
+=== _QueueItem_ 
+
+
+
+[.fields-QueueItem]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| created
+| X
+| Date 
+| 
+| date-time 
+
+| id
+| X
+| String 
+| 
+|  
+
+| priority
+| X
+| Integer 
+| 
+| int32 
+
+|===
+
+
+[#SubtitleFile]
+=== _SubtitleFile_ 
+
+
+
+[.fields-SubtitleFile]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| file
+| X
+| String 
+| 
+|  
+
+| fileSize
+| X
+| Long 
+| 
+| int64 
+
+| format
+| X
+| String 
+| 
+|  
+
+| type
+| X
+| String 
+| 
+|  
+
+|===
+
+
+[#VideoFile]
+=== _VideoFile_ 
+
+
+
+[.fields-VideoFile]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| file
+| X
+| String 
+| 
+|  
+
+| fileSize
+| X
+| Long 
+| 
+| int64 
+
+| format
+| X
+| String 
+| 
+|  
+
+| type
+| X
+| String 
+| 
+|  
+
+| audioStreams
+| 
+| List  of <<AudioStream>>
+| 
+|  
+
+| duration
+| 
+| Double 
+| 
+| double 
+
+| overallBitrate
+| 
+| Long 
+| 
+| int64 
+
+| videoStreams
+| 
+| List  of <<VideoStream>>
+| 
+|  
+
+|===
+
+
+[#VideoStream]
+=== _VideoStream_ 
+
+
+
+[.fields-VideoStream]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| bitDepth
+| 
+| Integer 
+| 
+| int32 
+
+| bitrate
+| 
+| Long 
+| 
+| int64 
+
+| codec
+| X
+| String 
+| 
+|  
+
+| displayAspectRatio
+| 
+| String 
+| 
+|  
+
+| duration
+| X
+| Double 
+| 
+| double 
+
+| format
+| 
+| String 
+| 
+|  
+
+| frameRate
+| X
+| String 
+| 
+|  
+
+| height
+| X
+| Integer 
+| 
+| int32 
+
+| isInterlaced
+| X
+| Boolean 
+| 
+|  
+
+| level
+| 
+| String 
+| 
+|  
+
+| numFrames
+| X
+| Integer 
+| 
+| int32 
+
+| pixelFormat
+| 
+| String 
+| 
+|  
+
+| profile
+| 
+| String 
+| 
+|  
+
+| sampleAspectRatio
+| 
+| String 
+| 
+|  
+
+| transferCharacteristics
+| 
+| String 
+| 
+|  
+
+| width
+| X
+| Integer 
+| 
+| int32 
+
+|===
+
+
